@@ -1,0 +1,59 @@
+﻿@charset "UTF-8";
+
+/* pagebar */
+.pagebar {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 10px;
+  padding-bottom: 20px;
+  span {
+    padding: 0 6px;
+    height: 26px;
+    line-height: 26px;
+    color: $color2;
+    font-size: 12px;
+  }
+  .active, a, input {
+    margin: 0 3px;
+    padding: 0 6px;
+    height: 26px;
+    line-height: 26px;
+    font-size: 12px;
+    border-radius: 4px;
+  }
+  .active {
+    color: #fff;
+    border: 1px solid $hlcolor;
+    background: $hlcolor;
+  }
+  a {
+    color: $color2;
+    border: 1px solid #ebebeb;
+    background: #fff;
+    &:hover {
+      color: #fff;
+      background: $hlcolor;
+    }
+  }
+  input {
+    text-align: center;
+    outline: none;
+    color: $color2;
+    border: 1px solid #ebebeb;
+    background: #fff;
+  }
+  .now,
+  .count {
+    padding: 0 5px;
+    color: $color2;
+  }
+}
+.pagebar-wrap {
+  margin: 0 auto;
+  .pagebar {
+    margin: 10px 0;
+  }
+}

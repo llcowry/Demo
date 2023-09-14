@@ -1,0 +1,34 @@
+﻿@charset "UTF-8";
+
+/* dropload */
+.dropload-up,
+.dropload-down {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  font-size: 12px;
+  transform: translateZ(0);
+}
+.dropload-down {
+  height: 50px;
+}
+.dropload-refresh,
+.dropload-update,
+.dropload-load,
+.dropload-noData {
+  height: 50px;
+  line-height: 50px;
+  color: $color2;
+  text-align: center;
+}
+.dropload-load .dropload-loader {
+  display: inline-block;
+  margin: 6px;
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  @include border(all, #666);
+  border-radius: 100%;
+  border-bottom-color: transparent;
+  animation: rotate 0.75s linear infinite;
+}
