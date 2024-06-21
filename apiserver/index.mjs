@@ -1,11 +1,9 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
-import dotenv from 'dotenv';
 import { logger } from './middlewares/logger.mjs';
 import { errorHandler } from './middlewares/errorHandler.mjs';
 import router from './routes/index.mjs';
-
-dotenv.config();
+import config from './config/config.mjs';
 
 const app = new Koa();
 
@@ -17,7 +15,7 @@ app.use(bodyParser());
 // 路由
 app.use(router.routes()).use(router.allowedMethods());
 
-const PORT = process.env.PORT || 3000;
+const PORT = config.PORT;
 
 // 启动服务器
 app.listen(PORT, () => {

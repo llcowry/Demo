@@ -2,11 +2,12 @@ import fs from 'fs';
 import path from 'path';
 import moment from 'moment';
 import { fileURLToPath } from 'url';
+import config from '../config/config.mjs';
 
 // 获取当前模块的文件路径和目录
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const logDir = path.join(__dirname, '../logs');
+const logDir = path.join(__dirname, `../${config.LOG_DIR}`);
 const logFilePath = path.join(logDir, 'server.log');
 
 // 创建日志目录（如果不存在）

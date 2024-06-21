@@ -1,14 +1,12 @@
 import mysql from 'mysql2/promise';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import config from '../config/config.mjs';
 
 // 创建 MySQL 连接池
 const pool = mysql.createPool({
-  host: process.env.DB_HOST, // 数据库主机
-  user: process.env.DB_USER, // 数据库用户名
-  password: process.env.DB_PASSWORD, // 数据库密码
-  database: process.env.DB_NAME, // 数据库名称
+  host: config.DB_HOST, // 数据库主机
+  user: config.DB_USER, // 数据库用户名
+  password: config.DB_PASSWORD, // 数据库密码
+  database: config.DB_NAME, // 数据库名称
 });
 
 // 将对象的键转换为逗号分隔的字符串

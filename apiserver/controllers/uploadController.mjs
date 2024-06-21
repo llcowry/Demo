@@ -4,13 +4,14 @@ import { format } from 'date-fns';
 import crypto from 'crypto';
 import multer from '@koa/multer';
 import { insertData } from '../db/mysql.mjs';
+import config from '../config/config.mjs';
 
 // 配置 multer 存储路径和文件命名规则
 const storage = multer.diskStorage({
   // 确定文件存储路径的回调函数
   destination: async (req, file, cb) => {
     // 生成上传文件的目标文件夹路径，以当前日期作为文件夹名
-    const uploadDir = path.join('./uploads', format(new Date(), 'yyyy-MM-dd'));
+    const uploadDir = path.join(`./${config.UPLOAD_DIR}`, format(new Date(), 'yyyy-MM-dd'));
     // 确保目标文件夹存在，如果不存在则创建
     await fs.mkdir(uploadDir, { recursive: true });
     // 将目标文件夹路径传递给 multer
