@@ -5,7 +5,7 @@ import config from '../config/config.mjs';
 
 // 生成 JWT token
 const generateToken = (user) => {
-  return jwt.sign({ id: user.id, username: user.username }, config.JWT_SECRET, { expiresIn: config.JWT_EXPIRES_IN });
+  return jwt.sign({ id: user.id, username: user.username }, config.JWT_SECRET, { expiresIn: '1h' });
 };
 
 // 使用 MD5 加密密码
@@ -15,7 +15,7 @@ const hashPassword = (password) => {
 
 // 注册新用户
 export const register = async (ctx) => {
-  const { username, password } = ctx.request.body;
+  const { username, password, nickname, gender, birthday, avatar } = ctx.request.body;
   if (!username || !password) {
     ctx.throw(400, '用户名和密码是必需的');
   }
@@ -27,7 +27,7 @@ export const register = async (ctx) => {
   }
 
   const hashedPassword = hashPassword(password);
-  const result = await insertData('users', { username, password: hashedPassword });
+  const result = await insertData('users', { username, password: hashedPassword, nickname, gender, birthday, avatar });
 
   if (result.status === 'error') {
     ctx.throw(500, result.msg);

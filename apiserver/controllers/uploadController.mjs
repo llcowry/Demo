@@ -2,8 +2,8 @@ import fs from 'fs/promises';
 import path from 'path';
 import crypto from 'crypto';
 import multer from '@koa/multer';
-import { insertData } from '../db/mysql.mjs';
 import config from '../config/config.mjs';
+import { insertData, getPaginatedData, updateDataById, deleteDataById, getDataById } from '../db/mysql.mjs';
 
 // 配置 multer 存储路径和文件命名规则
 const storage = multer.diskStorage({
@@ -49,10 +49,16 @@ export const saveUploadInfo = async (ctx) => {
 
   // 遍历每个上传的文件
   for (const file of files) {
+    const { filename, path: filepath, size, mimetype: type } = file;
+    const description = ctx.request.body.description || '';
+
     // 将文件信息插入数据库
     const result = await insertData('uploads', {
-      filename: file.filename,
-      path: file.path,
+      filename,
+      path: filepath,
+      size,
+      type,
+      description,
       uploaded_at: new Date(),
     });
 
@@ -60,14 +66,80 @@ export const saveUploadInfo = async (ctx) => {
     uploadResults.push({
       status: result.status,
       msg: result.msg,
-      data: result.status === 'success' ? { filename: file.filename, path: file.path } : null,
+      data: result.status === 'success' ? { filename, path: filepath, size, type } : null,
     });
   }
 
   // 设置响应体，返回上传结果数组
   ctx.body = {
     status: 'success',
-    msg: 'Files uploaded and data saved successfully',
+    msg: '文件上传和数据保存成功',
     data: uploadResults,
+  };
+};
+
+// 查看所有文件（分页处理）
+export const getFiles = async (ctx) => {
+  const { page = 1, pageSize = 10 } = ctx.query;
+  const result = await getPaginatedData('uploads', parseInt(page), parseInt(pageSize));
+
+  if (result.status === 'error') {
+    ctx.throw(500, result.msg);
+  }
+
+  ctx.body = {
+    status: 'success',
+    msg: '获取文件列表成功',
+    data: result.data,
+    totalCount: result.totalCount,
+  };
+};
+
+// 修改文件信息
+export const updateFile = async (ctx) => {
+  const { id } = ctx.params;
+  const { description } = ctx.request.body;
+
+  const existingFile = await getDataById('uploads', id);
+  if (existingFile.status === 'error') {
+    ctx.throw(400, '文件不存在');
+  }
+
+  const result = await updateDataById('uploads', id, { description });
+
+  if (result.status === 'error') {
+    ctx.throw(500, result.msg);
+  }
+
+  ctx.body = {
+    status: 'success',
+    msg: '文件信息更新成功',
+  };
+};
+
+// 删除文件和记录
+export const deleteFile = async (ctx) => {
+  const { id } = ctx.params;
+
+  const existingFile = await getDataById('uploads', id);
+  if (existingFile.status === 'error') {
+    ctx.throw(400, '文件不存在');
+  }
+
+  try {
+    await fs.unlink(existingFile.data[0].path); // 删除文件
+  } catch (err) {
+    ctx.throw(500, `删除文件时发生错误：${err.message}`);
+  }
+
+  const result = await deleteDataById('uploads', id);
+
+  if (result.status === 'error') {
+    ctx.throw(500, result.msg);
+  }
+
+  ctx.body = {
+    status: 'success',
+    msg: '文件和记录删除成功',
   };
 };
