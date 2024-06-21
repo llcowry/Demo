@@ -8,13 +8,20 @@ import config from '../config/config.mjs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const logDir = path.join(__dirname, `../${config.LOG_DIR}`);
-const logFilePath = path.join(logDir, 'server.log');
 
 // 创建日志目录（如果不存在）
 if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir, { recursive: true });
 }
-const logFile = fs.createWriteStream(logFilePath, { flags: 'a' });
+
+// 获取当前日志文件路径
+const getLogFilePath = () => {
+  const dateStr = moment().format('YYYY-MM-DD');
+  return path.join(logDir, `server-${dateStr}.log`);
+};
+
+// 初始化日志文件流
+let logFile = fs.createWriteStream(getLogFilePath(), { flags: 'a' });
 const logStdout = process.stdout;
 
 /**
@@ -33,7 +40,15 @@ export const logger = async (ctx, next) => {
   // 计算请求处理所需时间
   const ms = Date.now() - start;
   // 记录 HTTP 方法、URL、响应状态码和响应时间（毫秒）
-  const logMessage = `${moment(new Date()).format('YYYY-MM-DD HH:mm:ss')} ${ctx.method} ${ctx.url} ${ctx.status} - ${ms}ms\n`;
+  const logMessage = `${moment().format('YYYY-MM-DD HH:mm:ss')} ${ctx.method} ${ctx.url} ${ctx.status} - ${ms}ms\n`;
+
+  // 检查是否需要切换日志文件（按日期）
+  const currentLogFilePath = getLogFilePath();
+  if (logFile.path !== currentLogFilePath) {
+    logFile.end(); // 结束当前日志文件流
+    logFile = fs.createWriteStream(currentLogFilePath, { flags: 'a' }); // 创建新的日志文件流
+  }
+
   logFile.write(logMessage);
   logStdout.write(logMessage);
 };
