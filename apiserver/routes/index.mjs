@@ -1,15 +1,10 @@
 import Router from '@koa/router';
+import indexRoutes from './indexRoutes.mjs';
+import uploadRoutes from './uploadRoutes.mjs';
 
 const router = new Router();
 
-router.get('/', async (ctx) => {
-  ctx.body = {
-    status: 'success',
-    msg: 'Request successful',
-    data: {
-      message: 'Hello, this is your optimized Koa API server!',
-    },
-  };
-});
+router.use(indexRoutes.routes()).use(indexRoutes.allowedMethods());
+router.use(uploadRoutes.routes()).use(uploadRoutes.allowedMethods());
 
 export default router;

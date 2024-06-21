@@ -1,5 +1,5 @@
 import Router from '@koa/router';
-import { uploadHandler, saveUploadInfo } from '../middlewares/uploadHandler.mjs';
+import { uploadHandler, saveUploadInfo } from '../controllers/uploadController.mjs';
 
 const router = new Router();
 

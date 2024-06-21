@@ -1,9 +1,11 @@
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
+import dotenv from 'dotenv';
 import { logger } from './middlewares/logger.mjs';
 import { errorHandler } from './middlewares/errorHandler.mjs';
-import indexRoutes from './routes/index.mjs';
-import uploadRoutes from './routes/upload.mjs';
+import router from './routes/index.mjs';
+
+dotenv.config();
 
 const app = new Koa();
 
@@ -13,10 +15,7 @@ app.use(errorHandler);
 app.use(bodyParser());
 
 // 路由
-app.use(indexRoutes.routes());
-app.use(indexRoutes.allowedMethods());
-app.use(uploadRoutes.routes());
-app.use(uploadRoutes.allowedMethods());
+app.use(router.routes()).use(router.allowedMethods());
 
 const PORT = process.env.PORT || 3000;
 
