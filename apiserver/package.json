@@ -5,7 +5,9 @@
   "main": "index.mjs",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.mjs",
+    "dev": "SET NODE_ENV=development && node index.mjs",
+    "build": "SET NODE_ENV=production && node index.mjs"
   },
   "author": "llcowry",
   "license": "ISC",
