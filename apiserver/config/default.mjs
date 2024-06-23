@@ -1,7 +1,7 @@
 export default {
   PORT: process.env.PORT || 3008,
   LOG_DIR: 'logs',
-  UPLOAD_DIR: 'uploads',
+  UPLOAD_DIR: 'public/uploads',
   JWT_SECRET: 'your-jwt-secret',
   JWT_EXPIRES_IN: '1h',
   DB_HOST: 'your-db-host',
