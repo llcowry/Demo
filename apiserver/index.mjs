@@ -1,6 +1,8 @@
 import Koa from 'koa';
 import bodyParser from '@koa/bodyparser';
+import cors from '@koa/cors';
 import serve from 'koa-static';
+import helmet from 'koa-helmet';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { logger } from './middlewares/logger.mjs';
@@ -15,6 +17,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // 中间件
+app.use(helmet());
+app.use(cors());
 app.use(logger);
 app.use(errorHandler);
 app.use(bodyParser());

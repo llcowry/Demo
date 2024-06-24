@@ -11,6 +11,9 @@ importers:
       '@koa/bodyparser':
         specifier: ^5.1.1
         version: 5.1.1(koa@2.15.3)
+      '@koa/cors':
+        specifier: ^5.0.0
+        version: 5.0.0
       '@koa/multer':
         specifier: ^3.0.2
         version: 3.0.2(multer@1.4.5-lts.1)
@@ -29,6 +32,9 @@ importers:
       koa:
         specifier: ^2.15.3
         version: 2.15.3
+      koa-helmet:
+        specifier: ^7.0.2
+        version: 7.0.2
       koa-static:
         specifier: ^5.0.0
         version: 5.0.0
@@ -184,6 +190,10 @@ packages:
     engines: {node: '>= 16'}
     peerDependencies:
       koa: ^2.14.1
+
+  '@koa/cors@5.0.0':
+    resolution: {integrity: sha512-x/iUDjcS90W69PryLDIMgFyV21YLTnG9zOpPXS7Bkt2b8AsY3zZsIpOLBkYr9fBcF3HbkKaER5hOBZLfpLgYNw==}
+    engines: {node: '>= 14.0.0'}
 
   '@koa/multer@3.0.2':
     resolution: {integrity: sha512-Q6WfPpE06mJWyZD1fzxM6zWywaoo+zocAn2YA9QYz4RsecoASr1h/kSzG0c5seDpFVKCMZM9raEfuM7XfqbRLw==}
@@ -410,6 +420,10 @@ packages:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
 
+  helmet@6.2.0:
+    resolution: {integrity: sha512-DWlwuXLLqbrIOltR6tFQXShj/+7Cyp0gLi6uAb8qMdFh/YBBFbKSgQ6nbXmScYd8emMctuthmgIa7tUfo9Rtyg==}
+    engines: {node: '>=14.0.0'}
+
   http-assert@1.5.0:
     resolution: {integrity: sha512-uPpH7OKX4H25hBmU6G1jWNaqJGpTXxey+YOUizJUAgu0AjLUeC8D73hTrhvDS5D+GJN1DN1+hhc/eF/wpxtp0w==}
     engines: {node: '>= 0.8'}
@@ -487,6 +501,10 @@ packages:
   koa-convert@2.0.0:
     resolution: {integrity: sha512-asOvN6bFlSnxewce2e/DK3p4tltyfC4VM7ZwuTuepI7dEQVcvpyFuBcEARu1+Hxg8DIwytce2n7jrZtRlPrARA==}
     engines: {node: '>= 10'}
+
+  koa-helmet@7.0.2:
+    resolution: {integrity: sha512-AvzS6VuEfFgbAm0mTUnkk/BpMarMcs5A56g+f0sfrJ6m63wII48d2GDrnUQGp0Nj+RR950vNtgqXm9UJSe7GOg==}
+    engines: {node: '>= 14.0.0'}
 
   koa-send@5.0.1:
     resolution: {integrity: sha512-tmcyQ/wXXuxpDxyNXv5yNNkdAMdFRqwtegBXUaowiQzUKqJehttS0x2j0eOZDQAyloAth5w6wwBImnFzkUz3pQ==}
@@ -930,6 +948,10 @@ snapshots:
       lodash.merge: 4.6.2
       type-is: 1.6.18
 
+  '@koa/cors@5.0.0':
+    dependencies:
+      vary: 1.1.2
+
   '@koa/multer@3.0.2(multer@1.4.5-lts.1)':
     dependencies:
       fix-esm: 1.0.1
@@ -1136,6 +1158,8 @@ snapshots:
     dependencies:
       function-bind: 1.1.2
 
+  helmet@6.2.0: {}
+
   http-assert@1.5.0:
     dependencies:
       deep-equal: 1.0.1
@@ -1226,6 +1250,10 @@ snapshots:
     dependencies:
       co: 4.6.0
       koa-compose: 4.1.0
+
+  koa-helmet@7.0.2:
+    dependencies:
+      helmet: 6.2.0
 
   koa-send@5.0.1:
     dependencies:
