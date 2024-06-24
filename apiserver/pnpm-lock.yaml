@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@koa/bodyparser':
+        specifier: ^5.1.1
+        version: 5.1.1(koa@2.15.3)
       '@koa/multer':
         specifier: ^3.0.2
         version: 3.0.2(multer@1.4.5-lts.1)
@@ -26,9 +29,6 @@ importers:
       koa:
         specifier: ^2.15.3
         version: 2.15.3
-      koa-bodyparser:
-        specifier: ^4.4.1
-        version: 4.4.1
       koa-static:
         specifier: ^5.0.0
         version: 5.0.0
@@ -179,6 +179,12 @@ packages:
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
 
+  '@koa/bodyparser@5.1.1':
+    resolution: {integrity: sha512-ZBF49xqNVxnmJ+8iXegq+fXPQm9RSX8giNl/aXS5rW1VpNct92wnFbGR/47vfoRJVLARGQ4HVL4WaQ0u8IJVoA==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      koa: ^2.14.1
+
   '@koa/multer@3.0.2':
     resolution: {integrity: sha512-Q6WfPpE06mJWyZD1fzxM6zWywaoo+zocAn2YA9QYz4RsecoASr1h/kSzG0c5seDpFVKCMZM9raEfuM7XfqbRLw==}
     engines: {node: '>= 8'}
@@ -266,9 +272,6 @@ packages:
   cookies@0.9.1:
     resolution: {integrity: sha512-TG2hpqe4ELx54QER/S3HQ9SRVnQnGBtKUz5bLQWtYAQ+o6GpgMs6sYUvaiJjVxb+UXwhRhAEP3m7LbsIZ77Hmw==}
     engines: {node: '>= 0.8'}
-
-  copy-to@2.0.1:
-    resolution: {integrity: sha512-3DdaFaU/Zf1AnpLiFDeNCD4TOWe3Zl2RZaTzUvWiIk5ERzcCodOE20Vqq4fzCbNoHURFHT4/us/Lfq+S2zyY4w==}
 
   core-util-is@1.0.3:
     resolution: {integrity: sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==}
@@ -478,10 +481,6 @@ packages:
     resolution: {integrity: sha512-iYSchDJ+liQ8iwbSI2QqsQOvqv58eJCEanyJPJi+Khyu8smkcKSFUCbPwzFcL7YVtZ6eONjqRX/38caJ7QjRAQ==}
     engines: {node: '>= 0.6'}
 
-  koa-bodyparser@4.4.1:
-    resolution: {integrity: sha512-kBH3IYPMb+iAXnrxIhXnW+gXV8OTzCu8VPDqvcDHW9SQrbkHmqPQtiZwrltNmSq6/lpipHnT7k7PsjlVD7kK0w==}
-    engines: {node: '>=8.0.0'}
-
   koa-compose@4.1.0:
     resolution: {integrity: sha512-8ODW8TrDuMYvXRwra/Kh7/rJo9BtOfPc6qO8eAfC80CnCvSjSl0bkRM24X6/XBBEyj0v1nRUQ1LyOy3dbqOWXw==}
 
@@ -518,6 +517,9 @@ packages:
 
   lodash.isstring@4.0.1:
     resolution: {integrity: sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw==}
+
+  lodash.merge@4.6.2:
+    resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
 
   lodash.once@4.1.1:
     resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
@@ -921,6 +923,13 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
 
+  '@koa/bodyparser@5.1.1(koa@2.15.3)':
+    dependencies:
+      co-body: 6.2.0
+      koa: 2.15.3
+      lodash.merge: 4.6.2
+      type-is: 1.6.18
+
   '@koa/multer@3.0.2(multer@1.4.5-lts.1)':
     dependencies:
       fix-esm: 1.0.1
@@ -1022,8 +1031,6 @@ snapshots:
     dependencies:
       depd: 2.0.0
       keygrip: 1.1.0
-
-  copy-to@2.0.1: {}
 
   core-util-is@1.0.3: {}
 
@@ -1213,12 +1220,6 @@ snapshots:
     dependencies:
       tsscmp: 1.0.6
 
-  koa-bodyparser@4.4.1:
-    dependencies:
-      co-body: 6.2.0
-      copy-to: 2.0.1
-      type-is: 1.6.18
-
   koa-compose@4.1.0: {}
 
   koa-convert@2.0.0:
@@ -1280,6 +1281,8 @@ snapshots:
   lodash.isplainobject@4.0.6: {}
 
   lodash.isstring@4.0.1: {}
+
+  lodash.merge@4.6.2: {}
 
   lodash.once@4.1.1: {}
 

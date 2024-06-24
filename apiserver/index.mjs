@@ -1,5 +1,5 @@
 import Koa from 'koa';
-import bodyParser from 'koa-bodyparser';
+import bodyParser from '@koa/bodyparser';
 import serve from 'koa-static';
 import path from 'path';
 import { fileURLToPath } from 'url';
