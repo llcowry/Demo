@@ -2,8 +2,7 @@
 .DS_Store
 node_modules
 source files
-SchoolAdmin
-Mall
+logs/*
 
 # local env files
 .env.local
