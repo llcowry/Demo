@@ -13,8 +13,8 @@ export default router;
 /**
  * @swagger
  * tags:
- *   name: Upload
- *   description: 上传文件管理
+ *   name: Uploads
+ *   description: 文件上传管理
  */
 
 /**
@@ -22,21 +22,24 @@ export default router;
  * /upload:
  *   post:
  *     summary: 上传文件
- *     description: 上传文件并保存文件信息到数据库
- *     tags: [Upload]
- *     consumes:
- *       - multipart/form-data
- *     parameters:
- *       - name: files
- *         in: formData
- *         description: 要上传的文件
- *         required: true
- *         type: array
- *         items:
- *           type: file
+ *     tags: [Uploads]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               files:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   format: binary
+ *               description:
+ *                 type: string
  *     responses:
  *       200:
- *         description: 文件上传并保存成功
+ *         description: 文件上传和数据保存成功
  *         content:
  *           application/json:
  *             schema:
@@ -44,21 +47,30 @@ export default router;
  *               properties:
  *                 status:
  *                   type: string
- *                   description: 操作状态
  *                 msg:
  *                   type: string
- *                   description: 消息
  *                 data:
  *                   type: array
  *                   items:
  *                     type: object
  *                     properties:
- *                       filename:
+ *                       status:
  *                         type: string
- *                         description: 文件名
- *                       path:
+ *                       msg:
  *                         type: string
- *                         description: 文件路径
+ *                       data:
+ *                         type: object
+ *                         properties:
+ *                           originalname:
+ *                             type: string
+ *                           filename:
+ *                             type: string
+ *                           path:
+ *                             type: string
+ *                           size:
+ *                             type: integer
+ *                           type:
+ *                             type: string
  */
 
 /**
@@ -66,24 +78,21 @@ export default router;
  * /files:
  *   get:
  *     summary: 查看所有文件（分页）
- *     description: 获取分页的文件信息列表
- *     tags: [Upload]
+ *     tags: [Uploads]
  *     parameters:
- *       - name: page
- *         in: query
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
  *         description: 页码
- *         required: false
- *         type: integer
- *         default: 1
- *       - name: pageSize
- *         in: query
- *         description: 每页记录数
- *         required: false
- *         type: integer
- *         default: 10
+ *       - in: query
+ *         name: pageSize
+ *         schema:
+ *           type: integer
+ *         description: 每页显示的记录数
  *     responses:
  *       200:
- *         description: 文件列表获取成功
+ *         description: 获取文件列表成功
  *         content:
  *           application/json:
  *             schema:
@@ -91,28 +100,30 @@ export default router;
  *               properties:
  *                 status:
  *                   type: string
- *                   description: 操作状态
  *                 msg:
  *                   type: string
- *                   description: 消息
  *                 data:
  *                   type: array
  *                   items:
  *                     type: object
  *                     properties:
- *                       id:
- *                         type: integer
- *                         description: 文件ID
- *                       filename:
+ *                       original_filename:
  *                         type: string
- *                         description: 文件名
+ *                       current_filename:
+ *                         type: string
  *                       path:
  *                         type: string
- *                         description: 文件路径
+ *                       size:
+ *                         type: integer
+ *                       type:
+ *                         type: string
+ *                       description:
+ *                         type: string
  *                       uploaded_at:
  *                         type: string
  *                         format: date-time
- *                         description: 上传时间
+ *                 totalCount:
+ *                   type: integer
  */
 
 /**
@@ -120,27 +131,23 @@ export default router;
  * /files/{id}:
  *   put:
  *     summary: 修改文件记录
- *     description: 根据文件ID修改文件信息
- *     tags: [Upload]
+ *     tags: [Uploads]
  *     parameters:
- *       - name: id
- *         in: path
- *         description: 文件ID
- *         required: true
- *         type: integer
- *       - name: body
- *         in: body
- *         description: 要更新的文件信息
+ *       - in: path
+ *         name: id
  *         required: true
  *         schema:
- *           type: object
- *           properties:
- *             filename:
- *               type: string
- *               description: 文件名
- *             path:
- *               type: string
- *               description: 文件路径
+ *           type: integer
+ *         description: 文件 ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               description:
+ *                 type: string
  *     responses:
  *       200:
  *         description: 文件信息更新成功
@@ -151,10 +158,8 @@ export default router;
  *               properties:
  *                 status:
  *                   type: string
- *                   description: 操作状态
  *                 msg:
  *                   type: string
- *                   description: 消息
  */
 
 /**
@@ -162,17 +167,17 @@ export default router;
  * /files/{id}:
  *   delete:
  *     summary: 删除文件和记录
- *     description: 根据文件ID删除文件及其数据库记录
- *     tags: [Upload]
+ *     tags: [Uploads]
  *     parameters:
- *       - name: id
- *         in: path
- *         description: 文件ID
+ *       - in: path
+ *         name: id
  *         required: true
- *         type: integer
+ *         schema:
+ *           type: integer
+ *         description: 文件 ID
  *     responses:
  *       200:
- *         description: 文件删除成功
+ *         description: 文件和记录删除成功
  *         content:
  *           application/json:
  *             schema:
@@ -180,8 +185,6 @@ export default router;
  *               properties:
  *                 status:
  *                   type: string
- *                   description: 操作状态
  *                 msg:
  *                   type: string
- *                   description: 消息
  */
