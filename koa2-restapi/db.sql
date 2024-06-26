@@ -12,8 +12,8 @@ CREATE TABLE users (
 
 CREATE TABLE uploads (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  original_filename VARCHAR(255) NOT NULL,
-  current_filename VARCHAR(255) NOT NULL,
+  originalname VARCHAR(255) NOT NULL,
+  filename VARCHAR(255) NOT NULL,
   path VARCHAR(255) NOT NULL,
   size INT NOT NULL,
   type VARCHAR(50) NOT NULL,
