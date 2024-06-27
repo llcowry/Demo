@@ -6,7 +6,7 @@ const env = process.env.NODE_ENV || 'default';
 let logging = false;
 if (env !== 'production') logging = console.log;
 
-const db = new Sequelize(config.DB_NAME, config.DB_USER, config.DB_PASSWORD, {
+export const sequelize = new Sequelize(config.DB_NAME, config.DB_USER, config.DB_PASSWORD, {
   host: config.DB_HOST,
   dialect: 'mysql',
   logging: logging,
@@ -15,4 +15,17 @@ const db = new Sequelize(config.DB_NAME, config.DB_USER, config.DB_PASSWORD, {
   },
 });
 
-export default db;
+export const initDB = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('数据库连接成功');
+    if (env !== 'production') {
+      await sequelize.sync({ alter: true });
+    } else {
+      await sequelize.sync();
+    }
+  } catch (error) {
+    console.error('无法连接到数据库:', error);
+  }
+};
+

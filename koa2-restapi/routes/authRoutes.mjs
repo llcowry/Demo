@@ -2,7 +2,7 @@ import Router from '@koa/router';
 import { register, login, logout, refreshToken } from '../controllers/authController.mjs';
 
 const router = new Router({
-  prefix: '/auth'
+  prefix: '/auth',
 });
 
 router.post('/register', register);

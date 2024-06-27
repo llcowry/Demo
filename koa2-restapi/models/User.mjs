@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
-import db from '../db/database.mjs';
+import { sequelize } from '../db/database.mjs';
 
-const User = db.define(
+const User = sequelize.define(
   'User',
   {
     id: {

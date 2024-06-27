@@ -20,11 +20,11 @@ const storage = multer.diskStorage({
       .update(file.originalname + Date.now())
       .digest('hex');
     cb(null, `${md5}${ext}`);
-  }
+  },
 });
 
 // 使用配置好的 storage 创建 multer 实例
-const upload = multer({ storage });
+const upload = multer({ storage, limits: { fileSize: config.MAX_FILE_SIZE } });
 
 // 处理文件上传的中间件函数，支持多文件上传，接收的字段名为 'files'
 export const uploadHandler = upload.array('files');
@@ -52,19 +52,18 @@ export const saveUploadInfo = async (ctx) => {
         size,
         type,
         description,
-        created_at: new Date()
       });
 
       uploadResults.push({
         status: 'success',
         msg: '文件上传成功',
-        data: upload
+        data: upload,
       });
     } catch (error) {
       uploadResults.push({
         status: 'error',
         msg: `文件上传失败: ${error.message}`,
-        data: null
+        data: null,
       });
     }
   }

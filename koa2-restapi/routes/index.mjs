@@ -4,7 +4,7 @@ import authRoutes from './authRoutes.mjs';
 import uploadRoutes from './uploadRoutes.mjs';
 import fileRoutes from './fileRoutes.mjs';
 import userRoutes from './userRoutes.mjs';
-import authMiddleware from '../middlewares/auth.mjs'; 
+import authMiddleware from '../middlewares/auth.mjs';
 
 const router = new Router({ prefix: '/api' });
 

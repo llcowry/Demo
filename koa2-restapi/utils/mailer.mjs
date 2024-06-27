@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport({
  * @param {string} html - 邮件 HTML 内容
  * @returns {object} - 包含邮件发送结果的对象
  */
-const sendMail = async (to, subject, text, html) => {
+export const sendMail = async (to, subject, text, html) => {
   // 配置邮件选项
   const mailOptions = {
     from: config.EMAIL_FROM, // 发件人地址
@@ -41,5 +41,3 @@ const sendMail = async (to, subject, text, html) => {
     return { status: 'error', msg: '邮件发送失败', error };
   }
 };
-
-export { sendMail };

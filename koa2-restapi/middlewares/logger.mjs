@@ -26,10 +26,10 @@ const logStdout = process.stdout;
 
 /**
  * 日志记录中间件
- * 
+ *
  * 该中间件记录每个请求的请求方法、URL 和响应时间。
  * 应尽早放置在中间件堆栈中，以记录所有传入请求。
- * 
+ *
  * @param {Object} ctx - Koa 上下文对象，表示请求和响应。
  * @param {Function} next - 调用下一个中间件的函数。
  * @returns {Promise<void>} - 表示异步记录操作的 Promise。

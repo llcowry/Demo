@@ -10,7 +10,7 @@ import swaggerConfig from './config/swagger.mjs';
 import { logger } from './middlewares/logger.mjs';
 import { errorHandler } from './middlewares/errorHandler.mjs';
 import router from './routes/index.mjs';
-import db from './db/database.mjs';
+import { initDB } from './db/database.mjs';
 import config from './config/config.mjs';
 
 const PORT = config.PORT;
@@ -20,6 +20,9 @@ const app = new Koa();
 // 获取当前文件的目录名
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// 同步所有模型
+initDB();
 
 // 中间件
 app.use(
@@ -40,19 +43,6 @@ app.use(serve(path.join(__dirname, '/public')));
 
 // 设置 Swagger UI
 app.use(koaSwagger(swaggerConfig));
-
-// 同步所有模型
-// (async () => {
-//   try {
-//     if (process.env.NODE_ENV !== 'production') {
-//       await db.sync({ force: true });
-//     } else {
-//       await db.sync();
-//     }
-//   } catch (error) {
-//     console.error('无法连接到数据库:', error);
-//   }
-// })();
 
 // 路由
 app.use(router.routes()).use(router.allowedMethods());

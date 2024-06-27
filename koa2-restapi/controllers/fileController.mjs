@@ -9,14 +9,14 @@ export const getFiles = async (ctx) => {
   try {
     const result = await Upload.findAndCountAll({
       offset,
-      limit: parseInt(pageSize)
+      limit: parseInt(pageSize),
     });
 
     ctx.body = {
       status: 'success',
       msg: '获取文件列表成功',
       data: result.rows,
-      totalCount: result.count
+      totalCount: result.count,
     };
   } catch (error) {
     ctx.throw(500, error.message);
@@ -37,7 +37,7 @@ export const updateFile = async (ctx) => {
     ctx.body = {
       status: 'success',
       msg: '文件信息更新成功',
-      data: updatedFile
+      data: updatedFile,
     };
   } catch (error) {
     ctx.throw(500, error.message);
@@ -57,7 +57,7 @@ export const deleteFile = async (ctx) => {
     await file.destroy(); // 删除记录
     ctx.body = {
       status: 'success',
-      msg: '文件和记录删除成功'
+      msg: '文件和记录删除成功',
     };
   } catch (error) {
     ctx.throw(500, `删除文件时发生错误：${error.message}`);

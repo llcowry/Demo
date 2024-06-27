@@ -2,6 +2,7 @@ export default {
   PORT: process.env.PORT || 3008,
   LOG_DIR: 'logs',
   UPLOAD_DIR: 'public/uploads',
+  MAX_FILE_SIZE: 1024 * 1024 * 10, // 10MB
   JWT_SECRET: 'X7cO9mw3FdTzNb1K',
   JWT_EXPIRES_IN: '1h',
   DB_HOST: 'localhost',

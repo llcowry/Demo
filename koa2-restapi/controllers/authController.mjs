@@ -45,7 +45,7 @@ export const register = async (ctx) => {
     ctx.body = {
       status: 'success',
       msg: '用户创建成功',
-      data: { user, token }
+      data: { user, token },
     };
   } catch (error) {
     ctx.throw(500, error.message);
@@ -79,7 +79,7 @@ export const login = async (ctx) => {
     ctx.body = {
       status: 'success',
       msg: '登录成功',
-      data: { user, token }
+      data: { user, token },
     };
   } catch (error) {
     ctx.throw(500, error.message);
@@ -90,7 +90,7 @@ export const login = async (ctx) => {
 export const logout = async (ctx) => {
   ctx.body = {
     status: 'success',
-    msg: '注销成功'
+    msg: '注销成功',
   };
 };
 
@@ -111,7 +111,7 @@ export const refreshToken = async (ctx) => {
     ctx.body = {
       status: 'success',
       msg: 'Token 刷新成功',
-      data: { token: newToken }
+      data: { token: newToken },
     };
   } catch (error) {
     ctx.throw(500, 'Token 刷新失败: ' + error.message);

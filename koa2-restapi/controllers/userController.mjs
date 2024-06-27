@@ -12,13 +12,13 @@ export const getUsers = async (ctx) => {
   try {
     const result = await User.findAndCountAll({
       offset,
-      limit: parseInt(pageSize)
+      limit: parseInt(pageSize),
     });
     ctx.body = {
       status: 'success',
       msg: '获取用户列表成功',
       data: result.rows,
-      totalCount: result.count
+      totalCount: result.count,
     };
   } catch (error) {
     ctx.throw(500, error.message);
@@ -61,7 +61,7 @@ export const addUser = async (ctx) => {
     ctx.body = {
       status: 'success',
       msg: '用户创建成功',
-      data: user
+      data: user,
     };
   } catch (error) {
     ctx.throw(500, error.message);
@@ -80,7 +80,7 @@ export const getUser = async (ctx) => {
     ctx.body = {
       status: 'success',
       msg: '获取用户信息成功',
-      data: user
+      data: user,
     };
   } catch (error) {
     ctx.throw(500, error.message);
@@ -116,7 +116,7 @@ export const updateUser = async (ctx) => {
     ctx.body = {
       status: 'success',
       msg: '用户信息更新成功',
-      data: updatedUser
+      data: updatedUser,
     };
   } catch (error) {
     ctx.throw(500, error.message);
@@ -135,7 +135,7 @@ export const deleteUser = async (ctx) => {
     await user.destroy();
     ctx.body = {
       status: 'success',
-      msg: '用户删除成功'
+      msg: '用户删除成功',
     };
   } catch (error) {
     ctx.throw(500, error.message);
