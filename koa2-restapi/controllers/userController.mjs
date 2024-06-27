@@ -1,24 +1,28 @@
-import { getPaginatedData, insertData, updateDataById, deleteDataById, getDataById } from '../db/mysql.mjs';
 import { validateUsername, validatePassword, validateEmail } from '../utils/validators.mjs';
-import { hashMD5, generateUniqueId } from '../utils/common.mjs';
+import { hashMD5 } from '../utils/common.mjs';
 import { sendMail } from '../utils/mailer.mjs';
+import { User } from '../models/User.mjs';
 import config from '../config/config.mjs';
 
-// 查看所有用户（分页处理）
+// 获取所有用户
 export const getUsers = async (ctx) => {
   const { page = 1, pageSize = 10 } = ctx.query;
-  const result = await getPaginatedData('users', parseInt(page), parseInt(pageSize));
+  const offset = (page - 1) * pageSize;
 
-  if (result.status === 'error') {
-    ctx.throw(500, result.msg);
+  try {
+    const result = await User.findAndCountAll({
+      offset,
+      limit: parseInt(pageSize)
+    });
+    ctx.body = {
+      status: 'success',
+      msg: '获取用户列表成功',
+      data: result.rows,
+      totalCount: result.count
+    };
+  } catch (error) {
+    ctx.throw(500, error.message);
   }
-
-  ctx.body = {
-    status: 'success',
-    msg: '获取用户列表成功',
-    data: result.data,
-    totalCount: result.totalCount
-  };
 };
 
 // 新增用户
@@ -38,26 +42,49 @@ export const addUser = async (ctx) => {
     ctx.throw(400, '电子邮件无效');
   }
 
-  const hashedPassword = hashMD5(password);
-  const result = await insertData('users', { id: generateUniqueId(), username, password: hashedPassword, nickname, gender, birthday, avatar, level, email });
-
-  if (result.status === 'error') {
-    ctx.throw(500, result.msg);
-  }
-
-  // 根据配置项决定是否发送欢迎邮件
-  if (config.EMAIL_SEND_ON_REGISTER && email) {
-    const emailResult = await sendMail(email, '欢迎加入我们', `亲爱的${nickname}, 欢迎加入我们!`, `<p>亲爱的${nickname},</p><p>欢迎加入我们!</p>`);
-
-    if (emailResult.status === 'error') {
-      console.error('邮件发送失败:', emailResult.error);
+  try {
+    const existingUser = await User.findOne({ where: { username } });
+    if (existingUser) {
+      ctx.throw(400, '用户名已被注册');
     }
-  }
+    const hashedPassword = hashMD5(password);
+    const user = await User.create({ username, password: hashedPassword, email, nickname, gender, birthday, avatar });
 
-  ctx.body = {
-    status: 'success',
-    msg: '用户新增成功'
-  };
+    // 根据配置项决定是否发送欢迎邮件
+    if (config.EMAIL_SEND_ON_REGISTER && email) {
+      const emailResult = await sendMail(email, '欢迎加入我们', `亲爱的${nickname}, 欢迎加入我们!`, `<p>亲爱的${nickname},</p><p>欢迎加入我们!</p>`);
+      if (emailResult.status === 'error') {
+        console.error('邮件发送失败:', emailResult.error);
+      }
+    }
+
+    ctx.body = {
+      status: 'success',
+      msg: '用户创建成功',
+      data: user
+    };
+  } catch (error) {
+    ctx.throw(500, error.message);
+  }
+};
+
+// 获取用户信息
+export const getUser = async (ctx) => {
+  const { id } = ctx.params;
+
+  try {
+    const user = await User.findByPk(id);
+    if (!user) {
+      ctx.throw(400, '用户不存在');
+    }
+    ctx.body = {
+      status: 'success',
+      msg: '获取用户信息成功',
+      data: user
+    };
+  } catch (error) {
+    ctx.throw(500, error.message);
+  }
 };
 
 // 修改用户
@@ -76,46 +103,41 @@ export const updateUser = async (ctx) => {
     ctx.throw(400, '电子邮件无效');
   }
 
-  const existingUser = await getDataById('users', id);
-  if (existingUser.status === 'error') {
-    ctx.throw(400, '用户不存在');
+  try {
+    const user = await User.findByPk(id);
+    if (!user) {
+      ctx.throw(400, '用户不存在');
+    }
+    const data = { username, nickname, gender, birthday, avatar, level, email };
+    if (password) {
+      data.password = hashMD5(password);
+    }
+    const updatedUser = await user.update(data);
+    ctx.body = {
+      status: 'success',
+      msg: '用户信息更新成功',
+      data: updatedUser
+    };
+  } catch (error) {
+    ctx.throw(500, error.message);
   }
-
-  const data = { username, nickname, gender, birthday, avatar, level, email };
-
-  if (password) {
-    data.password = hashMD5(password);
-  }
-
-  const result = await updateDataById('users', id, data);
-
-  if (result.status === 'error') {
-    ctx.throw(500, result.msg);
-  }
-
-  ctx.body = {
-    status: 'success',
-    msg: '用户信息更新成功'
-  };
 };
 
 // 删除用户
 export const deleteUser = async (ctx) => {
   const { id } = ctx.params;
 
-  const existingUser = await getDataById('users', id);
-  if (existingUser.status === 'error') {
-    ctx.throw(400, '用户不存在');
+  try {
+    const user = await User.findByPk(id);
+    if (!user) {
+      ctx.throw(400, '用户不存在');
+    }
+    await user.destroy();
+    ctx.body = {
+      status: 'success',
+      msg: '用户删除成功'
+    };
+  } catch (error) {
+    ctx.throw(500, error.message);
   }
-
-  const result = await deleteDataById('users', id);
-
-  if (result.status === 'error') {
-    ctx.throw(500, result.msg);
-  }
-
-  ctx.body = {
-    status: 'success',
-    msg: '用户删除成功'
-  };
 };

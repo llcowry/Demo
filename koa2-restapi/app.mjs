@@ -6,10 +6,11 @@ import helmet from 'koa-helmet';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { koaSwagger } from 'koa2-swagger-ui';
-import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerConfig from './config/swagger.mjs';
 import { logger } from './middlewares/logger.mjs';
 import { errorHandler } from './middlewares/errorHandler.mjs';
 import router from './routes/index.mjs';
+import db from './db/database.mjs';
 import config from './config/config.mjs';
 
 const PORT = config.PORT;
@@ -23,7 +24,7 @@ const __dirname = path.dirname(__filename);
 // 中间件
 app.use(
   helmet({
-    contentSecurityPolicy: false // 禁用contentSecurityPolicy
+    contentSecurityPolicy: false, // 禁用contentSecurityPolicy
   })
 );
 app.use(cors());
@@ -32,29 +33,26 @@ app.use(errorHandler);
 app.use(
   bodyParser({
     enableTypes: ['json'],
-    jsonLimit: '10mb'
+    jsonLimit: '10mb',
   })
 );
 app.use(serve(path.join(__dirname, '/public')));
 
 // 设置 Swagger UI
-const specs = swaggerJsdoc({
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Koa2 REST API',
-      version: '1.0.0',
-      description: 'API Documentation'
-    }
-  },
-  apis: [path.join(__dirname, './routes/*.mjs')]
-});
-app.use(
-  koaSwagger({
-    routePrefix: '/swagger', // Swagger UI 的访问路径
-    swaggerOptions: { spec: specs }
-  })
-);
+app.use(koaSwagger(swaggerConfig));
+
+// 同步所有模型
+// (async () => {
+//   try {
+//     if (process.env.NODE_ENV !== 'production') {
+//       await db.sync({ force: true });
+//     } else {
+//       await db.sync();
+//     }
+//   } catch (error) {
+//     console.error('无法连接到数据库:', error);
+//   }
+// })();
 
 // 路由
 app.use(router.routes()).use(router.allowedMethods());

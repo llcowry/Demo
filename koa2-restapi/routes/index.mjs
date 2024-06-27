@@ -6,7 +6,7 @@ import fileRoutes from './fileRoutes.mjs';
 import userRoutes from './userRoutes.mjs';
 import authMiddleware from '../middlewares/auth.mjs'; 
 
-const router = new Router();
+const router = new Router({ prefix: '/api' });
 
 // 公开路由
 router.use(indexRoutes.routes()).use(indexRoutes.allowedMethods());

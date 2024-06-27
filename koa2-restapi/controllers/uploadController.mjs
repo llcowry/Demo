@@ -3,8 +3,8 @@ import path from 'path';
 import moment from 'moment';
 import crypto from 'crypto';
 import multer from '@koa/multer';
+import { Upload } from '../models/Upload.mjs';
 import config from '../config/config.mjs';
-import { insertData } from '../db/mysql.mjs';
 
 // 配置 multer 存储路径和文件命名规则
 const storage = multer.diskStorage({
@@ -33,8 +33,9 @@ export const uploadHandler = upload.array('files');
 export const saveUploadInfo = async (ctx) => {
   const files = ctx.files;
 
+  // 检查是否有上传的文件
   if (!files || files.length === 0) {
-    ctx.throw(400, 'No files uploaded');
+    ctx.throw(400, '没有上传文件');
   }
 
   const uploadResults = [];
@@ -43,26 +44,28 @@ export const saveUploadInfo = async (ctx) => {
     const { originalname, filename, path: filepath, size, mimetype: type } = file;
     const description = ctx.request.body.description || '';
 
-    const result = await insertData('uploads', {
-      originalname,
-      filename,
-      path: filepath,
-      size,
-      type,
-      description,
-      uploaded_at: new Date()
-    });
+    try {
+      const upload = await Upload.create({
+        originalname,
+        filename,
+        path: filepath,
+        size,
+        type,
+        description,
+        created_at: new Date()
+      });
 
-    uploadResults.push({
-      status: result.status,
-      msg: result.msg,
-      data: result.status === 'success' ? { originalname, filename, path: filepath, size, type } : null
-    });
+      uploadResults.push({
+        status: 'success',
+        msg: '文件上传成功',
+        data: upload
+      });
+    } catch (error) {
+      uploadResults.push({
+        status: 'error',
+        msg: `文件上传失败: ${error.message}`,
+        data: null
+      });
+    }
   }
-
-  ctx.body = {
-    status: 'success',
-    msg: '文件上传和数据保存成功',
-    data: uploadResults
-  };
 };

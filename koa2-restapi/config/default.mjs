@@ -2,12 +2,12 @@ export default {
   PORT: process.env.PORT || 3008,
   LOG_DIR: 'logs',
   UPLOAD_DIR: 'public/uploads',
-  JWT_SECRET: 'your-jwt-secret',
+  JWT_SECRET: 'X7cO9mw3FdTzNb1K',
   JWT_EXPIRES_IN: '1h',
-  DB_HOST: 'your-db-host',
-  DB_USER: 'your-username',
-  DB_PASSWORD: 'your-password',
-  DB_NAME: 'your-db-name',
+  DB_HOST: 'localhost',
+  DB_USER: 'root',
+  DB_PASSWORD: 'Root@888',
+  DB_NAME: 'restapi',
   EMAIL_SEND_ON_REGISTER: true, // 是否在注册时发送邮件
   EMAIL_HOST: 'smtp.example.com', // SMTP 服务器地址
   EMAIL_PORT: 587, // SMTP 端口
