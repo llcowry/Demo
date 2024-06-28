@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>listing directory</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      outline: 0;
+    }
+    body {
+      padding: 80px 100px;
+      font: 13px "Microsoft Yahei", "Helvetica Neue", "Lucida Grande", "Arial";
+      background: #ECE9E9 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ECE9E9));
+      background-repeat: no-repeat;
+      color: #555;
+      -webkit-font-smoothing: antialiased;
+    }
+    ul li {
+      list-style: none;
+    }
+    ul li:hover {
+      cursor: pointer;
+      color: #2e2e2e;
+    }
+    ul li .path {
+      padding-left: 5px;
+      font-weight: bold;
+    }
+    ul li .line {
+      padding-right: 5px;
+      font-style: italic;
+    }
+    ul li:first-child .path {
+      padding-left: 0;
+    }
+    p {
+      line-height: 1.5;
+    }
+    a {
+      color: #555;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #303030;
+    }
+    #files {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    #files li {
+      float: left;
+      width: 30%;
+      line-height: 25px;
+      margin: 1px;
+    }
+    #files li a {
+      display: block;
+      height: 25px;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    #files li a:focus,
+    #files li a:hover {
+      background: rgba(255,255,255,0.65);
+      border: 1px solid #ececec;
+    }
+    #files li a.highlight {
+      transition: background .4s ease-in-out;
+      background: #ffff4f;
+      border-color: #E9DC51;
+    }
+    /* views */
+    #files span {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-indent: 10px;
+    }
+    #files .name {
+      width: 100%;
+      background-repeat: no-repeat;
+      background-position: 8px 5px;
+    }
+    /* mobile */
+    @media (max-width: 768px) {
+      body {
+        font-size: 13px;
+        line-height: 16px;
+        padding: 0;
+      }
+      #files {
+        border-top: 1px solid #cacaca;
+      }
+      #files li {
+        float: none;
+        width: auto !important;
+        display: block;
+        border-bottom: 1px solid #cacaca;
+        font-size: 2em;
+        line-height: 1.2em;
+        text-indent: 0;
+        margin: 0;
+      }
+      #files li:nth-child(odd) {
+        background: #e0e0e0;
+      }
+      #files li a {
+        height: auto;
+        border: 0;
+        border-radius: 0;
+        padding: 15px 10px;
+      }
+      #files li a:focus,
+      #files li a:hover {
+        border: 0;
+      }
+      #files .name {
+        float: none;
+        display: inline-block;
+        width: 100%;
+        text-indent: 0;
+        background-position: 0 50%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <ul id="files"><% pages.forEach(function(page){ %>
+    <li>
+      <a href="/<%= page %>"><span class="name"><%= page %></span></a>
+    </li><% }); %>
+  </ul>
+</body>
+</html>

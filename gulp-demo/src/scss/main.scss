@@ -1,0 +1,64 @@
+﻿@charset "UTF-8";
+
+@import "reset";
+@import "base";
+
+/* header */
+header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  line-height: px2rem(44px);
+  text-align: center;
+  color: $hlcolor;
+  font-size: px2rem(18px);
+  background-color: $bgcolor;
+  border-bottom: px2rem(1px) solid $bdcolor;
+  overflow: hidden;
+  span {
+    display: inline-block;
+    position: absolute;
+    top: px2rem(12px);
+    left: px2rem(10px);
+    width: px2rem(20px);
+    height: px2rem(20px);
+    background: url(../images/ico-arrow-left.png) center no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+  }
+}
+footer {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: px2rem(44px);
+  line-height: px2rem(44px);
+  text-align: center;
+  background-color: #fff;
+  border-top: px2rem(1px) solid $bdcolor;
+}
+
+/* main */
+.main {
+  position: relative;
+  left: 0;
+  top: px2rem(44px);
+  padding: px2rem(20px);
+  height: 100%;
+  overflow: hidden;
+  h1 {
+    font-size: px2rem(30px);
+  }
+  p {
+    line-height: px2rem(50px);
+  }
+}
+
+/* Todo index */
+.index {
+  overflow: auto;
+}

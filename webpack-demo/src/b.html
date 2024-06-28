@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>页面 b</title>
+</head>
+<body>
+  <h1>页面 b</h1>
+  <p>
+    这是页面b的内容！
+  </p>
+  <% if (htmlWebpackPlugin.options.debug) { %>
+  <script src="vender.js"></script>
+  <script src="common.js"></script>
+  <script src="b.js"></script>
+  <% } %>
+</body>
+</html>

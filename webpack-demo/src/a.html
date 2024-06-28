@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <title>页面 a</title>
+</head>
+<body>
+  <h1>页面 a</h1>
+  <p id="logo"></p>
+  <div id="list">
+    <p class="loading"></p>
+  </div>
+  <div id="dialog" class="none">
+    这是一个dialog
+  </div>
+  <div id="toast" class="none">
+    这是一个toast
+  </div>
+  <% if (htmlWebpackPlugin.options.debug) { %>
+  <script src="vender.js"></script>
+  <script src="common.js"></script>
+  <script src="a.js"></script>
+  <% } %>
+</body>
+</html>

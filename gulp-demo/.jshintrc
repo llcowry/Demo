@@ -1,0 +1,73 @@
+{
+    "bitwise": true, //禁用位运算符
+    "camelcase": true, //使用驼峰命名
+    "curly": true, //循环或者条件语句必须使用花括号包围
+    "es3": true, //兼容低级浏览器 IE 6/7/8/9
+    "eqeqeq": true, //强制使用三等号
+    "indent": 2, //代码缩进
+    "forin": false, //在forin循环中使用hasOwnProperty()来过滤原型链中的属性
+    "immed": false, //匿名函数调用格式限定
+    "latedef": "nofunc", //禁止定义之前使用变量，忽略函数声明
+    "newcap": true, //构造器函数首字母大写
+    "noarg": true, //禁止使用arguments.caller和arguments.callee
+    "noempty": true, //禁止出现空的代码块
+    "nonew": false, //禁止使用构造器
+    "plusplus": false,
+    "quotmark": "single", //为true时，禁止单引号和双引号混用
+    "regexp": false,
+    "undef": true, //变量未定义
+    "unused": false, //变量未使用
+    "strict": false, //强制使用ES5的严格模式
+    "trailing": true, //禁止行尾空格
+    "maxparams": 20, //函数可以接受的最大参数数量
+    "maxdepth": 6, //代码块中可以嵌入大括号的最大深度
+    "maxlen": 1000, //一行中最大字符数
+    
+    "asi": false, //控制“缺少分号”的警告
+    "boss": false,
+
+    "debug": false, //允许debugger语句
+    "eqnull": true, //允许==null
+    "esnext": false, //允许ES6规约
+    "evil": true, //允许使用eval
+    "expr": true, //允许应该出现赋值或函数调用的地方使用表达式
+    "funcscope": false, //允许在控制体内定义变量而在外部使用
+    "globalstrict": false, //允许全局严格模式
+    "iterator": false,
+    "lastsemic": false,
+    "laxbreak": true, //允许不安全的行中断(与laxcomma配合使用)
+    "laxcomma": true, //允许逗号开头的编码样式
+    "loopfunc": false, //允许循环中定义函数
+    "multistr": false, //允许多行字符串
+    "onecase": false,
+    "proto": false,
+    "regexdash": false,
+    "scripturl": true, //允许使用脚本url
+    "smarttabs": true, //允许混合tab和space排版
+    "shadow": true, //允许变量shadow
+    "sub": true, //允许person[‘name’]
+    "supernew": false,
+    "validthis": true, //允许严格模式下在非构造函数中使用this
+
+    "browser": true,
+    "couch": false,
+    "devel": false,
+    "dojo": false,
+    "jquery": true,
+    "mootools": false,
+    "node": true,
+    "nonstandard": false,
+    "prototypejs": false,
+    "rhino": false,
+    "wsh": false,
+
+    "nomen": false,
+    "onevar": false,
+    "passfail": false,
+    "white": false,
+
+    "predef": [
+        "define", 
+        "require"
+    ]
+}
