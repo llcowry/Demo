@@ -2,13 +2,6 @@
 
 基于 webpack+gulp+koa 搭建纯静态页面型前端工程解决方案实例
 
-
-### 拷贝项目
-
-``` bash
-$ git clone https://github.com/llcowry/webpack-demo.git
-```
-
 ### 安装依赖模块
 
 ``` bash
@@ -48,4 +41,4 @@ $ npm run deploy # or run `gulp deploy`
 
 ### License
 
-MIT.
+ISC.

@@ -1,6 +1,6 @@
 # gulp-demo
 
-Frontend engineering solution based on gulp
+基于 gulp 的前端工程解决方案
 
 ### Install
 
