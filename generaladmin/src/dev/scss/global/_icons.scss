@@ -1,0 +1,212 @@
+@charset "UTF-8";
+
+/* icons */
+.rightico, .errico, .copyico, .cutico, .affixico, .plusico,
+.minusico, .addico, .editico, .delico, .newico, .moveico,
+.faddico, .feditico, .fdelico, .fnewico, .fmoveico, .nextico,
+.deleteico, .qqico, .preico, .uploadico, .downloadico, .refreshico,
+.helpico, .infoico, .stopico, .tipico, .imageico, .emailico,
+.tagico, .tableico, .lockico, .fileico, .folderico, .dateico,
+.sendmailico, .mailsico, .searchico, .printico, .userico, .mobileico {
+  padding: 0 5px 0 18px;
+  height: 18px;
+  line-height: 18px;
+  background-image: url(../images/icons/ico-16.png);
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.rightico {
+  background-position: 0 -7px;
+  color: green;
+}
+.errico {
+  background-position: 0 -37px;
+  color: red;
+}
+.cutico {
+  background-position: 0 -67px;
+}
+.copyico {
+  background-position: 0 -97px;
+}
+.affixico {
+  background-position: 0 -127px;
+}
+.plusico {
+  background-position: 0 -157px;
+  padding: 0 0 0 18px;
+}
+.minusico {
+  background-position: 0 -187px;
+  padding: 0 0 0 18px;
+}
+.addico {
+  background-position: 0 -217px;
+}
+.delico {
+  background-position: 0 -247px;
+}
+.editico {
+  background-position: 0 -277px;
+}
+.newico {
+  background-position: 0 -307px;
+}
+.moveico {
+  background-position: 0 -337px;
+}
+.faddico {
+  background-position: 0 -367px;
+}
+.fdelico {
+  background-position: 0 -397px;
+}
+.feditico {
+  background-position: 0 -427px;
+}
+.fnewico {
+  background-position: 0 -457px;
+}
+.fmoveico {
+  background-position: 0 -487px;
+}
+.nextico {
+  background-position: 0 -517px;
+}
+.preico {
+  background-position: 0 -547px;
+}
+.uploadico {
+  background-position: 0 -577px;
+}
+.downloadico {
+  background-position: 0 -607px;
+}
+.refreshico {
+  background-position: 0 -637px;
+}
+.helpico {
+  background-position: 0 -667px;
+}
+.infoico {
+  background-position: 0 -697px;
+}
+.stopico {
+  background-position: 0 -727px;
+}
+.tipico {
+  background-position: 0 -757px;
+}
+.imageico {
+  background-position: 0 -787px;
+}
+.emailico {
+  background-position: 0 -817px;
+}
+.tagico {
+  background-position: 0 -847px;
+}
+.tableico {
+  background-position: 0 -877px;
+}
+.lockico {
+  background-position: 0 -907px;
+}
+.fileico {
+  background-position: 0 -937px;
+}
+.folderico {
+  background-position: 0 -967px;
+}
+.dateico {
+  background-position: 0 -997px;
+}
+.deleteico {
+  background-position: 0 -1027px;
+}
+.qqico {
+  background-position: 0 -1057px;
+}
+.sendmailico {
+  background-position: 0 -1087px;
+}
+.mailsico {
+  background-position: 0 -1117px;
+}
+.searchico {
+  background-position: 0 -1147px;
+}
+.printico {
+  background-position: 0 -1177px;
+}
+.userico {
+  background-position: 0 -1207px;
+}
+.mobileico {
+  background-position: 0 -1237px;
+}
+.dateico:hover, .plusico:hover, .minusico:hover {
+  text-decoration: none;
+}
+
+.loading {
+  background: url(../images/loading.gif) no-repeat;
+  padding: 0 5px 0 18px;
+}
+
+.ico32 {
+  background-image: url(../images/icons/ico-32.png);
+  background-repeat: no-repeat;
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+.setting {
+  background-position: 0 0;
+}
+.column {
+  background-position: -32px 0;
+}
+.template {
+  background-position: -64px 0;
+}
+.update {
+  background-position: -96px 0;
+}
+.data {
+  background-position: -128px 0;
+}
+.log {
+  background-position: -160px 0;
+}
+.modify {
+  background-position: -192px 0;
+}
+.plugin {
+  background-position: -224px 0;
+}
+.user {
+  background-position: -288px 0;
+}
+
+.ico-back {
+  background: url(../images/icon16/back.png) no-repeat;
+  padding: 0 5px 0 18px;
+  line-height: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.ico-collapsable, .ico-expandable {
+  float: left;
+  width: 16px;
+  height: 16px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.ico-collapsable {
+  background: url(../images/icons/collapsable.gif) no-repeat center;
+}
+.ico-expandable {
+  background: url(../images/icons/expandable.gif) no-repeat center;
+}

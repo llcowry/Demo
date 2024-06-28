@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+/* import */
+@import "global/base";
+@import "global/icons";
+
+/* uploadbox */
+.uploadbox {
+  display: inline-block;
+  *display: inline;
+  position: relative;
+  height: 22px;
+  vertical-align: middle;
+  .upload-btn {
+    display: inline-block;
+    *display: inline;
+    height: 22px;
+    line-height: 22px;
+    color: #333;
+    vertical-align: middle;
+    border-radius: 3px;
+    background: url(../images/btn-bg.gif) no-repeat;
+    &:hover {
+      background-position: 0 -22px;
+    }
+    &:active {
+      background-position: 0 -44px;
+    }
+  }
+  .upload-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2px 5px;
+    width: 115px;
+    height: 26px;
+    border: 1px solid #d0d0d0;
+    background: #fff;
+    overflow: hidden;
+    .txt {
+      display: block;
+      padding-right: 10px;
+      height: 18px;
+      line-height: 18px;
+      font-weight: normal;
+      font-style: normal;
+      font-size: 11px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .bar {
+      display: block;
+      position: relative;
+      width: 112px;
+      height: 4px;
+      border: 1px solid #68af02;
+    }
+    .bar b {
+      display: block;
+      width: 0%;
+      height: 4px;
+      font-weight: normal;
+      text-indent: -99em;
+      background: #68af02;
+      overflow: hidden;
+    }
+    .close {
+      display: block;
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      width: 14px;
+      height: 14px;
+      text-indent: -99em;
+      background: url(../images/btn-close.png) no-repeat;
+      cursor: pointer;
+      overflow: hidden;
+    }
+  }
+}
+
+/* msgtip */
+.msgtip {
+  position: absolute;
+  width: auto;
+  height: 22px;
+  top: -22px;
+  text-align: center;
+  margin-left: -283px;
+  z-index: 1000;
+  display: block;
+  .msg, .errmsg, .info, .loading {
+    margin-left: 566px;
+    white-space: nowrap;
+    padding: 0 15px;
+    color: #fff;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    z-index: 999;
+    display: inline-block;
+    border-radius: 3px;
+  }
+  .msg {
+    background: #68af02;
+  }
+  .errmsg {
+    background: #ef8f00;
+  }
+  .info {
+    background: #00bdec;
+  }
+  .loading {
+    padding: 0 10px 0 22px;
+    background: #4b981d url(../images/loading2.gif) no-repeat 5px 50%;
+  }
+}
+
+/* textarea resizer */
+.grippie {
+  background: #eee url(../images/resizer/grippie.png) no-repeat scroll center 2px;
+  border-color: #ddd;
+  border-style: solid;
+  border-width: 0 1px 1px;
+  cursor: s-resize;
+  height: 9px;
+  overflow: hidden;
+}
+.resizable-textarea textarea {
+  display: block;
+  margin-bottom: 0;
+  height: 30%;
+}

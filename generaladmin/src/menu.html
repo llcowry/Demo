@@ -1,0 +1,139 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>功能管理</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Language" content="utf-8" />
+  <link rel="stylesheet" type="text/css" href="style/common.css" />
+  <link rel="stylesheet" type="text/css" href="style/lxlui-gray.css" />
+  <script type="text/javascript" src="scripts/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/lxlui.min.js"></script>
+  <script type="text/javascript" src="scripts/common.min.js"></script>
+</head>
+<body class="js-box">
+  <div class="tab_toolbar">
+    <div class="btnlist">
+      <a href="javascript:util.exec(1006)" class="addico">添加</a>
+      <a href="javascript:util.exec(1008)" class="delico">删除</a>
+      <a href="javascript:util.exec(1003, '?action=doexec')" class="deleteico" title="清理无效记录！">清理数据</a>
+    </div>
+  </div>
+  <form name="datalistfrm" method="post" action="">
+    <div class="tab_header">
+      <table cellspacing="0" cellpadding="1" align="center" class="table">
+        <tr>
+          <td width="2%" class="title">
+            <input type="checkbox" name="selectall" value="" onclick="util.selCheckbox(this.form)" />
+          </td>
+          <td width="38%" class="title">菜单名称</td>
+          <td width="30%" class="title">链接地址</td>
+          <td width="5%" class="title">状态</td>
+          <td width="5%" class="title">显示</td>
+          <td class="title">操作</td>
+        </tr>
+      </table>
+    </div>
+    <div class="tab_content">
+      <table cellspacing="0" cellpadding="1" align="center" class="table">
+        <tr data-url="?action=getdatalist&id=1">
+          <td class="tdc">
+            <input type="checkbox" value="1" disabled="disabled" />
+          </td>
+          <td class="a20">
+            &nbsp;
+            <a href="javascript:util.exec(1005, 1, '?action=sort&id=1');" class="a20">1.</a>
+            【<a href="javascript:util.exec(1010,1);" class="a20">系统管理</a>】
+            <span class="gray">ID:1</span>
+          </td>
+          <td class="tdc">&nbsp;</td>
+          <td class="tdc">&nbsp;</td>
+          <td class="tdc">
+            <span class="b green">√</span>
+          </td>
+          <td class="tdc">
+            <a href="javascript:util.exec(1010,1);" class="editico">编辑</a>
+            <a disabled="disabled" class="delico">删除</a>
+          </td>
+        </tr>
+        <tr data-url="?action=getdatalist&id=2">
+          <td class="tdc">
+            <input type="checkbox" value="2" disabled="disabled" />
+          </td>
+          <td class="a20">
+            &nbsp;
+            <a href="javascript:util.exec(1005, 2, '?action=sort&id=2');" class="a20">2.</a>
+            【<a href="javascript:util.exec(1010,2);" class="a20">栏目管理</a>】
+            <span class="gray">ID:2</span>
+          </td>
+          <td class="tdc">&nbsp;</td>
+          <td class="tdc">&nbsp;</td>
+          <td class="tdc">
+            <span class="b green">√</span>
+          </td>
+          <td class="tdc">
+            <a href="javascript:util.exec(1010,2);" class="editico">编辑</a>
+            <a disabled="disabled" class="delico">删除</a>
+          </td>
+        </tr>
+        <tr data-url="?action=getdatalist&id=3">
+          <td class="tdc">
+            <input type="checkbox" value="3" disabled="disabled" />
+          </td>
+          <td class="a20">
+            &nbsp;
+            <a href="javascript:util.exec(1005, 3, '?action=sort&id=3');" class="a20">3.</a>
+            【<a href="javascript:util.exec(1010,3);" class="a20">用户管理</a>】
+            <span class="gray">ID:3</span>
+          </td>
+          <td class="tdc">&nbsp;</td>
+          <td class="tdc">&nbsp;</td>
+          <td class="tdc">
+            <span class="b green">√</span>
+          </td>
+          <td class="tdc">
+            <a href="javascript:util.exec(1010,3);" class="editico">编辑</a>
+            <a disabled="disabled" class="delico">删除</a>
+          </td>
+        </tr>
+        <tr data-url="?action=getdatalist&id=76">
+          <td class="tdc">
+            <input type="checkbox" value="76" disabled="disabled" />
+          </td>
+          <td class="a20">
+            &nbsp;
+            <a href="javascript:util.exec(1005, 4, '?action=sort&id=76');" class="a20">4.</a>
+            【<a href="javascript:util.exec(1010,76);" class="a20">商城管理</a>】
+            <span class="gray">ID:76</span>
+          </td>
+          <td class="tdc">&nbsp;</td>
+          <td class="tdc">&nbsp;</td>
+          <td class="tdc">
+            <span class="b green">√</span>
+          </td>
+          <td class="tdc">
+            <a href="javascript:util.exec(1010,76);" class="editico">编辑</a>
+            <a disabled="disabled" class="delico">删除</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="tab_footer">
+      &nbsp;
+      <select name="batchoperate" onchange="util.exec(this);">
+        <option value="">- 操作 -</option>
+        <option value="delete">批量删除</option>
+      </select>
+      &nbsp;
+      <select name="classid" onchange="util.exec(this);">
+        <option value="0">- 移动 -</option>
+        <option value="1">【系统管理】</option>
+        <option value="2">【栏目管理】</option>
+        <option value="3">【用户管理】</option>
+        <option value="76">【商城管理】</option>
+        <option value="5">【扩展管理】</option>
+        <option value="4">【高级管理】</option>
+      </select>
+    </div>
+  </form>
+</body>
+</html>

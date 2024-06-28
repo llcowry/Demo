@@ -1,0 +1,1232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>角色管理</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Language" content="utf-8" />
+  <link rel="stylesheet" type="text/css" href="style/common.css" />
+  <link rel="stylesheet" type="text/css" href="style/lxlui-gray.css" />
+  <script type="text/javascript" src="scripts/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/lxlui.min.js"></script>
+  <script type="text/javascript" src="scripts/common.min.js"></script>
+</head>
+<body class="js-box">
+  <form name="update" method="post" action="?action=modify&id=2" onsubmit="return util.chkForm()">
+    <input type="hidden" name="R_Flag" value="0" />
+    <input type="hidden" name="R_ArrCols" id="colsid" value="8,1187" />
+    <div class="header">
+      <span class="fleft ico-title">更新</span>
+      <span class="fright">
+        <a href="#" class="preico btn-back">返回</a>
+      </span>
+    </div>
+    <div class="tabbox">
+      <table cellspacing="0" cellpadding="1" align="center" class="table">
+        <tr>
+          <td class="left"> <em>*</em>
+            角色名称：
+          </td>
+          <td>
+            <input type="text" name="R_Name" value="系统管理组" class="input w200" pattern="^.{1,100}$" />
+            <span> <font class="gray">(角色中文名称，100字符内)</font>
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="left"> <em>*</em>
+            页面权限：
+          </td>
+          <td>
+            <table border="0" cellspacing="0" cellpadding="0" class="power_tab">
+              <thead>
+                <tr>
+                  <th width="25%">导航名称</th>
+                  <th width="65%">权限分配</th>
+                  <th width="10%">
+                    <input type="checkbox" name="checkall" value="" />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    &nbsp;
+                    <span class="folderico">系统管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_sys_settings0" name="o_sys_settings" value="show" checked="checked" />
+                    <label for="o_sys_settings0">显示</label>
+                  </td>
+                  <td class="tdc">
+                    <input type="checkbox" name="checktherow" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">起始页</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_startpage0" name="o_startpage" value="show" checked="checked" />
+                    <label for="o_startpage0">显示</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">基本设置</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_config0" name="o_config" value="show" />
+                    <label for="o_config0">显示</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">数据维护</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_data0" name="o_data" value="show" />
+                    <label for="o_data0">显示</label>
+                    <input type="checkbox" id="o_data1" name="o_data" value="backup" />
+                    <label for="o_data1">备份</label>
+                    <input type="checkbox" id="o_data2" name="o_data" value="restore" />
+                    <label for="o_data2">还原</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">缓存管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_cache0" name="o_cache" value="show" />
+                    <label for="o_cache0">显示</label>
+                    <input type="checkbox" id="o_cache1" name="o_cache" value="delete" />
+                    <label for="o_cache1">删除</label>
+                    <input type="checkbox" id="o_cache2" name="o_cache" value="delall" />
+                    <label for="o_cache2">清空</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">类别管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_groups0" name="o_groups" value="show" />
+                    <label for="o_groups0">显示</label>
+                    <input type="checkbox" id="o_groups1" name="o_groups" value="add" />
+                    <label for="o_groups1">添加</label>
+                    <input type="checkbox" id="o_groups2" name="o_groups" value="mod" />
+                    <label for="o_groups2">修改</label>
+                    <input type="checkbox" id="o_groups3" name="o_groups" value="move" />
+                    <label for="o_groups3">移动</label>
+                    <input type="checkbox" id="o_groups4" name="o_groups" value="delete" />
+                    <label for="o_groups4">删除</label>
+                    <input type="checkbox" id="o_groups5" name="o_groups" value="delall" />
+                    <label for="o_groups5">清空</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">模型管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_model0" name="o_model" value="show" />
+                    <label for="o_model0">显示</label>
+                    <input type="checkbox" id="o_model1" name="o_model" value="add" />
+                    <label for="o_model1">添加</label>
+                    <input type="checkbox" id="o_model2" name="o_model" value="mod" />
+                    <label for="o_model2">修改</label>
+                    <input type="checkbox" id="o_model3" name="o_model" value="move" />
+                    <label for="o_model3">移动</label>
+                    <input type="checkbox" id="o_model4" name="o_model" value="delete" />
+                    <label for="o_model4">删除</label>
+                    <input type="checkbox" id="o_model5" name="o_model" value="delall" />
+                    <label for="o_model5">清空</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">角色管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_role0" name="o_role" value="show" />
+                    <label for="o_role0">显示</label>
+                    <input type="checkbox" id="o_role1" name="o_role" value="add" />
+                    <label for="o_role1">添加</label>
+                    <input type="checkbox" id="o_role2" name="o_role" value="mod" />
+                    <label for="o_role2">修改</label>
+                    <input type="checkbox" id="o_role3" name="o_role" value="delete" />
+                    <label for="o_role3">删除</label>
+                    <input type="checkbox" id="o_role4" name="o_role" value="delall" />
+                    <label for="o_role4">清空</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">管理员管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_manager0" name="o_manager" value="show" />
+                    <label for="o_manager0">显示</label>
+                    <input type="checkbox" id="o_manager1" name="o_manager" value="add" />
+                    <label for="o_manager1">添加</label>
+                    <input type="checkbox" id="o_manager2" name="o_manager" value="mod" />
+                    <label for="o_manager2">修改</label>
+                    <input type="checkbox" id="o_manager3" name="o_manager" value="delete" />
+                    <label for="o_manager3">删除</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">上传文件管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_uploadlog0" name="o_uploadlog" value="show" />
+                    <label for="o_uploadlog0">显示</label>
+                    <input type="checkbox" id="o_uploadlog1" name="o_uploadlog" value="delete" />
+                    <label for="o_uploadlog1">删除</label>
+                    <input type="checkbox" id="o_uploadlog2" name="o_uploadlog" value="delall" />
+                    <label for="o_uploadlog2">清空</label>
+                    <input type="checkbox" id="o_uploadlog3" name="o_uploadlog" value="doexec" />
+                    <label for="o_uploadlog3">执行</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">邮件模板管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_mailtpl0" name="o_mailtpl" value="show" />
+                    <label for="o_mailtpl0">显示</label>
+                    <input type="checkbox" id="o_mailtpl1" name="o_mailtpl" value="add" />
+                    <label for="o_mailtpl1">添加</label>
+                    <input type="checkbox" id="o_mailtpl2" name="o_mailtpl" value="mod" />
+                    <label for="o_mailtpl2">修改</label>
+                    <input type="checkbox" id="o_mailtpl3" name="o_mailtpl" value="delete" />
+                    <label for="o_mailtpl3">删除</label>
+                    <input type="checkbox" id="o_mailtpl4" name="o_mailtpl" value="delall" />
+                    <label for="o_mailtpl4">清空</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">网站地图生成</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_createsitemap0" name="o_createsitemap" value="show" />
+                    <label for="o_createsitemap0">显示</label>
+                    <input type="checkbox" id="o_createsitemap1" name="o_createsitemap" value="createfile" />
+                    <label for="o_createsitemap1">生成</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">系统日志管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_log0" name="o_log" value="show" />
+                    <label for="o_log0">显示</label>
+                    <input type="checkbox" id="o_log1" name="o_log" value="delete" />
+                    <label for="o_log1">删除</label>
+                    <input type="checkbox" id="o_log2" name="o_log" value="delall" />
+                    <label for="o_log2">清空</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">系统信息检测</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_spaceinfo0" name="o_spaceinfo" value="show" />
+                    <label for="o_spaceinfo0">显示</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;
+                    <span class="folderico">栏目管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_sys_column0" name="o_sys_column" value="show" />
+                    <label for="o_sys_column0">显示</label>
+                  </td>
+                  <td class="tdc">
+                    <input type="checkbox" name="checktherow" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">栏目管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_column0" name="o_column" value="show" />
+                    <label for="o_column0">显示</label>
+                    <input type="checkbox" id="o_column1" name="o_column" value="add" />
+                    <label for="o_column1">添加</label>
+                    <input type="checkbox" id="o_column2" name="o_column" value="mod" />
+                    <label for="o_column2">修改</label>
+                    <input type="checkbox" id="o_column3" name="o_column" value="move" />
+                    <label for="o_column3">移动</label>
+                    <input type="checkbox" id="o_column4" name="o_column" value="delete" />
+                    <label for="o_column4">删除</label>
+                    <input type="checkbox" id="o_column5" name="o_column" value="delall" />
+                    <label for="o_column5">清空</label>
+                    <input type="checkbox" id="o_column6" name="o_column" value="flag" />
+                    <label for="o_column6">处理</label>
+                    <input type="checkbox" id="o_column7" name="o_column" value="createfile" />
+                    <label for="o_column7">生成</label>
+                    <input type="checkbox" id="o_column8" name="o_column" value="sort" />
+                    <label for="o_column8">排序</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">文章管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_article0" name="o_article" value="show" />
+                    <label for="o_article0">显示</label>
+                    <input type="checkbox" id="o_article1" name="o_article" value="add" />
+                    <label for="o_article1">添加</label>
+                    <input type="checkbox" id="o_article2" name="o_article" value="mod" />
+                    <label for="o_article2">修改</label>
+                    <input type="checkbox" id="o_article3" name="o_article" value="move" />
+                    <label for="o_article3">移动</label>
+                    <input type="checkbox" id="o_article4" name="o_article" value="delete" />
+                    <label for="o_article4">删除</label>
+                    <input type="checkbox" id="o_article5" name="o_article" value="delall" />
+                    <label for="o_article5">清空</label>
+                    <input type="checkbox" id="o_article6" name="o_article" value="auditing" />
+                    <label for="o_article6">审核</label>
+                    <input type="checkbox" id="o_article7" name="o_article" value="createfile" />
+                    <label for="o_article7">生成</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;
+                    <span class="folderico">用户管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_sys_user0" name="o_sys_user" value="show" />
+                    <label for="o_sys_user0">显示</label>
+                  </td>
+                  <td class="tdc">
+                    <input type="checkbox" name="checktherow" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">会员管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_users0" name="o_users" value="show" />
+                    <label for="o_users0">显示</label>
+                    <input type="checkbox" id="o_users1" name="o_users" value="add" />
+                    <label for="o_users1">添加</label>
+                    <input type="checkbox" id="o_users2" name="o_users" value="mod" />
+                    <label for="o_users2">修改</label>
+                    <input type="checkbox" id="o_users3" name="o_users" value="move" />
+                    <label for="o_users3">移动</label>
+                    <input type="checkbox" id="o_users4" name="o_users" value="delete" />
+                    <label for="o_users4">删除</label>
+                    <input type="checkbox" id="o_users5" name="o_users" value="delall" />
+                    <label for="o_users5">清空</label>
+                    <input type="checkbox" id="o_users6" name="o_users" value="auditing" />
+                    <label for="o_users6">审核</label>
+                    <input type="checkbox" id="o_users7" name="o_users" value="flag" />
+                    <label for="o_users7">处理</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">会员组管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_usergroups0" name="o_usergroups" value="show" />
+                    <label for="o_usergroups0">显示</label>
+                    <input type="checkbox" id="o_usergroups1" name="o_usergroups" value="add" />
+                    <label for="o_usergroups1">添加</label>
+                    <input type="checkbox" id="o_usergroups2" name="o_usergroups" value="mod" />
+                    <label for="o_usergroups2">修改</label>
+                    <input type="checkbox" id="o_usergroups3" name="o_usergroups" value="move" />
+                    <label for="o_usergroups3">移动</label>
+                    <input type="checkbox" id="o_usergroups4" name="o_usergroups" value="delete" />
+                    <label for="o_usergroups4">删除</label>
+                    <input type="checkbox" id="o_usergroups5" name="o_usergroups" value="delall" />
+                    <label for="o_usergroups5">清空</label>
+                    <input type="checkbox" id="o_usergroups6" name="o_usergroups" value="flag" />
+                    <label for="o_usergroups6">处理</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">消息管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_message0" name="o_message" value="show" />
+                    <label for="o_message0">显示</label>
+                    <input type="checkbox" id="o_message1" name="o_message" value="view" />
+                    <label for="o_message1">查看</label>
+                    <input type="checkbox" id="o_message2" name="o_message" value="add" />
+                    <label for="o_message2">添加</label>
+                    <input type="checkbox" id="o_message3" name="o_message" value="delete" />
+                    <label for="o_message3">删除</label>
+                    <input type="checkbox" id="o_message4" name="o_message" value="delall" />
+                    <label for="o_message4">清空</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;
+                    <span class="folderico">商城管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_sys_mall0" name="o_sys_mall" value="show" />
+                    <label for="o_sys_mall0">显示</label>
+                  </td>
+                  <td class="tdc">
+                    <input type="checkbox" name="checktherow" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">商品管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_goods0" name="o_goods" value="show" />
+                    <label for="o_goods0">显示</label>
+                    <input type="checkbox" id="o_goods1" name="o_goods" value="add" />
+                    <label for="o_goods1">添加</label>
+                    <input type="checkbox" id="o_goods2" name="o_goods" value="mod" />
+                    <label for="o_goods2">修改</label>
+                    <input type="checkbox" id="o_goods3" name="o_goods" value="move" />
+                    <label for="o_goods3">移动</label>
+                    <input type="checkbox" id="o_goods4" name="o_goods" value="delete" />
+                    <label for="o_goods4">删除</label>
+                    <input type="checkbox" id="o_goods5" name="o_goods" value="delall" />
+                    <label for="o_goods5">清空</label>
+                    <input type="checkbox" id="o_goods6" name="o_goods" value="auditing" />
+                    <label for="o_goods6">审核</label>
+                    <input type="checkbox" id="o_goods7" name="o_goods" value="createfile" />
+                    <label for="o_goods7">生成</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">订单管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_orders0" name="o_orders" value="show" />
+                    <label for="o_orders0">显示</label>
+                    <input type="checkbox" id="o_orders1" name="o_orders" value="mod" />
+                    <label for="o_orders1">修改</label>
+                    <input type="checkbox" id="o_orders2" name="o_orders" value="delete" />
+                    <label for="o_orders2">删除</label>
+                    <input type="checkbox" id="o_orders3" name="o_orders" value="delall" />
+                    <label for="o_orders3">清空</label>
+                    <input type="checkbox" id="o_orders4" name="o_orders" value="flag" />
+                    <label for="o_orders4">处理</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">品牌管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_brand0" name="o_brand" value="show" />
+                    <label for="o_brand0">显示</label>
+                    <input type="checkbox" id="o_brand1" name="o_brand" value="add" />
+                    <label for="o_brand1">添加</label>
+                    <input type="checkbox" id="o_brand2" name="o_brand" value="mod" />
+                    <label for="o_brand2">修改</label>
+                    <input type="checkbox" id="o_brand3" name="o_brand" value="delete" />
+                    <label for="o_brand3">删除</label>
+                    <input type="checkbox" id="o_brand4" name="o_brand" value="delall" />
+                    <label for="o_brand4">清空</label>
+                    <input type="checkbox" id="o_brand5" name="o_brand" value="flag" />
+                    <label for="o_brand5">处理</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">品牌分类管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_brandclass0" name="o_brandclass" value="show" />
+                    <label for="o_brandclass0">显示</label>
+                    <input type="checkbox" id="o_brandclass1" name="o_brandclass" value="sort" />
+                    <label for="o_brandclass1">排序</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;
+                    <span class="folderico">扩展管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_sys_extend0" name="o_sys_extend" value="show" checked="checked" />
+                    <label for="o_sys_extend0">显示</label>
+                  </td>
+                  <td class="tdc">
+                    <input type="checkbox" name="checktherow" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">模板管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_templates0" name="o_templates" value="show" />
+                    <label for="o_templates0">显示</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">标签管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_label0" name="o_label" value="show" />
+                    <label for="o_label0">显示</label>
+                    <input type="checkbox" id="o_label1" name="o_label" value="add" />
+                    <label for="o_label1">添加</label>
+                    <input type="checkbox" id="o_label2" name="o_label" value="mod" />
+                    <label for="o_label2">修改</label>
+                    <input type="checkbox" id="o_label3" name="o_label" value="move" />
+                    <label for="o_label3">移动</label>
+                    <input type="checkbox" id="o_label4" name="o_label" value="delete" />
+                    <label for="o_label4">删除</label>
+                    <input type="checkbox" id="o_label5" name="o_label" value="delall" />
+                    <label for="o_label5">清空</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">广告管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_adzone0" name="o_adzone" value="show" />
+                    <label for="o_adzone0">显示</label>
+                    <input type="checkbox" id="o_adzone1" name="o_adzone" value="add" />
+                    <label for="o_adzone1">添加</label>
+                    <input type="checkbox" id="o_adzone2" name="o_adzone" value="mod" />
+                    <label for="o_adzone2">修改</label>
+                    <input type="checkbox" id="o_adzone3" name="o_adzone" value="delete" />
+                    <label for="o_adzone3">删除</label>
+                    <input type="checkbox" id="o_adzone4" name="o_adzone" value="delall" />
+                    <label for="o_adzone4">清空</label>
+                    <input type="checkbox" id="o_adzone5" name="o_adzone" value="flag" />
+                    <label for="o_adzone5">处理</label>
+                    <input type="checkbox" id="o_adzone6" name="o_adzone" value="createfile" />
+                    <label for="o_adzone6">生成</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">广告内容管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_ads0" name="o_ads" value="show" />
+                    <label for="o_ads0">显示</label>
+                    <input type="checkbox" id="o_ads1" name="o_ads" value="add" />
+                    <label for="o_ads1">添加</label>
+                    <input type="checkbox" id="o_ads2" name="o_ads" value="mod" />
+                    <label for="o_ads2">修改</label>
+                    <input type="checkbox" id="o_ads3" name="o_ads" value="move" />
+                    <label for="o_ads3">移动</label>
+                    <input type="checkbox" id="o_ads4" name="o_ads" value="delete" />
+                    <label for="o_ads4">删除</label>
+                    <input type="checkbox" id="o_ads5" name="o_ads" value="delall" />
+                    <label for="o_ads5">清空</label>
+                    <input type="checkbox" id="o_ads6" name="o_ads" value="flag" />
+                    <label for="o_ads6">处理</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">信息调用</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_call0" name="o_call" value="show" />
+                    <label for="o_call0">显示</label>
+                    <input type="checkbox" id="o_call1" name="o_call" value="add" />
+                    <label for="o_call1">添加</label>
+                    <input type="checkbox" id="o_call2" name="o_call" value="mod" />
+                    <label for="o_call2">修改</label>
+                    <input type="checkbox" id="o_call3" name="o_call" value="delete" />
+                    <label for="o_call3">删除</label>
+                    <input type="checkbox" id="o_call4" name="o_call" value="delall" />
+                    <label for="o_call4">清空</label>
+                    <input type="checkbox" id="o_call5" name="o_call" value="createfile" />
+                    <label for="o_call5">生成</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">留言管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_guestbook0" name="o_guestbook" value="show" checked="checked" />
+                    <label for="o_guestbook0">显示</label>
+                    <input type="checkbox" id="o_guestbook1" name="o_guestbook" value="mod" checked="checked" />
+                    <label for="o_guestbook1">修改</label>
+                    <input type="checkbox" id="o_guestbook2" name="o_guestbook" value="delete" checked="checked" />
+                    <label for="o_guestbook2">删除</label>
+                    <input type="checkbox" id="o_guestbook3" name="o_guestbook" value="delall" />
+                    <label for="o_guestbook3">清空</label>
+                    <input type="checkbox" id="o_guestbook4" name="o_guestbook" value="auditing" checked="checked" />
+                    <label for="o_guestbook4">审核</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">内链接管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_insidelink0" name="o_insidelink" value="show" />
+                    <label for="o_insidelink0">显示</label>
+                    <input type="checkbox" id="o_insidelink1" name="o_insidelink" value="add" />
+                    <label for="o_insidelink1">添加</label>
+                    <input type="checkbox" id="o_insidelink2" name="o_insidelink" value="mod" />
+                    <label for="o_insidelink2">修改</label>
+                    <input type="checkbox" id="o_insidelink3" name="o_insidelink" value="delete" />
+                    <label for="o_insidelink3">删除</label>
+                    <input type="checkbox" id="o_insidelink4" name="o_insidelink" value="delall" />
+                    <label for="o_insidelink4">清空</label>
+                    <input type="checkbox" id="o_insidelink5" name="o_insidelink" value="flag" />
+                    <label for="o_insidelink5">处理</label>
+                    <input type="checkbox" id="o_insidelink6" name="o_insidelink" value="sort" />
+                    <label for="o_insidelink6">排序</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">关键字管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_keyword0" name="o_keyword" value="show" />
+                    <label for="o_keyword0">显示</label>
+                    <input type="checkbox" id="o_keyword1" name="o_keyword" value="add" />
+                    <label for="o_keyword1">添加</label>
+                    <input type="checkbox" id="o_keyword2" name="o_keyword" value="mod" />
+                    <label for="o_keyword2">修改</label>
+                    <input type="checkbox" id="o_keyword3" name="o_keyword" value="delete" />
+                    <label for="o_keyword3">删除</label>
+                    <input type="checkbox" id="o_keyword4" name="o_keyword" value="delall" />
+                    <label for="o_keyword4">清空</label>
+                    <input type="checkbox" id="o_keyword5" name="o_keyword" value="flag" />
+                    <label for="o_keyword5">处理</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">友情链接管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_link0" name="o_link" value="show" />
+                    <label for="o_link0">显示</label>
+                    <input type="checkbox" id="o_link1" name="o_link" value="add" />
+                    <label for="o_link1">添加</label>
+                    <input type="checkbox" id="o_link2" name="o_link" value="mod" />
+                    <label for="o_link2">修改</label>
+                    <input type="checkbox" id="o_link3" name="o_link" value="move" />
+                    <label for="o_link3">移动</label>
+                    <input type="checkbox" id="o_link4" name="o_link" value="delete" />
+                    <label for="o_link4">删除</label>
+                    <input type="checkbox" id="o_link5" name="o_link" value="delall" />
+                    <label for="o_link5">清空</label>
+                    <input type="checkbox" id="o_link6" name="o_link" value="flag" />
+                    <label for="o_link6">处理</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">蜘蛛访问日志</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_spiderlog0" name="o_spiderlog" value="show" />
+                    <label for="o_spiderlog0">显示</label>
+                    <input type="checkbox" id="o_spiderlog1" name="o_spiderlog" value="delete" />
+                    <label for="o_spiderlog1">删除</label>
+                    <input type="checkbox" id="o_spiderlog2" name="o_spiderlog" value="delall" />
+                    <label for="o_spiderlog2">清空</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">在线申请管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_apply0" name="o_apply" value="show" />
+                    <label for="o_apply0">显示</label>
+                    <input type="checkbox" id="o_apply1" name="o_apply" value="view" />
+                    <label for="o_apply1">查看</label>
+                    <input type="checkbox" id="o_apply2" name="o_apply" value="delete" />
+                    <label for="o_apply2">删除</label>
+                    <input type="checkbox" id="o_apply3" name="o_apply" value="delall" />
+                    <label for="o_apply3">清空</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">投票报名管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_voteitem0" name="o_voteitem" value="show" />
+                    <label for="o_voteitem0">显示</label>
+                    <input type="checkbox" id="o_voteitem1" name="o_voteitem" value="flag" />
+                    <label for="o_voteitem1">处理</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;
+                    <span class="folderico">高级管理</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_sys_config0" name="o_sys_config" value="show" />
+                    <label for="o_sys_config0">显示</label>
+                  </td>
+                  <td class="tdc">
+                    <input type="checkbox" name="checktherow" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">功能设置</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_menu0" name="o_menu" value="show" />
+                    <label for="o_menu0">显示</label>
+                    <input type="checkbox" id="o_menu1" name="o_menu" value="add" />
+                    <label for="o_menu1">添加</label>
+                    <input type="checkbox" id="o_menu2" name="o_menu" value="mod" />
+                    <label for="o_menu2">修改</label>
+                    <input type="checkbox" id="o_menu3" name="o_menu" value="move" />
+                    <label for="o_menu3">移动</label>
+                    <input type="checkbox" id="o_menu4" name="o_menu" value="delete" />
+                    <label for="o_menu4">删除</label>
+                    <input type="checkbox" id="o_menu5" name="o_menu" value="delall" />
+                    <label for="o_menu5">清空</label>
+                    <input type="checkbox" id="o_menu6" name="o_menu" value="sort" />
+                    <label for="o_menu6">排序</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    &nbsp;&nbsp;└
+                    <span class="fileico">木马检测</span>
+                  </td>
+                  <td>
+                    <input type="checkbox" id="o_scanhorse0" name="o_scanhorse" value="show" />
+                    <label for="o_scanhorse0">显示</label>
+                    <input type="checkbox" id="o_scanhorse1" name="o_scanhorse" value="doexec" />
+                    <label for="o_scanhorse1">执行</label>
+                  </td>
+                  <td class="tdc">
+                    <input name="checktherow" type="checkbox" value="" />
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr class="hide">
+          <td class="left">
+            <em>*</em>
+            配置权限：
+            <br />
+            <label for="selectthis2">全选</label>
+            <input type="checkbox" id="selectthis2" name="checktherow" value="" />
+          </td>
+          <td class="cfglist">
+            <ul>
+              <li>
+                <ul class="clearfix">
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid1" value="1" checked="checked" />
+                    <label for="cfgid1" title="WebName">网站名称</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid2" value="2" checked="checked" />
+                    <label for="cfgid2" title="WebUrl">网站地址</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid3" value="3" checked="checked" />
+                    <label for="cfgid3" title="WebTitle">网站标题</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid4" value="4" checked="checked" />
+                    <label for="cfgid4" title="MetaKey">站点关键字</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid5" value="5" checked="checked" />
+                    <label for="cfgid5" title="MetaDes">站点描述</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid6" value="6" checked="checked" />
+                    <label for="cfgid6" title="Copyright">网站版权信息</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid7" value="7" checked="checked" />
+                    <label for="cfgid7" title="ICP">ICP备案</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid8" value="8" checked="checked" />
+                    <label for="cfgid8" title="Logo">网站Logo</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid9" value="9" />
+                    <label for="cfgid9" title="Qrcode">网站二维码</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid10" value="10" />
+                    <label for="cfgid10" title="WxQrcode">微信公众号</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid11" value="11" checked="checked" />
+                    <label for="cfgid11" title="MasterEmail">站长Email</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid12" value="12" checked="checked" />
+                    <label for="cfgid12" title="Servicedown">关闭网站</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid13" value="13" checked="checked" />
+                    <label for="cfgid13" title="ServicedownDes">网站维护说明</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid14" value="14" checked="checked" />
+                    <label for="cfgid14" title="SiteJump">站点跳转</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid15" value="15" checked="checked" />
+                    <label for="cfgid15" title="DisRCCC">禁止右键与复制</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid16" value="16" checked="checked" />
+                    <label for="cfgid16" title="LeaveWordAuditing">留言审核</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid17" value="17" />
+                    <label for="cfgid17" title="OpenLog">开启系统日志</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid18" value="18" />
+                    <label for="cfgid18" title="ClearUploadLog">清理上传日志</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid19" value="19" />
+                    <label for="cfgid19" title="ClearTmpFile">清理临时文件</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid20" value="20" />
+                    <label for="cfgid20" title="KEPasteType">编辑器粘贴类型</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid21" value="21" checked="checked" />
+                    <label for="cfgid21" title="SplitPageNum">自动分页字符数</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid22" value="22" />
+                    <label for="cfgid22" title="BadWords">脏话过滤</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid23" value="23" />
+                    <label for="cfgid23" title="SkinPath">模板所在目录</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid24" value="24" />
+                    <label for="cfgid24" title="ShowType">网页显示类型</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid25" value="25" />
+                    <label for="cfgid25" title="CreateFilePath">静态生成目录</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid26" value="26" />
+                    <label for="cfgid26" title="CreateFileExt">静态文件后缀</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid27" value="27" />
+                    <label for="cfgid27" title="NoReplaceFileList">不替换的动态文件</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid28" value="28" />
+                    <label for="cfgid28" title="UploadFileAS">文件上传大小</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid29" value="29" />
+                    <label for="cfgid29" title="UploadImageAT">图片上传类型</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid30" value="30" />
+                    <label for="cfgid30" title="UploadFileAT">文件上传类型</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid31" value="31" />
+                    <label for="cfgid31" title="UploadMediaAT">多媒体上传类型</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid32" value="32" />
+                    <label for="cfgid32" title="ImageComponents">图像处理组件</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid33" value="33" />
+                    <label for="cfgid33" title="WaterMarkType">水印类型</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid34" value="34" />
+                    <label for="cfgid34" title="WaterMarkText">水印文字</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid35" value="35" />
+                    <label for="cfgid35" title="WMFontColor">水印颜色</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid36" value="36" />
+                    <label for="cfgid36" title="WMFontType">水印字体</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid37" value="37" />
+                    <label for="cfgid37" title="WMFontSize">字体大小</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid38" value="38" />
+                    <label for="cfgid38" title="WMFontBlod">字体是否加粗</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid39" value="39" />
+                    <label for="cfgid39" title="WMImage">水印图片</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid40" value="40" />
+                    <label for="cfgid40" title="WMImageBgColor">去除图片底色</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid41" value="41" />
+                    <label for="cfgid41" title="WMImageMinW">图片最小宽度</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid42" value="42" />
+                    <label for="cfgid42" title="WMImageMinH">图片最小高度</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid43" value="43" />
+                    <label for="cfgid43" title="WMOpacity">水印透明度</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid44" value="44" />
+                    <label for="cfgid44" title="WMQuality">水印质量</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid45" value="45" />
+                    <label for="cfgid45" title="WMPosition">水印位置</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid46" value="46" />
+                    <label for="cfgid46" title="ThumbnailW">缩略图的宽度</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid47" value="47" />
+                    <label for="cfgid47" title="ThumbnailH">缩略图的高度</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid48" value="48" />
+                    <label for="cfgid48" title="ShowImageW">大图的宽度</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid49" value="49" />
+                    <label for="cfgid49" title="ShowImageH">大图的高度</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid50" value="50" />
+                    <label for="cfgid50" title="SysMailComponents">邮箱发送组件</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid51" value="51" />
+                    <label for="cfgid51" title="SysMail">系统邮箱</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid52" value="52" />
+                    <label for="cfgid52" title="SysMailFormat">邮件格式</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid53" value="53" />
+                    <label for="cfgid53" title="SysMailLoginName">邮箱登录账号</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid54" value="54" />
+                    <label for="cfgid54" title="SysMailLoginPass">邮箱登录密码</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid55" value="55" />
+                    <label for="cfgid55" title="SysMailSMTP">邮箱服务器</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid56" value="56" />
+                    <label for="cfgid56" title="SMSPostUrl">短信发送接口</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid57" value="57" />
+                    <label for="cfgid57" title="SMSLoginName">短信发送账号</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid58" value="58" />
+                    <label for="cfgid58" title="SMSLoginPass">短信发送密码</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid59" value="59" />
+                    <label for="cfgid59" title="CommentAuditing">评论审核</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid60" value="60" />
+                    <label for="cfgid60" title="GuestComment">匿名评论</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid61" value="61" />
+                    <label for="cfgid61" title="MemberAuditing">用户审核</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid62" value="62" />
+                    <label for="cfgid62" title="WelcomeMsg">发送欢迎短消息</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid63" value="63" />
+                    <label for="cfgid63" title="LoginExp">登录一次加积分</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid64" value="64" />
+                    <label for="cfgid64" title="CommentExp">发表评论加积分</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid65" value="65" />
+                    <label for="cfgid65" title="UploadfaceExp">上传头像加积分</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid66" value="66" />
+                    <label for="cfgid66" title="AddDetailsExp">填写资料加积分</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid67" value="67" />
+                    <label for="cfgid67" title="GetPassMode">取回密码方式</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid68" value="68" />
+                    <label for="cfgid68" title="EmailLimit">注册Email限制</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid69" value="69" />
+                    <label for="cfgid69" title="NickNameLimit">注册昵称限制</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid70" value="70" />
+                    <label for="cfgid70" title="RegIDLimit">注册ID限制</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid71" value="71" />
+                    <label for="cfgid71" title="RegIPLimit">注册IP限制</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid72" value="72" />
+                    <label for="cfgid72" title="SignLength">个性签名长度</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid73" value="73" />
+                    <label for="cfgid73" title="SignLimit">个性签名限制</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid74" value="74" />
+                    <label for="cfgid74" title="UploadExpLimit">上件积分限制</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid75" value="75" />
+                    <label for="cfgid75" title="CurrencyChar">货币符号</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid76" value="76" />
+                    <label for="cfgid76" title="TaxRate">开发票税率</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid77" value="77" />
+                    <label for="cfgid77" title="FreeFreight">免配送费用标准</label>
+                  </li>
+                  <li>
+                    <input type="checkbox" name="cfgid" id="cfgid78" value="78" />
+                    <label for="cfgid78" title="VoteEndTime">投票结束时间</label>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="footer">
+      <input type="submit" name="submit" value="提 交" class="button" />
+      <input type="reset" name="reset" value="重 置" class="button" />
+    </div>
+  </form>
+  <script type="text/javascript">
+    $(function () {
+      var loadSet = function () {
+        if ($(":checkbox[name='o_config'][value='show']").prop("checked")) $(".cfglist").parent().show();
+        else $(".cfglist").parent().hide();
+      };
+      loadSet();
+      $(":checkbox[name='checkall']").click(function () {
+        $(":checkbox").prop("checked", $(this).prop("checked"));
+        loadSet();
+      });
+      $(":checkbox[name='checktherow']").click(function () {
+        $(this).parent().siblings("td").find(":checkbox").prop("checked", $(this).prop("checked"));
+        loadSet();
+      });
+      $(":checkbox[name='o_config'][value='show']").click(function () { loadSet(); });
+      $(":checkbox[name='o_column'][value='show']").click(function () {
+        if (this.checked) xl.$selcols();
+      });
+    });
+  </script>
+</body>
+</html>

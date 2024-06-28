@@ -1,0 +1,39 @@
+{
+    "bitwise": true, //禁用位运算符
+    "camelcase": false, //使用驼峰命名
+    "es3": true, //兼容低级浏览器 IE 6/7/8/9
+    "indent": 2, //代码缩进
+    "latedef": "nofunc", //禁止定义之前使用变量，忽略函数声明
+    "newcap": true, //构造器函数首字母大写
+    "noarg": true, //禁止使用arguments.caller和arguments.callee
+    "noempty": true, //禁止出现空的代码块
+    "quotmark": false, //为true时，禁止单引号和双引号混用
+    "regexp": false,
+    "undef": false, //变量未定义
+    "unused": true, //变量未使用
+    "trailing": true, //禁止行尾空格
+    "eqnull": true, //允许==null
+    "evil": true, //允许使用eval
+    "expr": true, //允许应该出现赋值或函数调用的地方使用表达式
+    "laxbreak": true, //允许不安全的行中断(与laxcomma配合使用)
+    "laxcomma": true, //允许逗号开头的编码样式
+    "loopfunc": true, //允许循环中定义函数
+    "multistr": true, //允许多行字符串
+    "scripturl": true, //允许使用脚本url
+    "shadow": true, //允许变量shadow
+    "sub": true, //允许person[‘name’]
+    "supernew": false,
+    "validthis": true, //允许严格模式下在非构造函数中使用this
+
+    "browser": true,
+    "jquery": true,
+    "mootools": false,
+    "node": true,
+
+    "predef": [
+        "define", 
+        "require"
+    ],
+
+    "-W065": true
+}

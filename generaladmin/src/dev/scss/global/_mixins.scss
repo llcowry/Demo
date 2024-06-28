@@ -1,0 +1,80 @@
+﻿@charset "UTF-8";
+
+// clearfix
+@mixin clearfix {
+  *zoom: 1;
+  &:after {
+    content: "\200B";
+    display: block;
+    height: 0;
+    clear: both;
+  }
+  // &:before, &:after {
+  //   content: "";
+  //   display: table;
+  // }
+  // &:after {
+  //   clear: both;
+  // }
+  // &:after {
+  //   content: ".";
+  //   display: block;
+  //   font-size: 0;
+  //   height: 0;
+  //   clear: both;
+  //   visibility: hidden;
+  // }
+}
+%clearfix {
+  @include clearfix;
+}
+
+// ellipsis
+@mixin ellipsis($width: 100%) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: $width;
+}
+
+// arrow
+@mixin arrow($direction, $size, $borderColor) {
+  content: "";
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  @if $direction == top {
+    border-bottom: $size solid $borderColor;
+    border-left: $size dashed transparent;
+    border-right: $size dashed transparent;
+  }
+  @else if $direction == right {
+    border-left: $size solid $borderColor;
+    border-top: $size dashed transparent;
+    border-bottom: $size dashed transparent;
+  }
+  @else if $direction == bottom {
+    border-top: $size solid $borderColor;
+    border-left: $size dashed transparent;
+    border-right: $size dashed transparent;
+  }
+  @else if $direction == left {
+    border-right: $size solid $borderColor;
+    border-top: $size dashed transparent;
+    border-bottom: $size dashed transparent;
+  }
+}
+
+@mixin arrow-right($position: right center, $size: 8px) {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAQCAYAAAAvf+5AAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABaSURBVChTY0hLS1sExHsTExNFGfCB1NTUw0CF/4H0JbyKQZJARVdppvjSIFIMxAegwpgAzdTDUGFUgKboKlar0RRhdx+dFYEAUMFegopAAKhgBUgxXkUMDAwAoil9zszyfM8AAAAASUVORK5CYII=);
+  background-repeat: no-repeat;
+  background-position: $position;
+  background-size: $size;
+}
+
+@mixin arrow-down($position: right center, $size: 12px) {
+  background-image: url(../images/ico-arrow-down.png);
+  background-repeat: no-repeat;
+  background-position: $position;
+  background-size: $size;
+}

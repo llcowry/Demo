@@ -1,0 +1,78 @@
+﻿@charset "UTF-8";
+
+/* webkit forms */
+@media screen and (-webkit-min-device-pixel-ratio: 0){
+  select,input[type=checkbox],input[type=radio]{
+    position: relative;
+    margin: 0 1px;
+    background-color: #f5f5f5;
+    border: 1px solid rgba(0,0,0,0.25);
+    -webkit-border-radius: 2px;
+    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.08), inset 0 1px 2px rgba(255,255,255,0.75);
+    -webkit-appearance: none;
+    -webkit-user-select: none;
+  }
+  select {
+    height: 22px;
+    -webkit-appearance: none;
+    -webkit-padding-end: 20px;
+    -webkit-padding-start: 6px;
+    &, &:hover, &:active, &:focus {
+      background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAAICAYAAAAbQcSUAAAAaUlEQVQoz2P4//8/A7UwdkEGhiggTsODo4g2LBEImJmZvwE1/UfHIHGQPNGGAbHCggULFrKxsf1ENgjEB4mD5EnxJoaByAZB5Yk3DNlAPj6+L8gGkWUYzMC3b982IRtEtmFQjaxYxDAwAGi4TwMYKNLfAAAAAElFTkSuQmCC") right center no-repeat;
+    }
+  }
+  input[type=checkbox]{
+    bottom: 1px;
+    height: 15px;
+    vertical-align: middle;
+    width: 15px;
+    &:checked::before {
+      position: absolute;
+      left: 3px;
+      top: 6px;
+      content:'';
+      width: 72%;
+      height: 2px;
+      background-color: #666;
+      -webkit-transform: rotate(120deg);
+    }
+    &:checked::after {
+      position: absolute;
+      left: 2px;
+      top: 8px;
+      content:'';
+      width: 4px;
+      height: 2px;
+      background-color: #666;
+      -webkit-transform: rotate(-150deg);
+    }
+  }
+  input[type=radio]{
+    bottom: 1px;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    -webkit-border-radius: 100%;
+    &:checked::before {
+      display: block;
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      bottom: 3px;
+      left: 3px;
+      content:'';
+      background-color: #377bcb;
+      -webkit-border-radius: 100%;
+    }
+  }
+  input[type=checkbox]:active,input[type=radio]:active {
+    background-image: -webkit-linear-gradient(#fcfcfc, #f8f8f8 38%, #e7e7e7);
+    -webkit-box-shadow: none;
+    text-shadow: none;
+  }
+  input[type=checkbox]:disabled,input[type=radio]:disabled {
+    background-color: #e5e5e5;
+    -webkit-box-shadow: none;
+    text-shadow: none;
+  }
+}

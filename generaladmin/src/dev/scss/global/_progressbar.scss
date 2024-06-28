@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+/* progressBar */
+.lp_bar, .sp_bar {
+  background: url(../images/progress/progress_right.gif) no-repeat;
+}
+.lp_bar_bg, .sp_bar_bg {
+  background: url(../images/progress/progress_left.gif) no-repeat;
+}
+.lp_bar {
+  float: left;
+  margin-left: 10px;
+  width: 200px;
+  height: 22px;
+  line-height: 22px;
+  background-position: right center;
+}
+.lp_bar_bg {
+  height: 22px;
+  background-position: left center;
+}
+.lp_bar_percent {
+  float: left;
+  padding-left: 8px;
+  line-height: 20px;
+  font-weight: 700;
+  color: #f60;
+}
+.sp_bar {
+  float: left;
+  width: 100px;
+  height: 16px;
+  line-height: 16px;
+  background-position: right center;
+}
+.sp_bar_bg {
+  height: 16px;
+  background-position: left center;
+}
+.sp_bar_percent {
+  float: left;
+  padding-left: 8px;
+  line-height: 17px;
+  font-weight: 700;
+  color: #f60;
+}

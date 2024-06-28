@@ -1,0 +1,1158 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>带Tab的系统基本设置</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Language" content="utf-8" />
+  <link rel="stylesheet" type="text/css" href="style/common.css" />
+  <link rel="stylesheet" type="text/css" href="style/lxlui-gray.css" />
+  <script type="text/javascript" src="scripts/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/lxlui.min.js"></script>
+  <script type="text/javascript" src="scripts/common.min.js"></script>
+</head>
+<body class="js-box">
+  <form name="modify" action="?action=modify" method="post">
+    <div class="tabs js-tabs-edit">
+      <div class="tabsHeader">
+        <div class="tabsHeaderContent">
+          <ul>
+            <li class="selected"><a href="#"><span>基本设置1</span></a></li>
+            <li><a href="#"><span>基本设置2</span></a></li>
+            <li><a href="#"><span>基本设置3</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tabsContent">
+        <div>
+          <table cellspacing="0" cellpadding="1" align="center" class="table">
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                网站名称：
+                <br />
+                <span class="gray">WebName</span>
+              </td>
+              <td>
+                <input type="text" id="WebName" name="WebName" value="环球品牌网" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">网站名称</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                网站地址：
+                <br />
+                <span class="gray">WebUrl</span>
+              </td>
+              <td>
+                <input type="text" id="WebUrl" name="WebUrl" value="http://www.hqppa.com" class="input w360" pattern="^(http|https|ftp|rtsp|mms):(\/\/|\\\\)([A-Za-z0-9\-]+\.){1,2}([A-Za-z]{2,4}|[A-Za-z]{2,4}\.[A-Za-z]{2})$" />
+                <br />
+                <span class="gray">例如：“http://www.your-domainname.com”</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                网站标题：
+                <br />
+                <span class="gray">WebTitle</span>
+              </td>
+              <td>
+                <input type="text" id="WebTitle" name="WebTitle" value="环球品牌网 全球最大的品牌门户" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">网站标题</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                站点关键字：
+                <br />
+                <span class="gray">MetaKey</span>
+              </td>
+              <td>
+                <textarea id="MetaKey" name="MetaKey" rows="3" class="w500">
+                  环球品牌网,品牌网,十大品牌网,2016十大品牌投票,2016十大品牌评选,2016十大品牌榜中榜,2016十大品牌推荐,创业加盟,品牌招商,品牌代理加盟,品牌经销商专卖,采购批发,产品订购,品牌产品促销,商务网,2016年十大品牌投票,2016十大品牌
+                </textarea>
+                <br />
+                <span class="gray">每个关键字请用“|”号或英文逗号“,”分隔</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                站点描述：
+                <br />
+                <span class="gray">MetaDes</span>
+              </td>
+              <td>
+                <textarea id="MetaDes" name="MetaDes" rows="3" class="w500">
+                  环球品牌网,全球最大的品牌电子商务平台。品牌招商，品牌代理加盟，品牌展示，品牌正品订购，2016年十大品牌投票就上环球品牌网。品牌产品促销,品牌产品特卖,品牌资讯发布就上环球品牌网。品牌专属页面免费申请，品牌经销商专属页面申请，一切竟在环球品牌网。环球品牌网您必不可少的品牌专家！
+                </textarea>
+                <br />
+                <span class="gray">说明您网站的主要内容，内容中请使用英文逗号“,”</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                网站版权信息：
+                <br />
+                <span class="gray">Copyright</span>
+              </td>
+              <td>
+                <textarea id="Copyright" name="Copyright" rows="3" class="w500" pattern="^.+$">
+                  Copyright © 2013-2014 &lt;a href="http://www.hqppa.com"&gt;环球品牌网&lt;/a&gt;. All Rights Reserved
+                </textarea>
+                <br />
+                <span class="gray">网站的版权信息</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                ICP备案：
+                <br />
+                <span class="gray">ICP</span>
+              </td>
+              <td>
+                <input type="text" id="ICP" name="ICP" value="湘ICP备14006615号" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">您站点的ICP备案号码</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                网站Logo：
+                <br />
+                <span class="gray">Logo</span>
+              </td>
+              <td>
+                <input type="text" id="Logo" name="Logo" value="/uploadfiles/image/config/201601181959185191.jpg" class="input w300" pattern="^.+$" />
+                <div class="uploadbox uploadimg"></div>
+                <br />
+                <span class="gray">网站的Logo标志地址，允许类型：jpg|jpeg|gif|bmp|png</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                网站二维码：
+                <br />
+                <span class="gray">Qrcode</span>
+              </td>
+              <td>
+                <input type="text" id="Qrcode" name="Qrcode" value="/uploadfiles/image/config/201510131503506036.jpg" class="input w300" pattern="^.+$" />
+                <div class="uploadbox uploadimg"></div>
+                <br />
+                <span class="gray">网站的二维码图片地址，允许类型：jpg|jpeg|gif|bmp|png</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                微信公众号：
+                <br />
+                <span class="gray">WxQrcode</span>
+              </td>
+              <td>
+                <input type="text" id="WxQrcode" name="WxQrcode" value="images/wx_qrcode.jpg" class="input w300" pattern="^.+$" />
+                <div class="uploadbox uploadimg"></div>
+                <br />
+                <span class="gray">微信公众号的二维码图片地址，允许类型：jpg|jpeg|gif|bmp|png</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                站长Email：
+                <br />
+                <span class="gray">MasterEmail</span>
+              </td>
+              <td>
+                <input type="text" id="MasterEmail" name="MasterEmail" value="webmaster@126.com" class="input w360" pattern="^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$" />
+                <br />
+                <span class="gray">站长的E-Mail地址</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                关闭网站：
+                <br />
+                <span class="gray">Servicedown</span>
+              </td>
+              <td>
+                <input type="radio" id="Servicedown" name="Servicedown" value="1" />
+                <label for="Servicedown">是</label>
+                <input type="radio" id="Servicedown1" name="Servicedown" value="0" checked="checked" />
+                <label for="Servicedown1">否</label>
+                <br />
+                <span class="gray">是否将网站暂时关闭</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                网站维护说明：
+                <br />
+                <span class="gray">ServicedownDes</span>
+              </td>
+              <td>
+                <textarea id="ServicedownDes" name="ServicedownDes" rows="3" class="w500" pattern="^.+$">
+                  网站维护，暂时关闭，请稍候访问！Sorry! the site is temporarily closed, please wait visit!
+                </textarea>
+                <br />
+                <span class="gray">仅当网站关闭时有效，显示关闭的原因</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                站点跳转：
+                <br />
+                <span class="gray">SiteJump</span>
+              </td>
+              <td>
+                <input type="radio" id="SiteJump" name="SiteJump" value="1" checked="checked" />
+                <label for="SiteJump">是</label>
+                <input type="radio" id="SiteJump1" name="SiteJump" value="0" />
+                <label for="SiteJump1">否</label>
+                <br />
+                <span class="gray">根据不同设备显示不同的站点</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                禁止右键与复制：
+                <br />
+                <span class="gray">DisRCCC</span>
+              </td>
+              <td>
+                <input type="radio" id="DisRCCC" name="DisRCCC" value="1" />
+                <label for="DisRCCC">是</label>
+                <input type="radio" id="DisRCCC1" name="DisRCCC" value="0" checked="checked" />
+                <label for="DisRCCC1">否</label>
+                <br />
+                <span class="gray">禁止鼠标右键与复制功能</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                留言审核：
+                <br />
+                <span class="gray">LeaveWordAuditing</span>
+              </td>
+              <td>
+                <input type="radio" id="LeaveWordAuditing" name="LeaveWordAuditing" value="1" />
+                <label for="LeaveWordAuditing">是</label>
+                <input type="radio" id="LeaveWordAuditing1" name="LeaveWordAuditing" value="0" checked="checked" />
+                <label for="LeaveWordAuditing1">否</label>
+                <br />
+                <span class="gray">提交留言后需审核才能显示</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                开启系统日志：
+                <br />
+                <span class="gray">OpenLog</span>
+              </td>
+              <td>
+                <input type="radio" id="OpenLog" name="OpenLog" value="1" checked="checked" />
+                <label for="OpenLog">是</label>
+                <input type="radio" id="OpenLog1" name="OpenLog" value="0" />
+                <label for="OpenLog1">否</label>
+                <br />
+                <span class="gray">是否开启系统的管理日志</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                清理上传日志：
+                <br />
+                <span class="gray">ClearUploadLog</span>
+              </td>
+              <td>
+                <input type="radio" id="ClearUploadLog" name="ClearUploadLog" value="1" />
+                <label for="ClearUploadLog">是</label>
+                <input type="radio" id="ClearUploadLog1" name="ClearUploadLog" value="0" checked="checked" />
+                <label for="ClearUploadLog1">否</label>
+                <br />
+                <span class="gray">是否开启自动清理上传日志的功能，只清理文件已删除的上传日志</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                清理临时文件：
+                <br />
+                <span class="gray">ClearTmpFile</span>
+              </td>
+              <td>
+                <input type="radio" id="ClearTmpFile" name="ClearTmpFile" value="1" />
+                <label for="ClearTmpFile">是</label>
+                <input type="radio" id="ClearTmpFile1" name="ClearTmpFile" value="0" checked="checked" />
+                <label for="ClearTmpFile1">否</label>
+                <br />
+                <span class="gray">是否开启自动清理临时文件的功能</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                编辑器粘贴类型：
+                <br />
+                <span class="gray">KEPasteType</span>
+              </td>
+              <td>
+                <select id="KEPasteType" name="KEPasteType">
+                  <option value="1" selected="selected">无格式文本</option>
+                  <option value="2">有格式文本</option>
+                </select>
+                <br />
+                <span class="gray">编辑器默认的粘贴类型</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                自动分页字符数：
+                <br />
+                <span class="gray">SplitPageNum</span>
+              </td>
+              <td>
+                <input type="text" id="SplitPageNum" name="SplitPageNum" value="500" class="input w120" pattern="^\d+$" />
+                <br />
+                <span class="gray">文章内容自动分页的每页字符数</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                脏话过滤：
+                <br />
+                <span class="gray">BadWords</span>
+              </td>
+              <td>
+                <textarea id="BadWords" name="BadWords" rows="3" class="w500" pattern="^.*$">fuck|shit|妈的|你妈的|他妈的|我操|我日|叼你|顶你个肺</textarea>
+                <br />
+                <span class="gray">多个使用 "|"分隔，如："fuck|shit|妈的|你妈的|他妈的|我操|我日|叼你|顶你个肺"</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                模板所在目录：
+                <br />
+                <span class="gray">SkinPath</span>
+              </td>
+              <td>
+                <input type="text" id="SkinPath" name="SkinPath" value="hqpp/" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">模板所在目录，路径须以“/”结束，例如："default/"</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                网页显示类型：
+                <br />
+                <span class="gray">ShowType</span>
+              </td>
+              <td>
+                <select id="ShowType" name="ShowType">
+                  <option value="0" selected="selected">动态显示</option>
+                  <option value="1">伪静态显示</option>
+                  <option value="2">静态显示</option>
+                </select>
+                <br />
+                <span class="gray">网页在前台显示的类型</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                静态生成目录：
+                <br />
+                <span class="gray">CreateFilePath</span>
+              </td>
+              <td>
+                <input type="text" id="CreateFilePath" name="CreateFilePath" value="" class="input w360" pattern="^.*$" />
+                <br />
+                <span class="gray">目录可为空，当指定某一目录时，路径须以“/”结束，例如："html/"</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                静态文件后缀：
+                <br />
+                <span class="gray">CreateFileExt</span>
+              </td>
+              <td>
+                <select id="CreateFileExt" name="CreateFileExt">
+                  <option value=".htm">.htm</option>
+                  <option value=".html" selected="selected">.html</option>
+                  <option value=".shtml">.shtml</option>
+                </select>
+                <br />
+                <span class="gray">如果更改了后缀需要生成全站才会生效</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                不替换的动态文件：
+                <br />
+                <span class="gray">NoReplaceFileList</span>
+              </td>
+              <td>
+                <textarea id="NoReplaceFileList" name="NoReplaceFileList" rows="3" class="w500" pattern="^.+$">(config|dywlkj_infolist).asp|xl_(vcode|call|pay|qqcs).asp</textarea>
+                <br />
+                <span class="gray">不需要生成和替换的动态文件列表，文件之间用“|”分隔</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                文件上传大小：
+                <br />
+                <span class="gray">UploadFileAS</span>
+              </td>
+              <td>
+                <input type="text" id="UploadFileAS" name="UploadFileAS" value="200" class="input w120" pattern="^[\d]{1,8}$" />
+                <br />
+                <span class="gray">允许上传文件的最大体积，单位KB</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                图片上传类型：
+                <br />
+                <span class="gray">UploadImageAT</span>
+              </td>
+              <td>
+                <input type="text" id="UploadImageAT" name="UploadImageAT" value="gif|jpg|jpeg|png|bmp" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">允许上传图片的文件类型后缀名，使用“|”分隔</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                文件上传类型：
+                <br />
+                <span class="gray">UploadFileAT</span>
+              </td>
+              <td>
+                <input type="text" id="UploadFileAT" name="UploadFileAT" value="doc|docx|xls|xlsx|ppt|htm|html|txt|zip|rar|gz|bz2" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">允许上传文件的文件类型后缀名，使用“|”分隔</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                多媒体上传类型：
+                <br />
+                <span class="gray">UploadMediaAT</span>
+              </td>
+              <td>
+                <input type="text" id="UploadMediaAT" name="UploadMediaAT" value="swf|flv|mp3|wav|wma|wmv|mid|avi|mpg|asf|rm|rmvb" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">允许上传影音的文件类型后缀名，使用“|”分隔</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                图像处理组件：
+                <br />
+                <span class="gray">ImageComponents</span>
+              </td>
+              <td>
+                <select id="ImageComponents" name="ImageComponents">
+                  <option value="0">不支持图像处理组件</option>
+                  <option value="1" selected="selected">Persits.Jpeg ×</option>
+                </select>
+                <br />
+                <span class="gray">处理图像的组件，比如：加水印，缩放图片</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                水印类型：
+                <br />
+                <span class="gray">WaterMarkType</span>
+              </td>
+              <td>
+                <select id="WaterMarkType" name="WaterMarkType">
+                  <option value="0" selected="selected">文字</option>
+                  <option value="1">图片</option>
+                </select>
+                <br />
+                <span class="gray">加水印的类型</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                水印文字：
+                <br />
+                <span class="gray">WaterMarkText</span>
+              </td>
+              <td>
+                <input type="text" id="WaterMarkText" name="WaterMarkText" value="huanqiu-pingpai.com" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">加水印的文字</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                水印颜色：
+                <br />
+                <span class="gray">WMFontColor</span>
+              </td>
+              <td>
+                <input type="text" id="WMFontColor" name="WMFontColor" value="#FFFFFF" class="input w100 colorinput" autocomplete="off" />
+                <br />
+                <span class="gray">加水印的文字颜色</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                水印字体：
+                <br />
+                <span class="gray">WMFontType</span>
+              </td>
+              <td>
+                <select id="WMFontType" name="WMFontType">
+                  <option value="宋体" selected="selected">宋体</option>
+                  <option value="黑体">黑体</option>
+                  <option value="隶书">隶书</option>
+                  <option value="Arial">Arial</option>
+                  <option value="Verdana">Verdana</option>
+                </select>
+                <br />
+                <span class="gray">加水印的文字字体</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                字体大小：
+                <br />
+                <span class="gray">WMFontSize</span>
+              </td>
+              <td>
+                <input type="text" id="WMFontSize" name="WMFontSize" value="12" class="input w120" pattern="^[\d]{1,2}$" />
+                <br />
+                <span class="gray">加水印的文字大小，单位：px</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                字体是否加粗：
+                <br />
+                <span class="gray">WMFontBlod</span>
+              </td>
+              <td>
+                <input type="radio" id="WMFontBlod" name="WMFontBlod" value="1" />
+                <label for="WMFontBlod">是</label>
+                <input type="radio" id="WMFontBlod1" name="WMFontBlod" value="0" checked="checked" />
+                <label for="WMFontBlod1">否</label>
+                <br />
+                <span class="gray">加水印的文字是否加粗</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                水印图片：
+                <br />
+                <span class="gray">WMImage</span>
+              </td>
+              <td>
+                <input type="text" id="WMImage" name="WMImage" value="images/watermark.jpg" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">加水印的图片</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                去除图片底色：
+                <br />
+                <span class="gray">WMImageBgColor</span>
+              </td>
+              <td>
+                <input type="text" id="WMImageBgColor" name="WMImageBgColor" value="#000000" class="input w100 colorinput" autocomplete="off" />
+                <br />
+                <span class="gray">去除水印图片底色</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                图片最小宽度：
+                <br />
+                <span class="gray">WMImageMinW</span>
+              </td>
+              <td>
+                <input type="text" id="WMImageMinW" name="WMImageMinW" value="150" class="input w120" pattern="^[\d]{1,4}$" />
+                <br />
+                <span class="gray">被加水印图片的最小宽度限制</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                图片最小高度：
+                <br />
+                <span class="gray">WMImageMinH</span>
+              </td>
+              <td>
+                <input type="text" id="WMImageMinH" name="WMImageMinH" value="150" class="input w120" pattern="^[\d]{1,4}$" />
+                <br />
+                <span class="gray">被加水印图片的最小高度限制</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                水印透明度：
+                <br />
+                <span class="gray">WMOpacity</span>
+              </td>
+              <td>
+                <input type="text" id="WMOpacity" name="WMOpacity" value="1" class="input w120" pattern="^.+$" />
+                <br />
+                <span class="gray">水印的透明度，0-1之间的数字</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                水印质量：
+                <br />
+                <span class="gray">WMQuality</span>
+              </td>
+              <td>
+                <input type="text" id="WMQuality" name="WMQuality" value="100" class="input w120" pattern="^[\d]{1,3}$" />
+                <br />
+                <span class="gray">水印的质量，0-100 为100时质量最好</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                水印位置：
+                <br />
+                <span class="gray">WMPosition</span>
+              </td>
+              <td>
+                <select id="WMPosition" name="WMPosition">
+                  <option value="0">左上</option>
+                  <option value="1">左下</option>
+                  <option value="2">居中</option>
+                  <option value="3">右上</option>
+                  <option value="4" selected="selected">右下</option>
+                </select>
+                <br />
+                <span class="gray">加水印的位置</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                缩略图的宽度：
+                <br />
+                <span class="gray">ThumbnailW</span>
+              </td>
+              <td>
+                <input type="text" id="ThumbnailW" name="ThumbnailW" value="160" class="input w120" pattern="^[\d]{1,4}$" />
+                <br />
+                <span class="gray">设置缩略图的宽度</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                缩略图的高度：
+                <br />
+                <span class="gray">ThumbnailH</span>
+              </td>
+              <td>
+                <input type="text" id="ThumbnailH" name="ThumbnailH" value="120" class="input w120" pattern="^[\d]{1,4}$" />
+                <br />
+                <span class="gray">设置缩略图的高度</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                大图的宽度：
+                <br />
+                <span class="gray">ShowImageW</span>
+              </td>
+              <td>
+                <input type="text" id="ShowImageW" name="ShowImageW" value="620" class="input w120" pattern="^[\d]{1,4}$" />
+                <br />
+                <span class="gray">默认显示大图的宽度限制</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                大图的高度：
+                <br />
+                <span class="gray">ShowImageH</span>
+              </td>
+              <td>
+                <input type="text" id="ShowImageH" name="ShowImageH" value="465" class="input w120" pattern="^[\d]{1,4}$" />
+                <br />
+                <span class="gray">默认显示大图的高度限制</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                邮箱发送组件：
+                <br />
+                <span class="gray">SysMailComponents</span>
+              </td>
+              <td>
+                <select id="SysMailComponents" name="SysMailComponents">
+                  <option value="0">不支持邮箱发送组件</option>
+                  <option value="1" selected="selected">JMail.Message ×</option>
+                  <option value="2">CDONTS.NewMail ×</option>
+                  <option value="3">Persits.MailSender ×</option>
+                </select>
+                <br />
+                <span class="gray">发送系统邮件的组件</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                系统邮箱：
+                <br />
+                <span class="gray">SysMail</span>
+              </td>
+              <td>
+                <input type="text" id="SysMail" name="SysMail" value="llcowry@126.com" class="input w360" pattern="^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$" />
+                <br />
+                <span class="gray">发送系统邮件的邮箱</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                邮件格式：
+                <br />
+                <span class="gray">SysMailFormat</span>
+              </td>
+              <td>
+                <select id="SysMailFormat" name="SysMailFormat">
+                  <option value="0" selected="selected">网页</option>
+                  <option value="1">文本</option>
+                </select>
+                <br />
+                <span class="gray">发送系统邮件的邮件格式</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                邮箱登录账号：
+                <br />
+                <span class="gray">SysMailLoginName</span>
+              </td>
+              <td>
+                <input type="text" id="SysMailLoginName" name="SysMailLoginName" value="firgray" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">发送系统邮件的登录账号</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                邮箱登录密码：
+                <br />
+                <span class="gray">SysMailLoginPass</span>
+              </td>
+              <td>
+                <input type="password" id="SysMailLoginPass" name="SysMailLoginPass" value="firgray.XL" class="input w200" />
+                <br />
+                <span class="gray">发送系统邮件的登录密码</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                邮箱服务器：
+                <br />
+                <span class="gray">SysMailSMTP</span>
+              </td>
+              <td>
+                <input type="text" id="SysMailSMTP" name="SysMailSMTP" value="smtp.126.com" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">发送系统邮件的邮箱服务器</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                短信发送接口：
+                <br />
+                <span class="gray">SMSPostUrl</span>
+              </td>
+              <td>
+                <textarea id="SMSPostUrl" name="SMSPostUrl" rows="3" class="w500" pattern="^.+$">
+                  http://218.244.136.70:8888/sms.aspx?action=send&userid=648&account={userid}&password={userpass}&mobile={mobile}&content={content}&sendTime=&extno=
+                </textarea>
+                <br />
+                <span class="gray">
+                  发送手机短信的接口，帐号：{userid}，密码：{userpass}，手机号：{mobile}，短信内容：{content}
+                </span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                短信发送账号：
+                <br />
+                <span class="gray">SMSLoginName</span>
+              </td>
+              <td>
+                <input type="text" id="SMSLoginName" name="SMSLoginName" value="userid" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">发送手机短信的账号</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                短信发送密码：
+                <br />
+                <span class="gray">SMSLoginPass</span>
+              </td>
+              <td>
+                <input type="password" id="SMSLoginPass" name="SMSLoginPass" value="userpass" class="input w200" />
+                <br />
+                <span class="gray">发送手机短信的密码</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                评论审核：
+                <br />
+                <span class="gray">CommentAuditing</span>
+              </td>
+              <td>
+                <input type="radio" id="CommentAuditing" name="CommentAuditing" value="1" />
+                <label for="CommentAuditing">是</label>
+                <input type="radio" id="CommentAuditing1" name="CommentAuditing" value="0" checked="checked" />
+                <label for="CommentAuditing1">否</label>
+                <br />
+                <span class="gray">提交评论后需审核才能显示</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                匿名评论：
+                <br />
+                <span class="gray">GuestComment</span>
+              </td>
+              <td>
+                <input type="radio" id="GuestComment" name="GuestComment" value="1" />
+                <label for="GuestComment">是</label>
+                <input type="radio" id="GuestComment1" name="GuestComment" value="0" checked="checked" />
+                <label for="GuestComment1">否</label>
+                <br />
+                <span class="gray">是否开启匿名评论</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                用户审核：
+                <br />
+                <span class="gray">MemberAuditing</span>
+              </td>
+              <td>
+                <select id="MemberAuditing" name="MemberAuditing">
+                  <option value="0">手工审核(更安全)</option>
+                  <option value="1" selected="selected">直接开通</option>
+                  <option value="2">邮箱验证(较方便)</option>
+                </select>
+                <br />
+                <span class="gray">用户注册后的开通方式</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                发送欢迎短消息：
+                <br />
+                <span class="gray">WelcomeMsg</span>
+              </td>
+              <td>
+                <input type="radio" id="WelcomeMsg" name="WelcomeMsg" value="1" checked="checked" />
+                <label for="WelcomeMsg">是</label>
+                <input type="radio" id="WelcomeMsg1" name="WelcomeMsg" value="0" />
+                <label for="WelcomeMsg1">否</label>
+                <br />
+                <span class="gray">用户注册后由系统发送的欢迎短消息</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                登录一次加积分：
+                <br />
+                <span class="gray">LoginExp</span>
+              </td>
+              <td>
+                <input type="text" id="LoginExp" name="LoginExp" value="0" class="input w120" pattern="^\d+$" />
+                <br />
+                <span class="gray">用户登录一次所加的积分</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                发表评论加积分：
+                <br />
+                <span class="gray">CommentExp</span>
+              </td>
+              <td>
+                <input type="text" id="CommentExp" name="CommentExp" value="0" class="input w120" pattern="^\d+$" />
+                <br />
+                <span class="gray">用户发表产品评论一次所加的积分</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                上传头像加积分：
+                <br />
+                <span class="gray">UploadfaceExp</span>
+              </td>
+              <td>
+                <input type="text" id="UploadfaceExp" name="UploadfaceExp" value="0" class="input w120" pattern="^\d+$" />
+                <br />
+                <span class="gray">用户上传个人头像所加的积分</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                填写资料加积分：
+                <br />
+                <span class="gray">AddDetailsExp</span>
+              </td>
+              <td>
+                <input type="text" id="AddDetailsExp" name="AddDetailsExp" value="0" class="input w120" pattern="^\d+$" />
+                <br />
+                <span class="gray">用户填写完详细资料所加的积分</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                取回密码方式：
+                <br />
+                <span class="gray">GetPassMode</span>
+              </td>
+              <td>
+                <select id="GetPassMode" name="GetPassMode">
+                  <option value="0" selected="selected">直接提供修改(较方便)</option>
+                  <option value="1">发送密码到用户邮箱(更安全)</option>
+                </select>
+                <br />
+                <span class="gray">用户找回密码答对提示问题后，用哪种方式来提供密码</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                注册Email限制：
+                <br />
+                <span class="gray">EmailLimit</span>
+              </td>
+              <td>
+                <input type="radio" id="EmailLimit" name="EmailLimit" value="1" />
+                <label for="EmailLimit">是</label>
+                <input type="radio" id="EmailLimit1" name="EmailLimit" value="0" checked="checked" />
+                <label for="EmailLimit1">否</label>
+                <br />
+                <span class="gray">是否限制Email只能注册一个帐号</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                注册昵称限制：
+                <br />
+                <span class="gray">NickNameLimit</span>
+              </td>
+              <td>
+                <input type="radio" id="NickNameLimit" name="NickNameLimit" value="1" />
+                <label for="NickNameLimit">是</label>
+                <input type="radio" id="NickNameLimit1" name="NickNameLimit" value="0" checked="checked" />
+                <label for="NickNameLimit1">否</label>
+                <br />
+                <span class="gray">是否允许用户笔名/昵称重复</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                注册ID限制：
+                <br />
+                <span class="gray">RegIDLimit</span>
+              </td>
+              <td>
+                <textarea id="RegIDLimit" name="RegIDLimit" rows="3" class="w500" pattern="^.*$">www,bbs,ftp,mail,user,users,admin,administrator</textarea>
+                <br />
+                <span class="gray">注册用户时候，限制所列出的ID注册，ID与ID之间换行隔开</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                注册IP限制：
+                <br />
+                <span class="gray">RegIPLimit</span>
+              </td>
+              <td>
+                <textarea id="RegIPLimit" name="RegIPLimit" rows="3" class="w500" pattern="^.*$"></textarea>
+                <br />
+                <span class="gray">注册用户时候，限制所列出的IP注册，IP与IP之间换行隔开</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                个性签名长度：
+                <br />
+                <span class="gray">SignLength</span>
+              </td>
+              <td>
+                <input type="text" id="SignLength" name="SignLength" value="99" class="input w120" pattern="^[0-9]{1,2}$" />
+                <br />
+                <span class="gray">用户个性签名长度，小于100个字符。</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                个性签名限制：
+                <br />
+                <span class="gray">SignLimit</span>
+              </td>
+              <td>
+                <input type="radio" id="SignLimit" name="SignLimit" value="1" />
+                <label for="SignLimit">是</label>
+                <input type="radio" id="SignLimit1" name="SignLimit" value="0" checked="checked" />
+                <label for="SignLimit1">否</label>
+                <br />
+                <span class="gray">是否允许用户签名带图片、视频、动画。</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                上件积分限制：
+                <br />
+                <span class="gray">UploadExpLimit</span>
+              </td>
+              <td>
+                <input type="text" id="UploadExpLimit" name="UploadExpLimit" value="0" class="input w120" pattern="^\d+$" />
+                <br />
+                <span class="gray">当积分达到多少后才允许上传，正整数</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                货币符号：
+                <br />
+                <span class="gray">CurrencyChar</span>
+              </td>
+              <td>
+                <input type="text" id="CurrencyChar" name="CurrencyChar" value="￥" class="input w360" pattern="^.+$" />
+                <br />
+                <span class="gray">交易所使用的货币符号</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                开发票税率：
+                <br />
+                <span class="gray">TaxRate</span>
+              </td>
+              <td>
+                <input type="text" id="TaxRate" name="TaxRate" value="5" class="input w360" pattern="^[0-99]{1,2}$" />
+                <br />
+                <span class="gray">开发票所需要税率费用，值为百分比</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                免配送费用标准：
+                <br />
+                <span class="gray">FreeFreight</span>
+              </td>
+              <td>
+                <input type="text" id="FreeFreight" name="FreeFreight" value="50" class="input w360" pattern="^\d+$" />
+                <br />
+                <span class="gray">产品的免配送费用的标准值</span>
+              </td>
+            </tr>
+            <tr>
+              <td class="left">
+                <span class="b red">*</span>
+                投票结束时间：
+                <br />
+                <span class="gray">VoteEndTime</span>
+              </td>
+              <td>
+                <input type="text" id="VoteEndTime" name="VoteEndTime" value="2016-06-30 12:00:00" class="input datetime" />
+                <span class="gray">投票的结束时间</span>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="tabsFooter">
+        <div class="tabsFooterContent">
+          <input type="submit" name="submit" value="提 交" class="button" />
+          <input type="reset" name="reset" value="重 置" class="button" />
+        </div>
+      </div>
+    </div>
+  </form>
+  <script src="scripts/plugins/jquery.colorpicker.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(function () {
+      $(".colorinput").colorpicker({ reset: function (o) { o.val('#000000'); } });
+      $(".datetime").lxlDateInput({ showTime: true });
+      $(".js-tabs-edit").lxlTabs({ height: 'full', skin: 'classic', nompb: true });
+    });
+  </script>
+</body>
+</html>

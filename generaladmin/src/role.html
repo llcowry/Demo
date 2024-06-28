@@ -1,0 +1,115 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>角色管理</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Language" content="utf-8" />
+  <link rel="stylesheet" type="text/css" href="style/common.css" />
+  <link rel="stylesheet" type="text/css" href="style/lxlui-gray.css" />
+  <link rel="stylesheet" type="text/css" href="scripts/plugins/jqgrid/css/jqgrid.css" />
+  <script type="text/javascript" src="scripts/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/plugins/jqgrid.min.js"></script>
+  <script type="text/javascript" src="scripts/lxlui.min.js"></script>
+  <script type="text/javascript" src="scripts/common.min.js"></script>
+</head>
+<body>
+  <div class="grid-toolbar">
+    <a class="btn-reload">
+      <span>刷新</span>
+    </a>
+    <div class="grid-toolbar-separator"></div>
+    <a href="role-add.html" class="btn-add">
+      <span>新增</span>
+    </a>
+    <a href="#" class="btn-edit">
+      <span>编辑</span>
+    </a>
+    <a href="#" class="btn-delete">
+      <span>删除</span>
+    </a>
+    <div class="grid-toolbar-separator"></div>
+    <a class="btn-leave">
+      <span>离开</span>
+    </a>
+    <a class="btn-back">
+      <span>返回</span>
+    </a>
+  </div>
+  <table id="gridTable"></table>
+  <script type="text/javascript">
+    $(function() {
+      $("#gridTable").jqGrid({
+        url: "/CommonModule/DataDictionary/TreeGridListJson",
+        datatype: "json",
+        ExpandColumn: "Code",
+        autowidth: true,
+        height: $(window).height() - 73,
+        colModel: [{
+          label: '主键',
+          name: 'DataDictionaryDetailId',
+          index: 'DataDictionaryDetailId',
+          hidden: true
+        }, {
+          label: '名称',
+          name: 'DataDictionaryDetailName',
+          index: 'DataDictionaryDetailName',
+          hidden: true
+        }, {
+          label: "项目名称",
+          name: "FullName",
+          index: "FullName",
+          width: 200
+        }, {
+          label: "项目值",
+          name: "Code",
+          index: "Code",
+          width: 300
+        }, {
+          label: '有效',
+          name: 'Enabled',
+          index: 'Enabled',
+          width: 45,
+          align: 'center',
+          formatter: function(cellvalue, options, rowObject) {
+            if (cellvalue == '1') return "<img src='images/icon16/checkokmark.gif'>";
+            if (cellvalue == '0') return "<img src='images/icon16/checknomark.gif'>";
+          }
+        }, {
+          label: "创建用户",
+          name: "CreateUserName",
+          index: "CreateUserName",
+          width: 100
+        }, {
+          label: "创建时间",
+          name: "CreateDate",
+          index: "CreateDate",
+          width: 120,
+          formatter: function(cellvalue, options, rowObject) {
+            return new Date(cellvalue).format('yyyy-MM-dd hh:mm:ss');
+          }
+        }, {
+          label: "修改用户",
+          name: "ModifyUserName",
+          index: "ModifyUserName",
+          width: 100
+        }, {
+          label: "修改时间",
+          name: "ModifyDate",
+          index: "ModifyDate",
+          width: 120,
+          formatter: function(cellvalue, options, rowObject) {
+            return new Date(cellvalue).format('yyyy-MM-dd hh:mm:ss');
+          }
+        }],
+        pager: "false",
+        rowNum: 1000,
+        rownumbers: true,
+        shrinkToFit: false
+      });
+      $(window).resize(function() {　　
+        $("#gridTable").setGridWidth($(window).width()).setGridHeight($(window).height() - 73);
+      });　　
+    });
+  </script>
+</body>
+</html>

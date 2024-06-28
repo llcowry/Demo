@@ -1,0 +1,157 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>功能管理-编辑-带Tab</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Language" content="utf-8" />
+  <link rel="stylesheet" type="text/css" href="style/common.css" />
+  <link rel="stylesheet" type="text/css" href="style/lxlui-gray.css" />
+  <script type="text/javascript" src="scripts/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/plugins/validform.min.js"></script>
+  <script type="text/javascript" src="scripts/plugins/jquery.form.js"></script>
+  <script type="text/javascript" src="scripts/lxlui.min.js"></script>
+  <script type="text/javascript" src="scripts/common.min.js"></script>
+</head>
+<body class="js-box">
+  <form name="addnew" action="?action=addnew" method="post" class="validform">
+    <div class="header has-tabs">
+      <div class="header-cnt">
+        <ul>
+          <li class="selected"><a>基本信息1</a></li>
+          <li><a href="#">相关信息2</a></li>
+          <li><a href="#">相关信息3</a></li>
+          <li><a href="#">相关信息4</a></li>
+        </ul>
+        <span class="more">
+          <a href="#" class="preico js-back">返回</a>
+        </span>
+      </div>
+    </div>
+    <div class="tabbox">
+      <table cellspacing="0" cellpadding="1" align="center" class="table">
+        <tr>
+          <td class="left">所属菜单：</td>
+          <td>
+            <select name="M_Pid">
+              <option value="0">【作为一级菜单】</option>
+              <option value="1">【系统管理】</option>
+              <option value="15">&nbsp;└ 起始页</option>
+              <option value="9">&nbsp;└ 基本设置</option>
+              <option value="2">【栏目管理】</option>
+              <option value="22">&nbsp;└ 栏目管理</option>
+              <option value="19">&nbsp;└ 文章管理</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td class="left"> <em>*</em>
+            菜单名称：
+          </td>
+          <td>
+            <input type="text" name="M_Name" value="" class="input w200" pattern="^.+$" />
+          </td>
+        </tr>
+        <tr>
+          <td class="left"> <em>*</em>
+            调用别名：
+          </td>
+          <td>
+            <input type="text" name="M_CallName" value="" class="input w200" pattern="^.+$" />
+          </td>
+        </tr>
+        <tr class="p1">
+          <td class="left">链接地址：</td>
+          <td>
+            <input type="text" name="M_Url" value="" class="input w300" />
+          </td>
+        </tr>
+        <tr class="p2">
+          <td class="left">图标名称：</td>
+          <td>
+            <input type="text" name="M_Icon" value="" class="input w200" />
+          </td>
+        </tr>
+        <tr>
+          <td class="left">
+            <em>*</em>
+            排序编号：
+          </td>
+          <td>
+            <input type="text" name="M_Sort" value="" class="input" pattern="^\d+$" />
+          </td>
+        </tr>
+        <tr>
+          <td class="left">
+            <em>*</em>
+            操作权限：
+          </td>
+          <td style="line-height:22px;">
+            <input type="checkbox" id="M_ActionType0" name="M_ActionType" value="show" />
+            <label for="M_ActionType0">显示(show)</label>
+            <input type="checkbox" id="M_ActionType1" name="M_ActionType" value="view" />
+            <label for="M_ActionType1">查看(view)</label>
+            <input type="checkbox" id="M_ActionType2" name="M_ActionType" value="add" />
+            <label for="M_ActionType2">添加(add)</label>
+            <input type="checkbox" id="M_ActionType3" name="M_ActionType" value="mod" />
+            <label for="M_ActionType3">修改(mod)</label>
+            <input type="checkbox" id="M_ActionType4" name="M_ActionType" value="move" />
+            <label for="M_ActionType4">移动(move)</label>
+            <input type="checkbox" id="M_ActionType5" name="M_ActionType" value="delete" />
+            <label for="M_ActionType5">删除(delete)</label>
+            <input type="checkbox" id="M_ActionType6" name="M_ActionType" value="delall" />
+            <label for="M_ActionType6">清空(delall)</label>
+            <input type="checkbox" id="M_ActionType7" name="M_ActionType" value="auditing" />
+            <label for="M_ActionType7">审核(auditing)</label>
+            <input type="checkbox" id="M_ActionType8" name="M_ActionType" value="flag" />
+            <label for="M_ActionType8">处理(flag)</label>
+            <input type="checkbox" id="M_ActionType9" name="M_ActionType" value="createfile" />
+            <label for="M_ActionType9">生成(createfile)</label>
+            <input type="checkbox" id="M_ActionType10" name="M_ActionType" value="backup" />
+            <label for="M_ActionType10">备份(backup)</label>
+            <input type="checkbox" id="M_ActionType11" name="M_ActionType" value="restore" />
+            <label for="M_ActionType11">还原(restore)</label>
+            <input type="checkbox" id="M_ActionType12" name="M_ActionType" value="doexec" />
+            <label for="M_ActionType12">执行(doexec)</label>
+            <input type="checkbox" id="M_ActionType13" name="M_ActionType" value="sort" />
+            <label for="M_ActionType13">排序(sort)</label>
+          </td>
+        </tr>
+        <tr>
+          <td class="left">
+            <em>*</em>
+            是否显示：
+          </td>
+          <td>
+            <input type="radio" id="M_Flag" name="M_Flag" value="1" checked="checked" />
+            <label for="M_Flag">显示</label>
+            <input type="radio" id="M_Flag1" name="M_Flag" value="0" />
+            <label for="M_Flag1">隐藏</label>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="footer">
+      <input type="submit" name="submit" value="提 交" class="button" />
+      <input type="reset" name="reset" value="重 置" class="button" />
+    </div>
+  </form>
+  <script type="text/javascript">
+    function setShowCtrl(id) {
+      if (parseInt(id) == 0) {
+        $(".p1").hide();
+        $(".p2").show();
+      } else {
+        $(".p1").show();
+        $(".p2").hide();
+      }
+    }
+    $(function () {
+      var _selobj = $("select[name='M_Pid']");
+      setShowCtrl(_selobj.val());
+      _selobj.change(function () {
+          setShowCtrl($(this).val());
+      });
+    });
+  </script>
+</body>
+</html>

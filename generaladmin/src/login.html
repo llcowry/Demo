@@ -1,0 +1,97 @@
+﻿
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>管理中心登录</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Language" content="utf-8" />
+	<link rel="stylesheet" type="text/css" href="style/login.css" />
+	<script type="text/javascript" src="scripts/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="scripts/base.js"></script>
+	<script type="text/javascript" src="scripts/lxlui.js"></script>
+	<script type="text/javascript" src="scripts/common.js"></script>
+</head>
+<body>
+	<div class="loginbox">
+		<div class="login_w">
+			<div class="login_top">
+				<h1>管理中心登录</h1>
+			</div>
+			<div class="login_btm">
+				<form id="frmLogin" method="post" action="">
+					<ul>
+						<li>
+							<label for="user">帐&nbsp;&nbsp;&nbsp;号：</label>
+							<input type="text" id="user" name="user" maxlength="20" class="input" placeholder="请输入登录账号" />
+						</li>
+						<li>
+							<label for="pass">密&nbsp;&nbsp;&nbsp;码：</label>
+							<input type="password" id="pass" name="pass" maxlength="20" class="input" placeholder="请输入登录密码" />
+						</li>
+						<li>
+							<label for="vcode">验证码：</label>
+							<input type="text" id="vcode" name="vcode" maxlength="4" value="" class="input" placeholder="请输入验证码" />
+							&nbsp;
+							<img src="../lib/class/xl_vcode2.asp" alt="" id="vcodeimg" />
+						</li>
+						<li class="last">
+							<input type="submit" name="btnSubmit" value="登 录" class="login-btn" />
+							<div id="tipinfo"></div>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$(".loginbox").lxlDrag({
+        proxy: false,
+				revert: true,
+				onDrag: function() {
+					$(".loginbox").css("margin", 0);
+				}
+			});
+      $("#frmLogin").submit(function() {
+        var o = $(this),
+          tipobj = $("#tipinfo");
+        var user = $("#user");
+        if ($.trim(user.val()) == "") {
+          tipobj.html(util.errStr("请输入登录帐号！"));
+          user.focus().select();
+          return false;
+        }
+        var pass = $("#pass");
+        if ($.trim(pass.val()) == "") {
+          tipobj.html(util.errStr("请输入登录密码！"));
+          pass.focus().select();
+          return false;
+        }
+        var vcode = $("#vcode");
+        if ($.trim(vcode.val()) == "") {
+          tipobj.html(util.errStr("请输入验证码！"));
+          vcode.focus().select();
+          return false;
+        } else {
+          $.get(ajaxPath, {
+            action: "chkvcode",
+            vcode: vcode.val()
+          }, function(data) {
+            if (!util.isN(data)) {
+              tipobj.html(util.errStr(data));
+              vcode.focus().select();
+              $("#vcodeimg").trigger('click');
+              return false;
+            } else {
+              tipobj.html('<span class="loading">登录中，请稍候...</span>');
+              o.attr("action", ajaxPath + "?action=chkbacklogin");
+              util.ajax.exec(o, tipobj);
+            }
+          });
+        }
+        return false;
+      });
+		});
+	</script>
+</body>
+</html>

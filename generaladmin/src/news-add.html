@@ -1,0 +1,75 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>新闻-添加</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Language" content="utf-8" />
+  <link rel="stylesheet" type="text/css" href="style/common.css" />
+  <link rel="stylesheet" type="text/css" href="style/lxlui-gray.css" />
+  <script type="text/javascript" src="scripts/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/plugins/validform.min.js"></script>
+  <script type="text/javascript" src="scripts/plugins/jquery.form.min.js"></script>
+  <script type="text/javascript" src="scripts/lxlui.min.js"></script>
+  <script type="text/javascript" src="scripts/common.min.js"></script>
+
+</head>
+<body class="js-box">
+  <form name="addnew" action="?action=addnew" method="post" class="validform">
+    <div class="header">
+      <span class="fleft ico-title">添加</span>
+      <span class="fright">
+        <a href="#" class="preico btn-back">返回</a>
+      </span>
+    </div>
+    <div class="tabbox">
+      <table cellspacing="0" cellpadding="1" align="center" class="table">
+        <tr>
+          <td class="left"> <em>*</em>
+            标题：
+          </td>
+          <td>
+            <input type="text" name="M_Name" value="" class="input w200" pattern="^.+$" />
+          </td>
+        </tr>
+        <tr>
+          <td class="left">
+            <em>*</em>
+            排序编号：
+          </td>
+          <td>
+            <input type="text" name="M_Sort" value="" class="input" pattern="^\d+$" />
+          </td>
+        </tr>
+        <tr>
+          <td class="left"> <em>*</em>
+            内容：
+          </td>
+          <td>
+            <textarea id="content" name="content" class="editor" datatype="*"></textarea>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="footer">
+      <input type="submit" name="submit" value="提 交" class="button" />
+      <input type="reset" name="reset" value="重 置" class="button" />
+    </div>
+  </form>
+  <script src="scripts/plugins/editor/kindeditor-min.js"></script>
+  <script>
+    $(function () {
+      window.editor = KindEditor.create('.editor', {
+        width: '80%',
+        filterMode: false, //默认不过滤HTML
+        pasteType: 1,//纯文本粘贴
+        resizeType: 1,
+        autoHeightMode: true,
+        uploadJson: '../../Upload/EditorFile?IsWater=1',
+        fileManagerJson: '../../Upload/ManagerFile',
+        afterBlur: function (e) { this.sync(); },
+        allowFileManager: true
+      });
+    });
+  </script>
+</body>
+</html>

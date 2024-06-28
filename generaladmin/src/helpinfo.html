@@ -1,0 +1,111 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>帮助信息</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Language" content="utf-8" />
+  <link rel="stylesheet" type="text/css" href="style/common.css" />
+  <link rel="stylesheet" type="text/css" href="style/lxlui.css" />
+  <script type="text/javascript" src="scripts/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/lxlui.min.js"></script>
+  <script type="text/javascript" src="scripts/common.min.js"></script>
+</head>
+<body>
+  <table cellspacing="0" cellpadding="1" align="center" class="table">
+    <tr>
+      <td class="helpinfo">
+        <h3>一、各种文件的上传限制有哪些？</h3>
+        <ol>
+          <li>
+            图片：
+            <br />
+            允许类型：
+            <%=Config("UploadImageAT") %>
+            <br />
+            允许大小：不超过
+            <%=Utils.FormatFS(Config("UploadFileAS")*1024, 1) %></li>
+          <li>
+            多媒体：
+            <br />
+            允许类型：
+            <%=Config("UploadMediaAT") %>
+            <br />
+            允许大小：不超过
+            <%=Utils.FormatFS(Config("UploadFileAS")*1024, 1) %></li>
+          <li>
+            软件：
+            <br />
+            允许类型：
+            <%=Config("UploadFileAT") %>
+            <br />
+            允许大小：不超过
+            <%=Utils.FormatFS(Config("UploadFileAS")*1024, 1) %></li>
+        </ol>
+        <h3>二、如何向Google、Yahoo!、MSN、Ask和百度提交网站地图Sitemap？</h3>
+        <ol>
+          <li>
+            都可以通过robots.txt来定义提交。但下面的提交方式更简单快捷！
+            <br />
+          </li>
+          <li>
+            向Baidu提交网站地图Sitemap：
+            <br />
+            没办法，现在百度不支持Sitemap。但可通过
+            <a target="_blank" href="http://www.baidu.com/search/url_submit.html">http://www.baidu.com/search/url_submit.html</a>
+            来提交你的网址。百度会自行搜索，更新速度很快。
+          </li>
+          <li>
+            向Google提交网站地图Sitemap：
+            <br />
+            通过网址
+            <a target="_blank" href="http://www.google.com/webmasters">http://www.google.com/webmasters</a>
+            需要申请google帐号登录后操作。
+            <br />
+            或者用URL直接提交：http://www.google.com/webmasters/sitemaps/ping?sitemap=http%3A//your.domainname/sitemap.xml。注意":"被%3A替换掉。
+          </li>
+          <li>
+            向Yahoo!提交网站地图Sitemap：
+            <br />
+            通过网址
+            <a target="_blank" href="http://siteexplorer.search.yahoo.com">http://siteexplorer.search.yahoo.com</a>
+            同上。
+          </li>
+          <li>
+            向MSN提交网站地图Sitemap：
+            <br />
+            用URL直接提交：http://www.bing.com/webmaster/ping.aspx?sitemap=http%3A//your.domainname/sitemap.xml。这是向MSN直接提交网站地图的后门URL。注意":"被%3A替换掉。
+          </li>
+          <li>
+            向ASK提交网站地图Sitemap：
+            <br />
+            用URL直接提交：http://submissions.ask.com/ping?sitemap=http%3A//your.domainname/sitemap.xml。注意":"被%3A替换掉。
+          </li>
+          <li>
+            向搜搜soso提交网站地图Sitemap：
+            <br />
+            可通过
+            <a target="_blank" href="http://open.soso.com/datacoop/sitemap/">http://open.soso.com/datacoop/sitemap/</a>
+            或者
+            <a target="_blank" href="http://www.soso.com/help/usb/urlsubmit.shtml">http://www.soso.com/help/usb/urlsubmit.shtml</a>
+            来提交你的网址。
+          </li>
+          <li>
+            向搜狗sogou提交网站地图Sitemap：
+            <br />
+            可通过
+            <a target="_blank" href="http://www.sogou.com/feedback/urlfeedback.php">http://www.sogou.com/feedback/urlfeedback.php</a>
+            来提交你的网址。
+          </li>
+          <li>
+            向有道youdao提交网站地图Sitemap：
+            <br />
+            可通过
+            <a target="_blank" href="http://tellbot.youdao.com/report">http://tellbot.youdao.com/report</a>
+            来提交你的网址。
+          </li>
+        </ol>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

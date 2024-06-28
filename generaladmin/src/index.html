@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>管理中心</title>
+  <link rel="stylesheet" href="style/common.css">
+  <link rel="stylesheet" href="style/lxlui-gray.css">
+  <script type="text/javascript" src="scripts/lib/jquery.min.js"></script>
+  <script src="scripts/lxlui.min.js"></script>
+  <script src="scripts/common.min.js"></script>
+</head>
+<body>
+  <div id="loading"><div></div></div>
+  <div class="container">
+    <div class="top">
+      <div class="logo">
+        <img src="images/logo-white.png">
+        <span>管理中心</span>
+      </div>
+      <div class="top-nav">
+        <ul>
+          <li>
+            <a href="#" class="btn-refresh">
+              <span class="c1"></span>系统首页
+            </a>
+          </li>
+          <li>
+            <a herf="#" class="btn-test">
+              <span class="c2"></span>网站首页
+            </a>
+          </li>
+          <li>
+            <a href="helpinfo.html" tabid="helpinfo">
+              <span class="c3"></span>帮助中心
+            </a>
+          </li>
+          <li>
+            <a href="#" tabid="modifypass">
+              <span class="c4"></span>修改密码
+            </a>
+          </li>
+          <li>
+            <a href="#" class="btn-logout">
+              <span class="c5"></span>安全退出
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="left" title="导航菜单">
+    </div>
+    <div class="center">
+      <div title="起始页" tabid="startpage" selected="true" icon="home">
+        <iframe src="startpage.html" id="startpage" name="startpage" frameborder="0"></iframe>
+      </div>
+    </div>
+    <div class="bottom">
+      <p><span class="js-lunar"></span>Powered by This &copy; 2017 All Rights Reserved</p>
+    </div>
+  </div>
+  <div class="hide">
+    <audio src="audio/msg.mp3" id="msgAudio"></audio>
+  </div>
+  <script src="scripts/plugins/lunar.min.js"></script>
+  <script>
+    $(function() {
+      $('div.container').lxlLayout({
+        topHeight: 68
+      });
+      $('div.center').lxlTab({
+        dragToMove: false
+      });
+      var treeData = [{
+        title: "系统管理",
+        icon: "images/icon16/cog.png",
+        selected: "true",
+        children: [{
+          url: "startpage.html",
+          text: "起始页",
+          icon: "images/icon16/house.png",
+          tabid: "startpage",
+          isexpand: "false"
+        }, {
+          url: "config.html",
+          text: "基本设置",
+          icon: "images/icon16/cog.png",
+          isexpand: "false"
+        }, {
+          url: "config-tab.html",
+          text: "基本设置带tab",
+          icon: "images/icon16/cog.png",
+          isexpand: "false"
+        }, {
+          url: "role.html",
+          text: "角色管理",
+          icon: "images/icon16/role.png",
+          isexpand: "false"
+        }, {
+          url: "search-list.html",
+          text: "带搜索的列表页面",
+          isexpand: "false"
+        }, {
+          url: "tree-list.html",
+          text: "带树的列表页",
+          icon: "images/icon16/tree.png",
+          isexpand: "false"
+        }]
+      }, {
+        title: "高级管理",
+        icon: "images/icon16/cog.png",
+        children: [{
+          url: "menu-add.html",
+          text: "功能添加",
+          isexpand: "false"
+        }, {
+          url: "menu-add-tab.html",
+          text: "功能添加带tab",
+          isexpand: "false"
+        }]
+      }, {
+        title: "高级管理",
+        icon: "images/icon16/cog.png",
+        children: [{
+          url: "config.html",
+          text: "基本设置",
+          isexpand: "false"
+        }]
+      }];
+      var leftCon = $('div.left');
+      for (var i = 0; i < treeData.length; i++) {
+        var d = treeData[i];
+        var c = $('<div title="' + d.title + '" icon="' + d.icon + '"' + (!!d.selected ? ' selected="' + d.selected + '"' : '') + '><ul class="tree"></ul></div>');
+        c.appendTo(leftCon).find('.tree').lxlTree({
+          data: d.children,
+          checkbox: false,
+          needCancel: false,
+          slide: false,
+          nodeWidth: null,
+          attribute: ['nodename', 'url'],
+          onAfterAppend: function() {
+            leftCon.find('.tree>li:first>div:first').addClass('selected');
+          },
+          onBeforeSelect: function() {
+            leftCon.find('.tree>li>div').removeClass('selected');
+          },
+          onSelect: function(node) {
+            if (!node.data.url) return;
+            var tabid = node.data.tabid || $(node.target).attr("tabid");
+            if (!tabid) {
+              tabid = new Date().getTime();
+              $(node.target).attr("tabid", tabid);
+            }
+            util.addTab(0, tabid, node.data.text, node.data.url);
+          }
+        });
+      }
+      leftCon.lxlAccordion();
+      $(".js-lunar").html(xlLunar.text());
+      // 短消息提示音
+      // var popup1 = null;
+      // setInterval(function() {
+      //   var msgAudio = document.getElementById('msgAudio');
+      //   msgAudio.play();
+      //   if (popup1) popup1.close();
+      //   popup1 = $.lxlDialog.popup('<a href="about:blank" tabid="tabid1">1、您有<em>(1)</em>项新任务未处理！</a><a href="about:blank" tabid="tabid2">2、您有<em>(1)</em>项新任务未处理！</a><a href="about:blank" tabid="tabid3">3、您有<em>(1)</em>项新任务未处理！</a>', '新任务提醒1', function() {
+      //     util.setTabLink();
+      //   });
+      // }, 3000);
+      // var popup2 = null;
+      // setInterval(function() {
+      //   if (popup2) popup2.close();
+      //   popup2 = $.lxlDialog.popup('<a href="about:blank" tabid="tabid1">1、您有<em>(1)</em>项新任务未处理！</a><a href="about:blank" tabid="tabid2">2、您有<em>(1)</em>项新任务未处理！</a>', '新任务提醒2', function() {
+      //     util.setTabLink();
+      //   });
+      // }, 5000);
+      $('.btn-test').click(function() {
+        var clip = null;
+        var s = '<ul id="infoList">\
+                  <li><em>账户名称：</em><span>买买提</span><a href="javascript:;">复制</a></li>\
+                  <li><em>银行名称：</em><span>中国工商银行</span><a href="javascript:;">复制</a></li>\
+                  <li><em>所属区域：</em><span>上海市,市辖区,长宁区</span><a href="javascript:;">复制</a></li>\
+                  <li><em>支行名称：</em><span>长宁支行</span><a href="javascript:;">复制</a></li>\
+                  <li><em>银行卡号：</em><span>6218123412341122</span><a href="javascript:;">复制</a></li>\
+                </ul>';
+        $.lxlDialog.preview(s, '信息预览', function() {
+          $('#infoList > li > a').click(function() {
+            $(this).prev().selectText();
+            document.execCommand('Copy');
+          });
+        });
+      });
+    });
+    $(window).bind("load", function() {
+      if ($("#loading").length > 0) $("#loading").remove();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>带搜索的列表页</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Language" content="utf-8" />
+  <link rel="stylesheet" type="text/css" href="style/common.css" />
+  <link rel="stylesheet" type="text/css" href="style/lxlui-gray.css" />
+  <link rel="stylesheet" type="text/css" href="scripts/plugins/jqgrid/css/jqgrid.css" />
+  <script type="text/javascript" src="scripts/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/plugins/jqgrid.min.js"></script>
+  <script type="text/javascript" src="scripts/lxlui.min.js"></script>
+  <script type="text/javascript" src="scripts/common.min.js"></script>
+</head>
+<body>
+  <div class="grid-search">
+    <div class="tabs js-tabs">
+      <div class="tabsHeader">
+        <div class="tabsHeaderContent">
+          <ul>
+            <li class="selected"><a href="#"><span>违章处理查询</span></a></li>
+            <li><a href="#"><span>违章处理查询</span></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tabsContent">
+        <div>
+          <div class="searchfrm">
+            <form name="search" method="get" action="" class="searchfrm">
+              车辆类型：
+              <select name="typeid" id="typeid" title="车辆类型" pattern="true" onchange="util.go('?classid='+$('#classid').val()+'&typeid='+$(this).val());">
+                <option value="0">- 请选择车辆类型 -</option>
+                <option value="7">【大型客车】</option>
+                <option value="8">【小型汽车】</option>
+                <option value="85">【轻型普通货车】</option>
+                <option value="86">【轻型仓栅货车】</option>
+                <option value="87">【轻型厢式货车】</option>
+                <option value="88">【轻型封闭货车】</option>
+                <option value="89">【中型普通货车】</option>
+                <option value="90">【中型箱式货车】</option>
+                <option value="91">【中型仓栅货车】</option>
+                <option value="92">【重型箱式货车】</option>
+                <option value="93">【重型仓栅货车】</option>
+                <option value="94">【重型普通货车】</option>
+                <option value="95">【小型普通客车】</option>
+                <option value="96">【重型半挂牵引车】</option>
+                <option value="97">【挂车】</option>
+                <option value="98">【中型客车】</option>
+              </select>
+              下单时间：
+              <input type="text" name="date1" class="search w80" placeholder="开始时间" />
+              至
+              <input type="text" name="date2" class="search w80" placeholder="结束时间" />
+              <br />
+              办理状态：
+              <select name="status" id="status" title="状态" pattern="true">
+                <option value="0">- 请选择状态 -</option>
+                <option value="60">【办理中】</option>
+                <option value="59">【已完成】</option>
+              </select>
+              欠款状态：
+              <select name="arrearage">
+                <option value="0">无欠款</option>
+                <option value="1">有欠款</option>
+              </select>
+              其他条件：
+              <input type="text" id="keyword" name="keyword" class="search" placeholder="请输入搜索条件" title="搜索条件可以是：会员姓名、手机号码、车牌号码、发动机号以及违章地点" style="width:220px;" />
+              <input type="hidden" id="classid" name="classid" value="0" />
+              <a href="javascript:toSearch()" class="searchico">搜索</a>
+            </form>
+          </div>
+        </div>
+        <div>
+          <div class="searchfrm">
+            <form name="search" method="get" action="">
+              车辆类型：
+              <select name="typeid" id="typeid" title="车辆类型" pattern="true" onchange="util.go('?classid='+$('#classid').val()+'&typeid='+$(this).val());">
+                <option value="0">- 请选择车辆类型 -</option>
+                <option value="7">【大型客车】</option>
+                <option value="8">【小型汽车】</option>
+                <option value="85">【轻型普通货车】</option>
+                <option value="86">【轻型仓栅货车】</option>
+                <option value="87">【轻型厢式货车】</option>
+                <option value="88">【轻型封闭货车】</option>
+                <option value="89">【中型普通货车】</option>
+                <option value="90">【中型箱式货车】</option>
+                <option value="91">【中型仓栅货车】</option>
+                <option value="92">【重型箱式货车】</option>
+                <option value="93">【重型仓栅货车】</option>
+                <option value="94">【重型普通货车】</option>
+                <option value="95">【小型普通客车】</option>
+                <option value="96">【重型半挂牵引车】</option>
+                <option value="97">【挂车】</option>
+                <option value="98">【中型客车】</option>
+              </select>
+              下单时间：
+              <input type="text" name="date1" class="search w80" placeholder="开始时间" />
+              至
+              <input type="text" name="date2" class="search w80" placeholder="结束时间" />
+              <br />
+              办理状态：
+              <select name="status" id="status" title="状态" pattern="true">
+                <option value="0">- 请选择状态 -</option>
+                <option value="60">【办理中】</option>
+                <option value="59">【已完成】</option>
+              </select>
+              其他条件：
+              <input type="text" id="keyword" name="keyword" class="search" placeholder="请输入搜索条件" title="搜索条件可以是：会员姓名、手机号码、车牌号码、发动机号以及违章地点" style="width:220px;" />
+              <input type="hidden" id="classid" name="classid" value="0" />
+              <a href="javascript:toSearch()" class="searchico">搜索</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid-toolbar">
+    <a class="btn-reload">
+      <span>刷新</span>
+    </a>
+    <div class="grid-toolbar-separator"></div>
+    <a href="#" class="btn-add">
+      <span>新增</span>
+    </a>
+    <a href="#" class="btn-edit">
+      <span>编辑</span>
+    </a>
+    <a href="#" class="btn-delete">
+      <span>删除</span>
+    </a>
+    <div class="grid-toolbar-separator"></div>
+    <a class="btn-leave">
+      <span>离开</span>
+    </a>
+  </div>
+  <table id="gridTable"></table>
+  <div class="pagebar"></div>
+  <script type="text/javascript">
+    $(function() {
+      $("#gridTable").jqGrid({
+        url: "/CommonModule/DataDictionary/TreeGridListJson",
+        datatype: "json",
+        autowidth: true,
+        height: $(window).height() - 173,
+        colModel: [{
+          label: '主键',
+          name: 'DataDictionaryDetailId',
+          index: 'DataDictionaryDetailId',
+          hidden: true
+        }, {
+          label: '名称',
+          name: 'DataDictionaryDetailName',
+          index: 'DataDictionaryDetailName',
+          hidden: true
+        }, {
+          label: "项目名称",
+          name: "FullName",
+          index: "FullName",
+          width: 200
+        }, {
+          label: "项目值",
+          name: "Code",
+          index: "Code",
+          width: 300
+        }, {
+          label: '有效',
+          name: 'Enabled',
+          index: 'Enabled',
+          width: 45,
+          align: 'center',
+          formatter: function(cellvalue, options, rowObject) {
+            if (cellvalue == '1') return "<img src='images/icon16/checkokmark.gif'>";
+            if (cellvalue == '0') return "<img src='images/icon16/checknomark.gif'>";
+          }
+        }, {
+          label: "创建用户",
+          name: "CreateUserName",
+          index: "CreateUserName",
+          width: 100
+        }, {
+          label: "创建时间",
+          name: "CreateDate",
+          index: "CreateDate",
+          width: 120,
+          formatter: function(cellvalue, options, rowObject) {
+            return new Date(cellvalue).format('yyyy-MM-dd hh:mm:ss');
+          }
+        }, {
+          label: "修改用户",
+          name: "ModifyUserName",
+          index: "ModifyUserName",
+          width: 100
+        }, {
+          label: "修改时间",
+          name: "ModifyDate",
+          index: "ModifyDate",
+          width: 120,
+          formatter: function(cellvalue, options, rowObject) {
+            return new Date(cellvalue).format('yyyy-MM-dd hh:mm:ss');
+          }
+        }],
+        viewrecords: true,
+        rowNum: 20,
+        rowList: [20, 50, 100, 500, 1000],
+        pager: "#pagebar",
+        sortname: 'SortCode',
+        sortorder: 'desc',
+        rownumbers: true,
+        shrinkToFit: false,
+        gridview: true
+      });
+      $(window).resize(function() {　　
+        $("#gridTable").setGridWidth($(window).width()).setGridHeight($(window).height() - 173);
+      });　　
+    });
+  </script>
+</body>
+</html>

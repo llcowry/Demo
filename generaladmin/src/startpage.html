@@ -1,0 +1,509 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>起始页</title>
+  <link rel="stylesheet" href="style/common.css">
+  <link rel="stylesheet" href="style/lxlui-gray.css">
+  <script type="text/javascript" src="scripts/lib/jquery.min.js"></script>
+  <script type="text/javascript" src="scripts/lxlui.min.js"></script>
+  <script type="text/javascript" src="scripts/common.min.js"></script>
+  <script>
+    $(function() {
+      $('.btnBetInfo').click(function() {
+        var clip = null;
+        var s = '<p id="pheigth" style="word-wrap: break-word">12312312312312312312312312312312312312312312312312312312312312312312231231231231231231231231231231231231232131231231231231231231231231231212312312312312312312312312312312312312312312312312312312312312312312231231231231231231231231231231231231232131231231231231231231231231231212312312312312312312312312312312312312312312312312312312312312312312231231231231231231231231231231231231232131231231231231231231231231231212312312312312312312312312312312312312312312312312312312312312312312231231231231231231231231231231231231232131231231231231231231231231231212312312312312312312312312312312312312312312312312312312312312312312231231231231231231231231231231231231232131231231231231231231231231231212312312312312312312312312312312312312312312312312312312312312312312231231231231231231231231231231231231232131231231231231231231231231231212312312312312312312312312312312312312312312312312312312312312312312231231231231231231231231231231231231232131231231231231231231231231231212312312312312312312312312312312312312312312312312312312312312312312231231231231231231231231231231231231232131231231231231231231231231231212312312312312312312312312312312312312312312312312312312312312312312231231231231231231231231231231231231232131231231231231231231231231231212312312312312312312123123123123123123123123123123122312312312312312312312312312312312312321312312312312312312312312312312</p>';
+        $.lxlDialog.preview(s, '投注內容',436);
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="startpage">
+    <table class="tbl-startpage">
+      <tr>
+        <td colspan="2" class="td-top">
+          <ul class="clearfix">
+            <li>
+              <div style="background-color:#2ec7c9">
+                <i></i>
+                <div class="num">10</div>
+                <div class="text" href="role.html">当前在线会员</div>
+              </div>
+            </li>
+            <li>
+              <div style="background-color:#2ba9e3">
+                <i></i>
+                <div class="num">100</div>
+                <div class="text" href="role.html">今日有效会员</div>
+              </div>
+            </li>
+            <li>
+              <div style="background-color:#28b779">
+                <i></i>
+                <div class="num">19</div>
+                <div class="text">今日新增会员</div>
+              </div>
+            </li>
+            <li>
+              <div style="background-color:#eeae44">
+                <i class="mark">￥</i>
+                <div class="num">18000</div>
+                <div class="text">今日存款金额</div>
+              </div>
+            </li>
+            <li>
+              <div style="background-color:#dd4b39">
+                <i class="mark">￥</i>
+                <div class="num">10000</div>
+                <div class="text">今日取款金额</div>
+              </div>
+            </li>
+            <li>
+              <div style="background-color:#c07fe7">
+                <i class="mark">￥</i>
+                <div class="num">1100.20</div>
+                <div class="text">今日有效投注（万）</div>
+              </div>
+            </li>
+            <li>
+              <div style="background-color:#8bbc21">
+                <i class="mark">￥</i>
+                <div class="num">830.15</div>
+                <div class="text">今日有效派奖（万）</div>
+              </div>
+            </li>
+          </ul>
+          <button id="btnRefresh"><img src="images/icon16/arrow_refresh.png"></button>
+        </td>
+      </tr>
+      <tr>
+        <td class="td-left">
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-header-con">
+                <div class="title">
+                  <span><a href="#" class="btnBetInfo">客户来源分布</a></span>
+                </div>
+              </div>
+            </div>
+            <div class="panel-content">
+              <div id="chart1"></div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-header-con">
+                <div class="title">
+                  <span>有效会员走势图</span>
+                </div>
+              </div>
+            </div>
+            <div class="panel-content">
+              <div id="chart2"></div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="td-left">
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-header-con">
+                <div class="title">
+                  <span>存取款走势图</span>
+                </div>
+              </div>
+            </div>
+            <div class="panel-content">
+              <div id="chart3"></div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="panel">
+            <div class="panel-header">
+              <div class="panel-header-con">
+                <div class="title">
+                  <span>有效投注走势图</span>
+                </div>
+              </div>
+            </div>
+            <div class="panel-content">
+              <div id="chart4"></div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <script src="scripts/plugins/echarts-all.js"></script>
+  <script>
+    var chart1 = echarts.init(document.getElementById('chart1'), 'macarons'),
+      chart2 = echarts.init(document.getElementById('chart2'), 'macarons'),
+      chart3 = echarts.init(document.getElementById('chart3'), 'macarons'),
+      chart4 = echarts.init(document.getElementById('chart4'), 'macarons');
+    var option1 = {
+      tooltip: {
+        trigger: 'item'
+      },
+      legend: {
+        orient: 'vertical',
+        x: 'left',
+        data: ['客户来源']
+      },
+      dataRange: {
+        min: 0,
+        max: 2000,
+        text: ['高', '低'],
+        calculable: true
+      },
+      toolbox: {
+        show: true,
+        orient: 'vertical',
+        x: 'right',
+        y: 'bottom',
+        feature: {
+          mark: {
+            show: true
+          },
+          dataView: {
+            show: true,
+            readOnly: false
+          },
+          restore: {
+            show: true
+          },
+          saveAsImage: {
+            show: true
+          }
+        }
+      },
+      roamController: {
+        show: true,
+        x: 'right',
+        mapTypeControl: {
+          'china': true
+        }
+      },
+      series: [{
+        name: '订单量',
+        type: 'map',
+        mapType: 'china',
+        roam: false,
+        itemStyle: {
+          normal: {
+            label: {
+              show: true,
+              textStyle: {
+                color: "#000000"
+              }
+            }
+          },
+          emphasis: {
+            label: {
+              show: true
+            }
+          }
+        },
+        data: [{
+          name: '北京',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '天津',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '上海',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '重庆',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '河北',
+          value: 0
+        }, {
+          name: '河南',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '云南',
+          value: 5
+        }, {
+          name: '辽宁',
+          value: 305
+        }, {
+          name: '黑龙江',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '湖南',
+          value: 200
+        }, {
+          name: '安徽',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '山东',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '新疆',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '江苏',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '浙江',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '江西',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '湖北',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '广西',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '甘肃',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '山西',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '内蒙古',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '陕西',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '吉林',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '福建',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '贵州',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '广东',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '青海',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '西藏',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '四川',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '宁夏',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '海南',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '台湾',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '香港',
+          value: Math.round(Math.random() * 2000)
+        }, {
+          name: '澳门',
+          value: Math.round(Math.random() * 2000)
+        }]
+      }]
+    };
+    var option2 = {
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['有效会员数', '新增会员数']
+      },
+      toolbox: {
+        show: true,
+        x: 'right',
+        y: 'bottom',
+        feature: {
+          mark: {
+            show: true
+          },
+          dataView: {
+            show: true,
+            readOnly: false
+          },
+          magicType: {
+            show: true,
+            type: ['line', 'bar', 'stack', 'tiled']
+          },
+          restore: {
+            show: true
+          },
+          saveAsImage: {
+            show: true
+          }
+        }
+      },
+      calculable: true,
+      xAxis: [{
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+      }],
+      yAxis: [{
+        type: 'value'
+      }],
+      series: [{
+        name: '有效会员数',
+        type: 'bar',
+        smooth: true,
+        itemStyle: {
+          normal: {
+            areaStyle: {
+              type: 'default'
+            }
+          }
+        },
+        data: [10, 12, 21, 54, 260, 830, 710]
+      }, {
+        name: '新增会员数',
+        type: 'bar',
+        smooth: true,
+        itemStyle: {
+          normal: {
+            areaStyle: {
+              type: 'default'
+            }
+          }
+        },
+        data: [30, 182, 434, 791, 390, 30, 10]
+      }]
+    };
+    var option3 = {
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['存款', '取款']
+      },
+      toolbox: {
+        show: true,
+        x: 'right',
+        y: 'bottom',
+        feature: {
+          mark: {
+            show: true
+          },
+          dataView: {
+            show: true,
+            readOnly: false
+          },
+          magicType: {
+            show: true,
+            type: ['line', 'bar', 'stack', 'tiled']
+          },
+          restore: {
+            show: true
+          },
+          saveAsImage: {
+            show: true
+          }
+        }
+      },
+      calculable: true,
+      xAxis: [{
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+      }],
+      yAxis: [{
+        type: 'value'
+      }],
+      series: [{
+        name: '存款',
+        type: 'line',
+        smooth: true,
+        itemStyle: {
+          normal: {
+            areaStyle: {
+              type: 'default'
+            }
+          }
+        },
+        data: [10, 12, 21, 54, 260, 830, 710]
+      }, {
+        name: '取款',
+        type: 'line',
+        smooth: true,
+        itemStyle: {
+          normal: {
+            areaStyle: {
+              type: 'default'
+            }
+          }
+        },
+        data: [30, 182, 434, 791, 390, 30, 10]
+      }]
+    };
+    var option4 = {
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['有效投注', '投注单量']
+      },
+      toolbox: {
+        show: true,
+        x: 'right',
+        y: 'bottom',
+        feature: {
+          mark: {
+            show: true
+          },
+          dataView: {
+            show: true,
+            readOnly: false
+          },
+          magicType: {
+            show: true,
+            type: ['line', 'bar', 'stack', 'tiled']
+          },
+          restore: {
+            show: true
+          },
+          saveAsImage: {
+            show: true
+          }
+        }
+      },
+      calculable: true,
+      xAxis: [{
+        type: 'category',
+        boundaryGap: false,
+        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+      }],
+      yAxis: [{
+        type: 'value'
+      }],
+      series: [{
+        name: '有效投注',
+        type: 'line',
+        stack: '总量',
+        data: [10, 12, 21, 54, 260, 830, 710]
+      }, {
+        name: '投注单量',
+        type: 'line',
+        stack: '总量',
+        data: [30, 182, 434, 791, 390, 30, 10]
+      }]
+    };
+    chart1.setOption(option1);
+    chart2.setOption(option2);
+    chart3.setOption(option3);
+    chart4.setOption(option4);
+  </script>
+</body>
+</html>
