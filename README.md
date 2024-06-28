@@ -18,6 +18,10 @@
 
 一个简单、轻量级、健壮且多用途的框架，基于 koa2 库的 REST API Server。 [点击查看](./koa2-restapi/)
 
-### License
+# generaladmin
+
+基于 jQuery+lxlui+kindeditor 搭建一个很老很老的纯静态页面型后端工程解决方案 [点击查看](./generaladmin/)
+
+# License
 
 ISC.
