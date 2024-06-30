@@ -27,7 +27,7 @@ export const getUsers = async (ctx) => {
 
 // 新增用户
 export const addUser = async (ctx) => {
-  const { username, password, nickname, gender, birthday, avatar, level, email } = ctx.request.body;
+  const { username, password, email, nickname, gender, birthday, avatar, level } = ctx.request.body;
 
   if (!username || !password) {
     ctx.throw(400, '用户名和密码是必需的');
@@ -48,7 +48,7 @@ export const addUser = async (ctx) => {
       ctx.throw(400, '用户名已被注册');
     }
     const hashedPassword = hashMD5(password);
-    const user = await User.create({ username, password: hashedPassword, email, nickname, gender, birthday, avatar });
+    const user = await User.create({ username, password: hashedPassword, email, nickname, gender, birthday, avatar, tel });
 
     // 根据配置项决定是否发送欢迎邮件
     if (config.EMAIL_SEND_ON_REGISTER && email) {
@@ -90,7 +90,7 @@ export const getUser = async (ctx) => {
 // 修改用户
 export const updateUser = async (ctx) => {
   const { id } = ctx.params;
-  const { username, password, nickname, gender, birthday, avatar, level, email } = ctx.request.body;
+  const { username, password, email, nickname, gender, birthday, avatar, level, tel } = ctx.request.body;
 
   // 验证用户名、密码和电子邮件
   if (username && !validateUsername(username)) {
@@ -108,7 +108,7 @@ export const updateUser = async (ctx) => {
     if (!user) {
       ctx.throw(400, '用户不存在');
     }
-    const data = { username, nickname, gender, birthday, avatar, level, email };
+    const data = { username, nickname, email, gender, birthday, avatar, level, tel };
     if (password) {
       data.password = hashMD5(password);
     }

@@ -45,6 +45,9 @@ const User = sequelize.define(
     avatar: {
       type: DataTypes.STRING,
     },
+    tel: {
+      type: DataTypes.STRING,
+    },
     level: {
       type: DataTypes.INTEGER,
     },
