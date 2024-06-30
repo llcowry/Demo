@@ -1,7 +1,7 @@
 import { validateUsername, validatePassword, validateEmail } from '../utils/validators.mjs';
+import { hashMD5, generateToken, invalidateToken, verifyToken } from '../utils/common.mjs';
 import { Admin } from '../models/Admin.mjs';
-import { hashMD5, generateToken } from '../utils/common.mjs';
-import config from '../config/config.mjs';
+import AdminLog from '../models/AdminLog.mjs';
 
 // 获取所有管理员
 export const getAdmins = async (ctx) => {
@@ -137,10 +137,37 @@ export const adminLogin = async (ctx) => {
 
   try {
     const admin = await Admin.findOne({ where: { username } });
-    if (!admin || admin.password !== hashMD5(password)) {
-      ctx.throw(401, '用户名或密码错误');
+    if (!admin) {
+      await AdminLog.create({
+        adminId: null,
+        adminName: username,
+        loginResult: 0,
+        loginIp: ctx.headers['x-forwarded-for'] || ctx.request.ip,
+        userAgent: ctx.headers['user-agent'],
+        remark: '用户不存在',
+      });
+      ctx.throw(401, '用户不存在');
+    }
+    if (admin.password !== hashMD5(password)) {
+      await AdminLog.create({
+        adminId: user.id,
+        adminName: username,
+        loginResult: 0,
+        loginIp: ctx.headers['x-forwarded-for'] || ctx.request.ip,
+        userAgent: ctx.headers['user-agent'],
+        remark: '密码错误',
+      });
+      ctx.throw(401, '密码错误');
     }
     const token = generateToken({ id: admin.id, username: admin.username });
+    await AdminLog.create({
+      adminId: user.id,
+      adminName: username,
+      loginResult: 1,
+      loginIp: ctx.headers['x-forwarded-for'] || ctx.request.ip,
+      userAgent: ctx.headers['user-agent'],
+      remark: '登录成功',
+    });
     ctx.body = {
       status: 'success',
       msg: '登录成功',
@@ -156,10 +183,26 @@ export const adminLogin = async (ctx) => {
 
 // 管理员注销
 export const adminLogout = async (ctx) => {
-  ctx.body = {
-    status: 'success',
-    msg: '注销成功',
-  };
+  const { adminId, adminName } = ctx.state.user;
+  try {
+    await AdminLog.create({
+      adminId,
+      adminName,
+      loginResult: 1,
+      loginIp: ctx.headers['x-forwarded-for'] || ctx.request.ip,
+      userAgent: ctx.headers['user-agent'],
+      remark: '注销成功',
+    });
+    // 无效化当前 Token
+    const token = ctx.headers.authorization.split(' ')[1];
+    invalidateToken(token);
+    ctx.body = {
+      status: 'success',
+      msg: '注销成功',
+    };
+  } catch (error) {
+    ctx.throw(500, error.message);
+  }
 };
 
 // 管理员token刷新
@@ -167,7 +210,7 @@ export const refreshAdminToken = async (ctx) => {
   const { token } = ctx.request.body;
 
   try {
-    const payload = jwt.verify(token, config.JWT_SECRET);
+    const payload = verifyToken(token);
     const admin = await Admin.findByPk(payload.id);
     if (!admin) {
       ctx.throw(404, '用户不存在');

@@ -2,9 +2,25 @@ import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import config from '../config/config.mjs';
 
+// 无效 JWT token 集合
+let invalidatedTokens = new Set();
+
 // 生成 JWT token
 export const generateToken = (data) => {
   return jwt.sign({ id: data.id, username: data.username }, config.JWT_SECRET, { expiresIn: config.JWT_EXPIRES_IN });
+};
+
+// 记录无效 JWT token
+export const invalidateToken = (token) => {
+  invalidatedTokens.add(token);
+};
+
+// 验证 JWT token
+export const verifyToken = (token) => {
+  if (invalidatedTokens.has(token)) {
+    throw new Error('Token 已失效');
+  }
+  return jwt.verify(token, config.JWT_SECRET);
 };
 
 /**

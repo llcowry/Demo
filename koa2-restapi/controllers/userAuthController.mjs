@@ -1,6 +1,5 @@
-import jwt from 'jsonwebtoken';
 import { validateUsername, validatePassword, validateEmail } from '../utils/validators.mjs';
-import { hashMD5, generateToken } from '../utils/common.mjs';
+import { hashMD5, generateToken, verifyToken } from '../utils/common.mjs';
 import { sendMail } from '../utils/mailer.mjs';
 import { User } from '../models/User.mjs';
 import config from '../config/config.mjs';
@@ -30,7 +29,12 @@ export const register = async (ctx) => {
 
     // 根据配置项决定是否发送欢迎邮件
     if (config.EMAIL_SEND_ON_REGISTER && email) {
-      const emailResult = await sendMail(email, '欢迎加入我们', `亲爱的${nickname}, 欢迎加入我们!`, `<p>亲爱的${nickname},</p><p>欢迎加入我们!</p>`);
+      const emailResult = await sendMail(
+        email,
+        '欢迎加入我们',
+        `亲爱的${nickname}, 欢迎加入我们!`,
+        `<p>亲爱的${nickname},</p><p>欢迎加入我们!</p>`,
+      );
       if (emailResult.status === 'error') {
         console.error('邮件发送失败:', emailResult.error);
       }
@@ -83,6 +87,9 @@ export const login = async (ctx) => {
 
 // 用户注销
 export const logout = async (ctx) => {
+  // 无效化当前 Token
+  const token = ctx.headers.authorization.split(' ')[1];
+  invalidateToken(token);
   ctx.body = {
     status: 'success',
     msg: '注销成功',
@@ -97,7 +104,7 @@ export const refreshToken = async (ctx) => {
   }
 
   try {
-    const decoded = jwt.verify(token, config.JWT_SECRET);
+    const decoded = verifyToken(token);
     const user = await User.findByPk(decoded.id);
     if (!user) {
       ctx.throw(400, '用户不存在');
