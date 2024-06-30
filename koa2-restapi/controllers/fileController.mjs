@@ -14,7 +14,7 @@ export const getFiles = async (ctx) => {
 
     ctx.body = {
       status: 'success',
-      msg: '获取文件列表成功',
+      msg: '获取列表成功',
       data: result.rows,
       totalCount: result.count,
     };
@@ -36,7 +36,7 @@ export const updateFile = async (ctx) => {
     const updatedFile = await file.update({ description });
     ctx.body = {
       status: 'success',
-      msg: '文件信息更新成功',
+      msg: '更新成功',
       data: updatedFile,
     };
   } catch (error) {

@@ -1,5 +1,5 @@
 import Router from '@koa/router';
-import { register, login, logout, refreshToken } from '../controllers/authController.mjs';
+import { register, login, logout, refreshToken } from '../controllers/userAuthController.mjs';
 
 const router = new Router({
   prefix: '/auth',

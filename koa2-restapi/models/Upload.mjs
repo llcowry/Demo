@@ -37,9 +37,7 @@ const Upload = sequelize.define(
   {
     tableName: 'uploads',
     timestamps: true,
-    createdAt: 'created_at',
-    updatedAt: 'updated_at',
-  }
+  },
 );
 
 export { Upload };

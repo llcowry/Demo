@@ -2,14 +2,13 @@ import { DataTypes } from 'sequelize';
 import { sequelize } from '../db/database.mjs';
 import { hashMD5 } from '../utils/common.mjs';
 
-const User = sequelize.define(
-  'User',
+const Admin = sequelize.define(
+  'Admin',
   {
     id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.INTEGER,
       primaryKey: true,
-      unique: true,
+      autoIncrement: true,
     },
     username: {
       type: DataTypes.STRING,
@@ -31,33 +30,41 @@ const User = sequelize.define(
     },
     email: {
       type: DataTypes.STRING,
+      allowNull: true,
       validate: {
-        isEmail: true, // 邮箱验证
+        isEmail: true,
       },
     },
     nickname: {
       type: DataTypes.STRING,
-    },
-    gender: {
-      type: DataTypes.STRING,
-    },
-    birthday: {
-      type: DataTypes.DATE,
+      allowNull: true,
     },
     avatar: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     tel: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
-    level: {
+    roleId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    note: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
   },
   {
-    tableName: 'users',
+    tableName: 'admins',
     timestamps: true,
   },
 );
 
-export { User };
+export { Admin };

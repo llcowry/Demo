@@ -1,14 +1,9 @@
 import jwt from 'jsonwebtoken';
 import { validateUsername, validatePassword, validateEmail } from '../utils/validators.mjs';
-import { hashMD5 } from '../utils/common.mjs';
+import { hashMD5, generateToken } from '../utils/common.mjs';
 import { sendMail } from '../utils/mailer.mjs';
 import { User } from '../models/User.mjs';
 import config from '../config/config.mjs';
-
-// 生成 JWT token
-const generateToken = (user) => {
-  return jwt.sign({ id: user.id, username: user.username }, config.JWT_SECRET, { expiresIn: '1h' });
-};
 
 // 注册新用户
 export const register = async (ctx) => {
@@ -17,7 +12,7 @@ export const register = async (ctx) => {
     ctx.throw(400, '用户名和密码是必需的');
   }
   if (!validateUsername(username)) {
-    ctx.throw(400, '用户名无效（3-15个字符，可以包含字母、数字和一些特殊字符）');
+    ctx.throw(400, '用户名无效（5-20个字符，可以包含字母、数字和一些特殊字符）');
   }
   if (!validatePassword(password)) {
     ctx.throw(400, '密码无效（6-20个字符，至少一个字母和一个数字）');
@@ -27,12 +22,11 @@ export const register = async (ctx) => {
   }
 
   try {
-    const existingUser = await User.findOne({ where: { username } });
-    if (existingUser) {
+    const isExists = await User.findOne({ where: { username } });
+    if (isExists) {
       ctx.throw(400, '用户名已被注册');
     }
-    const hashedPassword = hashMD5(password);
-    const user = await User.create({ username, password: hashedPassword, email });
+    const user = await User.create({ username, password, email });
 
     // 根据配置项决定是否发送欢迎邮件
     if (config.EMAIL_SEND_ON_REGISTER && email) {
@@ -60,7 +54,7 @@ export const login = async (ctx) => {
     ctx.throw(400, '用户名和密码是必需的');
   }
   if (!validateUsername(username)) {
-    ctx.throw(400, '用户名无效（3-15个字符，可以包含字母、数字和一些特殊字符）');
+    ctx.throw(400, '用户名无效（5-20个字符，可以包含字母、数字和一些特殊字符）');
   }
   if (!validatePassword(password)) {
     ctx.throw(400, '密码无效（6-20个字符，至少一个字母和一个数字）');
@@ -76,6 +70,7 @@ export const login = async (ctx) => {
       ctx.throw(400, '密码错误');
     }
     const token = generateToken(user);
+    delete user.password;
     ctx.body = {
       status: 'success',
       msg: '登录成功',

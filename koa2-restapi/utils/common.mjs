@@ -1,4 +1,11 @@
 import crypto from 'crypto';
+import jwt from 'jsonwebtoken';
+import config from '../config/config.mjs';
+
+// 生成 JWT token
+export const generateToken = (data) => {
+  return jwt.sign({ id: data.id, username: data.username }, config.JWT_SECRET, { expiresIn: config.JWT_EXPIRES_IN });
+};
 
 /**
  * 使用 MD5 加密字符串

@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import config from '../config/config.mjs';
 
-const authMiddleware = async (ctx, next) => {
+const auth = async (ctx, next) => {
   // 从请求头中获取 Authorization 字段，并提取 token
   const token = ctx.headers.authorization?.split(' ')[1];
 
@@ -23,4 +23,4 @@ const authMiddleware = async (ctx, next) => {
   }
 };
 
-export default authMiddleware;
+export default auth;

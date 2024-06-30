@@ -1,5 +1,4 @@
 import { validateUsername, validatePassword, validateEmail } from '../utils/validators.mjs';
-import { hashMD5 } from '../utils/common.mjs';
 import { sendMail } from '../utils/mailer.mjs';
 import { User } from '../models/User.mjs';
 import config from '../config/config.mjs';
@@ -16,7 +15,7 @@ export const getUsers = async (ctx) => {
     });
     ctx.body = {
       status: 'success',
-      msg: '获取用户列表成功',
+      msg: '获取列表成功',
       data: result.rows,
       totalCount: result.count,
     };
@@ -33,7 +32,7 @@ export const addUser = async (ctx) => {
     ctx.throw(400, '用户名和密码是必需的');
   }
   if (!validateUsername(username)) {
-    ctx.throw(400, '用户名无效（3-15个字符，可以包含字母、数字和一些特殊字符）');
+    ctx.throw(400, '用户名无效（5-20个字符，可以包含字母、数字和一些特殊字符）');
   }
   if (!validatePassword(password)) {
     ctx.throw(400, '密码无效（6-20个字符，至少一个字母和一个数字）');
@@ -43,12 +42,11 @@ export const addUser = async (ctx) => {
   }
 
   try {
-    const existingUser = await User.findOne({ where: { username } });
-    if (existingUser) {
+    const isExists = await User.findOne({ where: { username } });
+    if (isExists) {
       ctx.throw(400, '用户名已被注册');
     }
-    const hashedPassword = hashMD5(password);
-    const user = await User.create({ username, password: hashedPassword, email, nickname, gender, birthday, avatar, tel });
+    const user = await User.create({ username, password, email, nickname, gender, birthday, avatar, tel });
 
     // 根据配置项决定是否发送欢迎邮件
     if (config.EMAIL_SEND_ON_REGISTER && email) {
@@ -60,7 +58,7 @@ export const addUser = async (ctx) => {
 
     ctx.body = {
       status: 'success',
-      msg: '用户创建成功',
+      msg: '创建成功',
       data: user,
     };
   } catch (error) {
@@ -79,7 +77,7 @@ export const getUser = async (ctx) => {
     }
     ctx.body = {
       status: 'success',
-      msg: '获取用户信息成功',
+      msg: '获取信息成功',
       data: user,
     };
   } catch (error) {
@@ -94,7 +92,7 @@ export const updateUser = async (ctx) => {
 
   // 验证用户名、密码和电子邮件
   if (username && !validateUsername(username)) {
-    ctx.throw(400, '用户名无效（3-15个字符，可以包含字母、数字和一些特殊字符）');
+    ctx.throw(400, '用户名无效（5-20个字符，可以包含字母、数字和一些特殊字符）');
   }
   if (password && !validatePassword(password)) {
     ctx.throw(400, '密码无效（6-20个字符，至少一个字母和一个数字）');
@@ -110,12 +108,12 @@ export const updateUser = async (ctx) => {
     }
     const data = { username, nickname, email, gender, birthday, avatar, level, tel };
     if (password) {
-      data.password = hashMD5(password);
+      data.password = password;
     }
     const updatedUser = await user.update(data);
     ctx.body = {
       status: 'success',
-      msg: '用户信息更新成功',
+      msg: '更新成功',
       data: updatedUser,
     };
   } catch (error) {
@@ -135,7 +133,7 @@ export const deleteUser = async (ctx) => {
     await user.destroy();
     ctx.body = {
       status: 'success',
-      msg: '用户删除成功',
+      msg: '删除成功',
     };
   } catch (error) {
     ctx.throw(500, error.message);

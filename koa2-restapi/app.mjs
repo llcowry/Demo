@@ -55,5 +55,5 @@ app.listen(PORT, () => {
 
 // 处理全局错误
 app.on('error', (err, ctx) => {
-  console.error('Server error', err, ctx);
+  console.error('服务器运行错误：', err, ctx);
 });
