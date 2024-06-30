@@ -8,6 +8,7 @@ import userRoutes from './userRoutes.mjs';
 import adminRoutes from './adminRoutes.mjs';
 import roleRoutes from './roleRoutes.mjs';
 import menuRoutes from './menuRoutes.mjs';
+import dictRoutes from './dictRoutes.mjs';
 
 const router = new Router({ prefix: '/api' });
 
@@ -25,5 +26,6 @@ router.use(userRoutes.routes()).use(userRoutes.allowedMethods());
 router.use(adminRoutes.routes()).use(adminRoutes.allowedMethods());
 router.use(roleRoutes.routes()).use(roleRoutes.allowedMethods());
 router.use(menuRoutes.routes()).use(menuRoutes.allowedMethods());
+router.use(dictRoutes.routes()).use(dictRoutes.allowedMethods());
 
 export default router;
