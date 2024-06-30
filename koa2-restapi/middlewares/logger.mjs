@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { fileURLToPath } from 'url';
 import config from '../config/config.mjs';
 
@@ -16,7 +16,7 @@ if (!fs.existsSync(logDir)) {
 
 // 获取当前日志文件路径
 const getLogFilePath = () => {
-  const dateStr = moment().format('YYYY-MM-DD');
+  const dateStr = dayjs().format('YYYY-MM-DD');
   return path.join(logDir, `server-${dateStr}.log`);
 };
 
@@ -40,7 +40,7 @@ export const logger = async (ctx, next) => {
   // 计算请求处理所需时间
   const ms = Date.now() - start;
   // 记录 HTTP 方法、URL、响应状态码和响应时间（毫秒）
-  const logMessage = `${moment().format('YYYY-MM-DD HH:mm:ss')} ${ctx.method} ${ctx.url} ${ctx.status} - ${ms}ms\n`;
+  const logMessage = `${dayjs().format('YYYY-MM-DD HH:mm:ss')} ${ctx.method} ${ctx.url} ${ctx.status} - ${ms}ms\n`;
 
   // 检查是否需要切换日志文件（按日期）
   const currentLogFilePath = getLogFilePath();

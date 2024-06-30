@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import crypto from 'crypto';
 import multer from '@koa/multer';
 import { Upload } from '../models/Upload.mjs';
@@ -9,7 +9,7 @@ import config from '../config/config.mjs';
 // 配置 multer 存储路径和文件命名规则
 const storage = multer.diskStorage({
   destination: async (req, file, cb) => {
-    const uploadDir = path.join(`./${config.UPLOAD_DIR}`, moment().format('YYYY-MM-DD'));
+    const uploadDir = path.join(`./${config.UPLOAD_DIR}`, dayjs().format('YYYY-MM-DD'));
     await fs.mkdir(uploadDir, { recursive: true });
     cb(null, uploadDir);
   },
