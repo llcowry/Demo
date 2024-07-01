@@ -165,8 +165,8 @@ export const adminLogin = async (ctx) => {
     }
     if (admin.password !== hashMD5(password)) {
       await AdminLog.create({
-        adminId: user.id,
-        adminName: username,
+        adminId: admin.id,
+        adminName: admin.username,
         loginResult: 0,
         loginIp: ctx.headers['x-forwarded-for'] || ctx.request.ip,
         userAgent: ctx.headers['user-agent'],
@@ -176,8 +176,8 @@ export const adminLogin = async (ctx) => {
     }
     const token = generateToken({ id: admin.id, username: admin.username });
     await AdminLog.create({
-      adminId: user.id,
-      adminName: username,
+      adminId: admin.id,
+      adminName: admin.username,
       loginResult: 1,
       loginIp: ctx.headers['x-forwarded-for'] || ctx.request.ip,
       userAgent: ctx.headers['user-agent'],
