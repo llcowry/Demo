@@ -60,6 +60,11 @@ const Admin = sequelize.define(
       allowNull: false,
       defaultValue: false,
     },
+    isDisabled: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   },
   {
     tableName: 'admins',
@@ -158,7 +163,7 @@ const Menu = sequelize.define(
       allowNull: false,
       defaultValue: false,
     },
-    status: {
+    isDisabled: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false,

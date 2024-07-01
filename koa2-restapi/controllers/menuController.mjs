@@ -25,7 +25,7 @@ export const getMenus = async (ctx) => {
 
 // 新增菜单
 export const addMenu = async (ctx) => {
-  const { menuName, menuType, sort, pid, icon, path, component, isCache, isLink, permissions, status } = ctx.request.body;
+  const { menuName, menuType, sort, pid, icon, path, component, isCache, isLink, permissions, isDisabled } = ctx.request.body;
 
   if (!menuName) {
     ctx.throw(400, '名称是必需的');
@@ -36,7 +36,7 @@ export const addMenu = async (ctx) => {
     if (isExists) {
       ctx.throw(400, '名称已被占用');
     }
-    const menu = await Menu.create({ menuName, menuType, sort, pid, icon, path, component, isCache, isLink, permissions, status });
+    const menu = await Menu.create({ menuName, menuType, sort, pid, icon, path, component, isCache, isLink, permissions, isDisabled });
     ctx.body = {
       status: 'success',
       msg: '创建成功',
@@ -69,14 +69,14 @@ export const getMenu = async (ctx) => {
 // 修改菜单
 export const updateMenu = async (ctx) => {
   const { id } = ctx.params;
-  const { menuName, menuType, sort, pid, icon, path, component, isCache, isLink, permissions, status } = ctx.request.body;
+  const { menuName, menuType, sort, pid, icon, path, component, isCache, isLink, permissions, isDisabled } = ctx.request.body;
 
   try {
     const menu = await Menu.findByPk(id);
     if (!menu) {
       ctx.throw(400, '菜单不存在');
     }
-    const data = { menuName, menuType, sort, pid, icon, path, component, isCache, isLink, permissions, status };
+    const data = { menuName, menuType, sort, pid, icon, path, component, isCache, isLink, permissions, isDisabled };
     const updatedMenu = await menu.update(data);
     ctx.body = {
       status: 'success',

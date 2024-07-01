@@ -30,7 +30,7 @@ export const getAdmins = async (ctx) => {
 
 // 新增管理员
 export const addAdmin = async (ctx) => {
-  const { username, password, email, nickname, roleId, birthday, avatar, tel, note } = ctx.request.body;
+  const { username, password, email, nickname, roleId, birthday, avatar, tel, note, isDisabled } = ctx.request.body;
 
   if (!username || !password) {
     ctx.throw(400, '用户名和密码是必需的');
@@ -50,7 +50,7 @@ export const addAdmin = async (ctx) => {
     if (isExists) {
       ctx.throw(400, '用户名已被注册');
     }
-    const admin = await Admin.create({ username, password, email, nickname, birthday, avatar, tel, note });
+    const admin = await Admin.create({ username, password, email, nickname, birthday, avatar, tel, note, isDisabled });
     await AdminRoles.create({
       adminId: admin.id,
       roleId,
@@ -89,7 +89,7 @@ export const getAdmin = async (ctx) => {
 // 修改管理员
 export const updateAdmin = async (ctx) => {
   const { id } = ctx.params;
-  const { username, password, email, nickname, roleId, birthday, avatar, tel, note } = ctx.request.body;
+  const { username, password, email, nickname, roleId, birthday, avatar, tel, note, isDisabled } = ctx.request.body;
 
   // 验证用户名、密码和电子邮件
   if (username && !validateUsername(username)) {
@@ -107,7 +107,7 @@ export const updateAdmin = async (ctx) => {
     if (!admin) {
       ctx.throw(400, '用户不存在');
     }
-    const data = { username, email, nickname, birthday, avatar, tel, note };
+    const data = { username, email, nickname, birthday, avatar, tel, note, isDisabled };
     if (password) {
       data.password = password;
     }
@@ -135,11 +135,55 @@ export const deleteAdmin = async (ctx) => {
       ctx.throw(400, '用户不存在');
     }
     // 软删除
-    await admin.update({ isDeleted: true }); 
+    await admin.update({ isDeleted: true });
     // await admin.destroy();
     ctx.body = {
       status: 'success',
       msg: '删除成功',
+    };
+  } catch (error) {
+    ctx.throw(500, error.message);
+  }
+};
+
+// 启用或禁用管理员
+export const setAdminStatus = async (ctx) => {
+  const { id } = ctx.params;
+  const { isDisabled } = ctx.request.body;
+
+  try {
+    const admin = await Admin.findByPk(id);
+    if (!admin) {
+      ctx.throw(404, '用户不存在');
+    }
+    await admin.update({ isDisabled });
+    ctx.body = {
+      status: 'success',
+      msg: `状态已${isDisabled ? '禁用' : '启用'}`,
+    };
+  } catch (error) {
+    ctx.throw(500, error.message);
+  }
+};
+
+// 设置管理员密码
+export const setAdminPassword = async (ctx) => {
+  const { id } = ctx.params;
+  const { password } = ctx.request.body;
+
+  if (password && !validatePassword(password)) {
+    ctx.throw(400, '密码无效（6-20个字符，至少一个字母和一个数字）');
+  }
+
+  try {
+    const admin = await Admin.findByPk(id);
+    if (!admin) {
+      ctx.throw(404, '用户不存在');
+    }
+    await admin.update({ password });
+    ctx.body = {
+      status: 'success',
+      msg: '密码已更新',
     };
   } catch (error) {
     ctx.throw(500, error.message);
