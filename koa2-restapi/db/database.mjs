@@ -28,4 +28,3 @@ export const initDB = async () => {
     console.error('无法连接到数据库:', error);
   }
 };
-

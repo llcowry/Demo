@@ -1,4 +1,4 @@
-import { Role } from '../models/Role.mjs';
+import { Role, Menu, AdminRoles, RoleMenus } from '../models/Admin.mjs';
 
 // 获取所有角色
 export const getRoles = async (ctx) => {
@@ -7,6 +7,7 @@ export const getRoles = async (ctx) => {
 
   try {
     const roles = await Role.findAndCountAll({
+      include: Menu,
       offset,
       limit: parseInt(pageSize),
     });
@@ -15,6 +16,8 @@ export const getRoles = async (ctx) => {
       msg: '获取列表成功',
       data: roles.rows,
       totalCount: roles.count,
+      page: parseInt(page),
+      limit: parseInt(limit),
     };
   } catch (error) {
     ctx.throw(500, error.message);
@@ -50,7 +53,9 @@ export const getRole = async (ctx) => {
   const { id } = ctx.params;
 
   try {
-    const role = await Role.findByPk(id);
+    const role = await Role.findByPk(id, {
+      include: Menu,
+    });
     if (!role) {
       ctx.throw(400, '角色不存在');
     }
@@ -95,6 +100,8 @@ export const deleteRole = async (ctx) => {
     if (!role) {
       ctx.throw(400, '角色不存在');
     }
+    await AdminRoles.destroy({ where: { roleId: id } });
+    await RoleMenus.destroy({ where: { roleId: id } });
     await role.destroy();
     ctx.body = {
       status: 'success',
@@ -115,11 +122,19 @@ export const setRoleMenus = async (ctx) => {
     if (!role) {
       ctx.throw(404, '角色未找到');
     }
-    const updatedRole = await role.update({ menuIds });
+    if (menuIds && menuIds.length > 0) {
+      await RoleMenus.destroy({ where: { roleId: id } });
+      for (const menuId of menuIds) {
+        await RoleMenus.create({
+          roleId: role.id,
+          menuId,
+        });
+      }
+    }
     ctx.body = {
       status: 'success',
       msg: '角色菜单设置成功',
-      data: updatedRole,
+      data: role,
     };
   } catch (error) {
     ctx.throw(500, error.message);

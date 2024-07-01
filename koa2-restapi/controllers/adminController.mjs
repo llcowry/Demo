@@ -1,6 +1,6 @@
 import { validateUsername, validatePassword, validateEmail } from '../utils/validators.mjs';
 import { hashMD5, generateToken, invalidateToken, verifyToken } from '../utils/common.mjs';
-import { Admin } from '../models/Admin.mjs';
+import { Admin, Role, AdminRoles } from '../models/Admin.mjs';
 import AdminLog from '../models/AdminLog.mjs';
 
 // 获取所有管理员
@@ -10,6 +10,8 @@ export const getAdmins = async (ctx) => {
 
   try {
     const result = await Admin.findAndCountAll({
+      where: { isDeleted: false },
+      include: Role,
       offset,
       limit: parseInt(pageSize),
     });
@@ -18,6 +20,8 @@ export const getAdmins = async (ctx) => {
       msg: '获取列表成功',
       data: result.rows,
       totalCount: result.count,
+      page: parseInt(page),
+      limit: parseInt(limit),
     };
   } catch (error) {
     ctx.throw(500, error.message);
@@ -46,7 +50,11 @@ export const addAdmin = async (ctx) => {
     if (isExists) {
       ctx.throw(400, '用户名已被注册');
     }
-    const admin = await Admin.create({ username, password, email, nickname, roleId, birthday, avatar, tel, note });
+    const admin = await Admin.create({ username, password, email, nickname, birthday, avatar, tel, note });
+    await AdminRoles.create({
+      adminId: admin.id,
+      roleId,
+    });
     ctx.body = {
       status: 'success',
       msg: '创建成功',
@@ -62,7 +70,9 @@ export const getAdmin = async (ctx) => {
   const { id } = ctx.params;
 
   try {
-    const admin = await Admin.findByPk(id);
+    const admin = await Admin.findByPk(id, {
+      include: Role,
+    });
     if (!admin) {
       ctx.throw(400, '用户不存在');
     }
@@ -97,11 +107,14 @@ export const updateAdmin = async (ctx) => {
     if (!admin) {
       ctx.throw(400, '用户不存在');
     }
-    const data = { username, email, nickname, roleId, birthday, avatar, tel, note };
+    const data = { username, email, nickname, birthday, avatar, tel, note };
     if (password) {
       data.password = password;
     }
     const updatedAdmin = await admin.update(data);
+    if (roleId) {
+      await AdminRoles.update({ roleId }, { where: { adminId: id } });
+    }
     ctx.body = {
       status: 'success',
       msg: '更新成功',
@@ -121,7 +134,9 @@ export const deleteAdmin = async (ctx) => {
     if (!admin) {
       ctx.throw(400, '用户不存在');
     }
-    await admin.destroy();
+    // 软删除
+    await admin.update({ isDeleted: true }); 
+    // await admin.destroy();
     ctx.body = {
       status: 'success',
       msg: '删除成功',

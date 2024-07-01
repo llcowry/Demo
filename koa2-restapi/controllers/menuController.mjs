@@ -1,4 +1,4 @@
-import { Menu } from '../models/Menu.mjs';
+import { Menu, RoleMenus } from '../models/Admin.mjs';
 
 // 获取所有菜单
 export const getMenus = async (ctx) => {
@@ -15,6 +15,8 @@ export const getMenus = async (ctx) => {
       msg: '获取列表成功',
       data: menus.rows,
       totalCount: menus.count,
+      page: parseInt(page),
+      limit: parseInt(limit),
     };
   } catch (error) {
     ctx.throw(500, error.message);
@@ -95,6 +97,7 @@ export const deleteMenu = async (ctx) => {
     if (!menu) {
       ctx.throw(400, '菜单不存在');
     }
+    await RoleMenus.destroy({ where: { menuId: id } });
     await menu.destroy();
     ctx.body = {
       status: 'success',
