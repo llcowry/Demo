@@ -1,7 +1,7 @@
 {
-  "name": "mrfavs-api",
+  "name": "koa2-restapi",
   "version": "1.0.0",
-  "description": "MRFavs API Server",
+  "description": "Koa2 RESTAPI Server",
   "main": "app.mjs",
   "type": "module",
   "scripts": {
