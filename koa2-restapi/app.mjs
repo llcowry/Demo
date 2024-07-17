@@ -28,16 +28,27 @@ initDB();
 app.use(
   helmet({
     contentSecurityPolicy: false, // 禁用contentSecurityPolicy
-  })
+    crossOriginResourcePolicy: false,
+  }),
 );
-app.use(cors());
+app.use(
+  cors({
+    origin: (ctx) => ctx.get('Origin'),
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowHeaders: ['Content-Type', 'Authorization', 'X-Access-Token', 'Accept'],
+    exposeHeaders: ['Content-Disposition'],
+    credentials: true,
+    maxAge: 300,
+    keepHeadersOnError: true,
+  }),
+);
 app.use(logger);
 app.use(errorHandler);
 app.use(
   bodyParser({
     enableTypes: ['json'],
     jsonLimit: '10mb',
-  })
+  }),
 );
 app.use(serve(path.join(__dirname, '/public')));
 
@@ -49,8 +60,8 @@ app.use(router.routes()).use(router.allowedMethods());
 
 // 启动服务器
 app.listen(PORT, () => {
-  console.log(`Server startup with http://localhost:${PORT}`);
-  console.log(`Swagger UI available at http://localhost:${PORT}/swagger`);
+  console.log(`服务器访问地址：http://localhost:${PORT}`);
+  console.log(`Swagger访问地址：http://localhost:${PORT}/swagger`);
 });
 
 // 处理全局错误

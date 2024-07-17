@@ -1,26 +1,26 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../db/database.mjs';
 
-const Dict = sequelize.define(
-  'Dict',
+const Config = sequelize.define(
+  'Config',
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    keyCode: {
+    configName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    keyValue: {
+    configKey: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    configValue: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-    },
-    keyName: {
-      type: DataTypes.STRING,
-      allowNull: false,
     },
     remark: {
       type: DataTypes.STRING,
@@ -28,9 +28,9 @@ const Dict = sequelize.define(
     },
   },
   {
-    tableName: 'dicts',
+    tableName: 'config',
     timestamps: true,
   },
 );
 
-export { Dict };
+export default Config;

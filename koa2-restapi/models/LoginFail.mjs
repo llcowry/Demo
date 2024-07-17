@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../db/database.mjs';
 
-const AdminLog = sequelize.define(
-  'AdminLog',
+const LoginFail = sequelize.define(
+  'LoginFail',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,36 +11,32 @@ const AdminLog = sequelize.define(
     },
     adminId: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
     },
     adminName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    loginResult: {
+    failCount: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
-      comment: '0: 失败, 1: 成功',
     },
-    loginIp: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    userAgent: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    remark: {
-      type: DataTypes.STRING,
+    isLock: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0,
+      comment: '0: 未锁定, 1: 已锁定',
+    },
+    lockBeginAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
     },
   },
   {
-    tableName: 'admin_logs',
+    tableName: 'loginfail',
     timestamps: true,
-    updatedAt: false,
   },
 );
 
-export default AdminLog;
+export default LoginFail;

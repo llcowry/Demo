@@ -1,46 +1,40 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../db/database.mjs';
 
-const AdminLog = sequelize.define(
-  'AdminLog',
+const Feedback = sequelize.define(
+  'Feedback',
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    adminId: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    adminName: {
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    loginResult: {
-      type: DataTypes.INTEGER,
+    content: {
+      type: DataTypes.TEXT,
       allowNull: false,
-      defaultValue: 0,
-      comment: '0: 失败, 1: 成功',
     },
-    loginIp: {
-      type: DataTypes.STRING,
+    attachment: {
+      type: DataTypes.TEXT,
       allowNull: true,
     },
-    userAgent: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    remark: {
-      type: DataTypes.STRING,
+    isRead: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: false,
     },
   },
   {
-    tableName: 'admin_logs',
+    tableName: 'feedbacks',
     timestamps: true,
-    updatedAt: false,
   },
 );
 
-export default AdminLog;
+export default Feedback;

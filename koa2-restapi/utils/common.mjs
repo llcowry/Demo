@@ -1,3 +1,4 @@
+import fs from 'fs/promises';
 import crypto from 'crypto';
 import jwt from 'jsonwebtoken';
 import config from '../config/config.mjs';
@@ -32,6 +33,30 @@ export const hashMD5 = (data) => {
   return crypto.createHash('md5').update(data).digest('hex');
 };
 
+// 构建菜单树形结构的辅助函数
+export const buildMenuTree = (menus) => {
+  const menuMap = {};
+  const menuTree = [];
+  // 将菜单按照 pid 分组
+  menus.forEach((menu) => {
+    if (!menuMap[menu.id]) {
+      menuMap[menu.id] = { ...menu, children: [] };
+    } else {
+      menuMap[menu.id] = { ...menu, ...menuMap[menu.id] };
+    }
+    const parent = menuMap[menu.id];
+    if (!menu.pid) {
+      menuTree.push(parent);
+    } else {
+      if (!menuMap[menu.pid]) {
+        menuMap[menu.pid] = { children: [] };
+      }
+      menuMap[menu.pid].children.push(parent);
+    }
+  });
+  return menuTree;
+};
+
 /**
  * 生成随机字符串
  * @param {number} length - 字符串长度
@@ -44,6 +69,16 @@ export const generateRandomString = (length) => {
     result += chars.charAt(Math.floor(Math.random() * chars.length));
   }
   return result;
+};
+
+// 检查文件是否存在
+export const checkFileExists = async (filePath) => {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
 };
 
 /**
@@ -163,7 +198,7 @@ let getsec = function (str) {
 };
 
 // 写 cookies
-export const setCookie = function setCookie(name, value, time, path = '/') {
+export const setCookie = function (name, value, time, path = '/') {
   let cookieString = name + '=' + encodeURIComponent(value);
   if (time) {
     let strsec = getsec(time);
@@ -225,9 +260,7 @@ export const getDomain = (host) => {
   host = host.split(':')[0];
   // 检查最后一个点后的部分是否为数字
   const lastSegment = host.substring(host.lastIndexOf('.') + 1);
-  return isNaN(lastSegment) 
-    ? host.substring(host.substring(0, host.lastIndexOf('.')).lastIndexOf('.') + 1) 
-    : host;
+  return isNaN(lastSegment) ? host.substring(host.substring(0, host.lastIndexOf('.')).lastIndexOf('.') + 1) : host;
 };
 
 /**
@@ -244,7 +277,7 @@ export const compareVersion = (curV, reqV) => {
     const arr1 = curV.split('.').map(Number);
     const arr2 = reqV.split('.').map(Number);
     const maxLength = Math.max(arr1.length, arr2.length);
-    
+
     // 用 0 补全较短的数组
     while (arr1.length < maxLength) arr1.push(0);
     while (arr2.length < maxLength) arr2.push(0);

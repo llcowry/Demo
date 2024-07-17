@@ -15,49 +15,44 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      validate: {
-        is: /^[a-zA-Z0-9_!@#$%^&*]+$/, // 用户名验证正则
-      },
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        is: /^[a-zA-Z0-9!@#$%^&*]{6,20}$/, // 密码验证正则
-      },
-      set(value) {
-        this.setDataValue('password', hashMD5(value));
-      },
     },
     email: {
       type: DataTypes.STRING,
-      validate: {
-        isEmail: true, // 邮箱验证
-      },
+      allowNull: true,
     },
     nickname: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     gender: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     birthday: {
       type: DataTypes.DATE,
+      allowNull: true,
     },
     avatar: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     tel: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
     level: {
       type: DataTypes.INTEGER,
+      allowNull: true,
     },
   },
   {
     tableName: 'users',
     timestamps: true,
-  },
+  }
 );
 
 export { User };

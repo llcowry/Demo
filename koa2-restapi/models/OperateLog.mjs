@@ -1,8 +1,8 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../db/database.mjs';
 
-const AdminLog = sequelize.define(
-  'AdminLog',
+const OperateLog = sequelize.define(
+  'OperateLog',
   {
     id: {
       type: DataTypes.INTEGER,
@@ -17,13 +17,25 @@ const AdminLog = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    loginResult: {
+    url: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    method: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    params: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    result: {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
       comment: '0: 失败, 1: 成功',
     },
-    loginIp: {
+    ip: {
       type: DataTypes.STRING,
       allowNull: true,
     },
@@ -37,10 +49,10 @@ const AdminLog = sequelize.define(
     },
   },
   {
-    tableName: 'admin_logs',
+    tableName: 'operate_logs',
     timestamps: true,
     updatedAt: false,
   },
 );
 
-export default AdminLog;
+export default OperateLog;

@@ -3,6 +3,7 @@ import path from 'path';
 import dayjs from 'dayjs';
 import crypto from 'crypto';
 import multer from '@koa/multer';
+import { verifyToken } from '../utils/common.mjs';
 import { Upload } from '../models/Upload.mjs';
 import config from '../config/config.mjs';
 
@@ -31,40 +32,76 @@ export const uploadHandler = upload.array('files');
 
 // 处理文件上传信息保存到数据库的函数
 export const saveUploadInfo = async (ctx) => {
-  const files = ctx.files;
-
-  // 检查是否有上传的文件
-  if (!files || files.length === 0) {
-    ctx.throw(400, '没有上传文件');
+  // 增加上传者信息
+  const token = ctx.headers.authorization;
+  let user = { id: null, username: null };
+  if (token) {
+    user = verifyToken(token);
   }
-
+  const { folder } = ctx.request.body;
+  const files = ctx.files;
+  if (!files || files.length === 0) {
+    ctx.body = {
+      status: 'error',
+      msg: '请选择上传对象',
+      code: 400,
+    };
+    return;
+  }
+  if (files.length >= config.MAX_FILE_SIZE) {
+    ctx.body = {
+      status: 'error',
+      msg: '文件大小超出限制',
+      code: 400,
+    };
+    return;
+  }
   const uploadResults = [];
-
   for (const file of files) {
     const { originalname, filename, path: filepath, size, mimetype: type } = file;
     const description = ctx.request.body.description || '';
-
     try {
-      const upload = await Upload.create({
+      // 上传文件完处理文件地址
+      let newFilepath = filepath.replace(/\\/g, '/');
+      newFilepath = newFilepath.replace(/public\//, '');
+      // 保存上传记录到数据库
+      const uploadData = await Upload.create({
+        folderType: folder || 1,
         originalname,
         filename,
-        path: filepath,
+        path: newFilepath,
         size,
         type,
+        url: config.UPLOAD_FILE_DNS + newFilepath,
         description,
+        creatorId: user.id,
+        creatorName: user.username,
       });
-
-      uploadResults.push({
-        status: 'success',
-        msg: '文件上传成功',
-        data: upload,
-      });
+      let successData = uploadData.toJSON();
+      successData.status = 'done';
+      successData.percent = 100;
+      uploadResults.push(successData);
     } catch (error) {
-      uploadResults.push({
+      const errorData = {
+        folderType: folder || 1,
+        originalname,
+        filename,
+        path: '',
+        size,
+        type,
+        url: '',
+        description,
+        creatorId: user.id,
+        creatorName: user.username,
         status: 'error',
-        msg: `文件上传失败: ${error.message}`,
-        data: null,
-      });
+        response: error.message,
+      };
+      uploadResults.push(errorData);
     }
   }
+  ctx.body = {
+    status: 'success',
+    msg: '文件上传完成',
+    data: uploadResults,
+  };
 };

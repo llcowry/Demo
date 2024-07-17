@@ -1,13 +1,8 @@
 /**
  * 错误处理中间件
- *
- * 该中间件捕获其他中间件或路由处理程序抛出的错误。
- * 设置适当的 HTTP 状态码，记录错误消息，并发送错误响应。
- *
- * @param {Object} ctx - Koa 上下文对象，表示请求和响应。
- * @param {Function} next - 调用下一个中间件的函数。
- * @returns {Promise<void>} - 表示异步错误处理操作的 Promise。
  */
+import { addOperateLog } from '../controllers/operateLogController.mjs';
+
 export async function errorHandler(ctx, next) {
   try {
     await next();
@@ -16,6 +11,7 @@ export async function errorHandler(ctx, next) {
       ctx.throw(404, 'Not Found');
     }
   } catch (err) {
+    await addOperateLog(ctx, err.message);
     ctx.status = err.status || 500; // 设置 HTTP 状态码（默认为 500）
     ctx.body = {
       status: 'error',

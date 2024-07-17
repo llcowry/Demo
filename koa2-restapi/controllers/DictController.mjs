@@ -1,12 +1,24 @@
 import { Dict } from '../models/Dict.mjs';
+import { Op } from 'sequelize';
+import { redis } from '../db/database.mjs';
 
-// 获取所有字典
+// 分页获取所有字典
 export const getDicts = async (ctx) => {
-  const { page = 1, pageSize = 10 } = ctx.query;
+  const { keywords, page = 1, pageSize = 10 } = ctx.request.body;
   const offset = (page - 1) * pageSize;
-
+  let where = {};
+  if (keywords) {
+    where = {
+      [Op.or]: [
+        { keyCode: { [Op.like]: `%${keywords}%` } },
+        { keyValue: { [Op.like]: `%${keywords}%` } },
+        { keyName: { [Op.like]: `%${keywords}%` } },
+      ],
+    };
+  }
   try {
     const dicts = await Dict.findAndCountAll({
+      where,
       offset,
       limit: parseInt(pageSize),
     });
@@ -15,6 +27,43 @@ export const getDicts = async (ctx) => {
       msg: '获取列表成功',
       data: dicts.rows,
       totalCount: dicts.count,
+      page: parseInt(page),
+      pageSize: parseInt(pageSize),
+    };
+  } catch (error) {
+    ctx.throw(500, error.message);
+  }
+};
+
+// 根据keyName获取字典
+export const getDictsByKeyName = async (ctx) => {
+  const { keyName } = ctx.request.body;
+  const dictKey = `dict:${keyName}`;
+  try {
+    const fetchDataAndCache = async () => {
+      const result = await Dict.findAll({
+        where: { keyName },
+        order: ['keyValue'],
+      });
+      await redis.set(dictKey, JSON.stringify(result), 'EX', 24 * 60 * 60);
+      return result;
+    };
+    let dicts = [];
+    let storedDicts = await redis.get(dictKey);
+    if (storedDicts) {
+      try {
+        dicts = JSON.parse(storedDicts);
+      } catch (e) {
+        console.error(`Error parsing cached data for ${dictKey}:`, e);
+        dicts = await fetchDataAndCache();
+      }
+    } else {
+      dicts = await fetchDataAndCache();
+    }
+    ctx.body = {
+      status: 'success',
+      msg: '获取列表成功',
+      data: dicts,
     };
   } catch (error) {
     ctx.throw(500, error.message);
@@ -23,18 +72,28 @@ export const getDicts = async (ctx) => {
 
 // 新增字典
 export const addDict = async (ctx) => {
-  const { keyCode, keyName, note } = ctx.request.body;
+  const { keyCode, keyValue, keyName, remark } = ctx.request.body;
 
-  if (!keyCode || !keyName) {
-    ctx.throw(400, '字典编码与名称是必需的');
+  if (!keyCode || !keyValue || !keyName) {
+    ctx.body = {
+      status: 'fail',
+      msg: '编码、值与名称都是必填项',
+      code: 400,
+    };
+    return;
   }
 
   try {
-    const isExists = await Dict.findOne({ where: { keyCode } });
+    const isExists = await Dict.findOne({ where: { keyValue } });
     if (isExists) {
-      ctx.throw(400, '字典编码已被占用');
+      ctx.body = {
+        status: 'fail',
+        msg: '字典值已被占用',
+        code: 400,
+      };
+      return;
     }
-    const dict = await Dict.create({ keyCode, keyName, note });
+    const dict = await Dict.create({ keyCode, keyValue, keyName, remark });
     ctx.body = {
       status: 'success',
       msg: '创建成功',
@@ -52,7 +111,12 @@ export const getDict = async (ctx) => {
   try {
     const dict = await Dict.findByPk(id);
     if (!dict) {
-      ctx.throw(400, '字典不存在');
+      ctx.body = {
+        status: 'fail',
+        msg: '字典不存在',
+        code: 400,
+      };
+      return;
     }
     ctx.body = {
       status: 'success',
@@ -67,14 +131,19 @@ export const getDict = async (ctx) => {
 // 修改字典
 export const updateDict = async (ctx) => {
   const { id } = ctx.params;
-  const { keyCode, keyName, note } = ctx.request.body;
+  const { keyCode, keyValue, keyName, remark } = ctx.request.body;
 
   try {
     const dict = await Dict.findByPk(id);
     if (!dict) {
-      ctx.throw(400, '字典不存在');
+      ctx.body = {
+        status: 'fail',
+        msg: '字典不存在',
+        code: 400,
+      };
+      return;
     }
-    const data = { keyCode, keyName, note };
+    const data = { keyCode, keyValue, keyName, remark };
     const updatedDict = await dict.update(data);
     ctx.body = {
       status: 'success',
@@ -93,7 +162,12 @@ export const deleteDict = async (ctx) => {
   try {
     const dict = await Dict.findByPk(id);
     if (!dict) {
-      ctx.throw(400, '字典不存在');
+      ctx.body = {
+        status: 'fail',
+        msg: '字典不存在',
+        code: 400,
+      };
+      return;
     }
     await dict.destroy();
     ctx.body = {
@@ -108,15 +182,20 @@ export const deleteDict = async (ctx) => {
 // 批量删除字典
 export const batchDeleteDict = async (ctx) => {
   const { ids } = ctx.request.body;
+  if (!ids) {
+    ctx.body = {
+      status: 'fail',
+      msg: '无效参数',
+      code: 400,
+    };
+    return;
+  }
 
   try {
-    if (!Array.isArray(ids)) {
-      ctx.throw(400, '无效参数：ids 应为ID数组');
-    }
     await Dict.destroy({
       where: {
-        id: ids
-      }
+        id: ids,
+      },
     });
     ctx.body = {
       status: 'success',

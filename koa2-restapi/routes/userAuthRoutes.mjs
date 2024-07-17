@@ -1,5 +1,5 @@
 import Router from '@koa/router';
-import { register, login, logout, refreshToken } from '../controllers/userAuthController.mjs';
+import { register, login, logout, refreshToken, getCaptcha } from '../controllers/userAuthController.mjs';
 
 const router = new Router({
   prefix: '/auth',
@@ -8,7 +8,8 @@ const router = new Router({
 router.post('/register', register);
 router.post('/login', login);
 router.post('/logout', logout);
-router.post('/refresh-token', refreshToken);
+router.post('/refreshToken', refreshToken);
+router.get('/captcha', getCaptcha);
 
 export default router;
 
@@ -94,7 +95,7 @@ export default router;
  *                 token:
  *                   type: string
  *                   description: 访问令牌
- *       401:
+ *       400:
  *         description: 登录失败
  */
 
@@ -108,13 +109,13 @@ export default router;
  *     responses:
  *       200:
  *         description: 注销成功
- *       401:
+ *       400:
  *         description: 注销失败
  */
 
 /**
  * @swagger
- * /auth/refresh-token:
+ * /auth/refreshToken:
  *   post:
  *     summary: 刷新令牌
  *     description: 刷新用户的访问令牌
@@ -142,6 +143,6 @@ export default router;
  *                 token:
  *                   type: string
  *                   description: 新的访问令牌
- *       401:
+ *       400:
  *         description: 刷新令牌失败
  */

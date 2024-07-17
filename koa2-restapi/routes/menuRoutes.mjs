@@ -1,12 +1,22 @@
 import Router from '@koa/router';
-import { getMenus, addMenu, getMenu, updateMenu, deleteMenu } from '../controllers/menuController.mjs';
+import {
+  getMenus,
+  addMenu,
+  getMenu,
+  updateMenu,
+  deleteMenu,
+  batchDeleteMenu,
+  getMenuTree,
+} from '../controllers/menuController.mjs';
 
-const router = new Router({ prefix: '/menus' });
+const router = new Router();
 
-router.get('/', getMenus);
-router.post('/', addMenu);
-router.get('/:id', getMenu);
-router.put('/:id', updateMenu);
-router.delete('/:id', deleteMenu);
+router.get('/menus/list', getMenus);
+router.get('/menus/tree', getMenuTree);
+router.post('/menus', addMenu);
+router.put('/menus/:id', updateMenu);
+router.delete('/menus/:id', deleteMenu);
+router.post('/menus/delete', batchDeleteMenu);
+router.get('/menus/:id', getMenu);
 
 export default router;

@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import dayjs from 'dayjs';
 import { fileURLToPath } from 'url';
+import { addOperateLog } from '../controllers/operateLogController.mjs';
 import config from '../config/config.mjs';
 
 // 获取当前模块的文件路径和目录
@@ -17,11 +18,14 @@ if (!fs.existsSync(logDir)) {
 // 获取当前日志文件路径
 const getLogFilePath = () => {
   const dateStr = dayjs().format('YYYY-MM-DD');
-  return path.join(logDir, `server-${dateStr}.log`);
+  return path.join(logDir, `app-${dateStr}.log`);
 };
 
 // 初始化日志文件流
-let logFile = fs.createWriteStream(getLogFilePath(), { flags: 'a' });
+let logFile = null;
+if (config.LOG_GENERATE) {
+  logFile = fs.createWriteStream(getLogFilePath(), { flags: 'a' });
+}
 const logStdout = process.stdout;
 
 /**
@@ -36,19 +40,31 @@ const logStdout = process.stdout;
  */
 export const logger = async (ctx, next) => {
   const start = Date.now();
-  await next();
-  // 计算请求处理所需时间
-  const ms = Date.now() - start;
-  // 记录 HTTP 方法、URL、响应状态码和响应时间（毫秒）
-  const logMessage = `${dayjs().format('YYYY-MM-DD HH:mm:ss')} ${ctx.method} ${ctx.url} ${ctx.status} - ${ms}ms\n`;
-
-  // 检查是否需要切换日志文件（按日期）
-  const currentLogFilePath = getLogFilePath();
-  if (logFile.path !== currentLogFilePath) {
-    logFile.end(); // 结束当前日志文件流
-    logFile = fs.createWriteStream(currentLogFilePath, { flags: 'a' }); // 创建新的日志文件流
+  try {
+    // 继续处理请求
+    await next();
+    // 记录操作日志
+    const token = ctx.headers.authorization;
+    if (token) {
+      await addOperateLog(ctx, '');
+    }
+    // 计算请求处理所需时间
+    const ms = Date.now() - start;
+    // 记录 HTTP 方法、URL、响应状态码和响应时间（毫秒）
+    const logMessage = `${dayjs().format('YYYY-MM-DD HH:mm:ss')} ${ctx.method} ${ctx.url} ${ctx.status} - ${ms}ms\n`;
+    logStdout.write(logMessage);
+    if (config.LOG_GENERATE) {
+      // 检查是否需要切换日志文件（按日期）
+      const currentLogFilePath = getLogFilePath();
+      if (logFile.path !== currentLogFilePath) {
+        // 结束当前日志文件流
+        logFile.end();
+        // 创建新的日志文件流
+        logFile = fs.createWriteStream(currentLogFilePath, { flags: 'a' });
+      }
+      logFile.write(logMessage);
+    }
+  } catch (err) {
+    await addOperateLog(ctx, err.message);
   }
-
-  logFile.write(logMessage);
-  logStdout.write(logMessage);
 };

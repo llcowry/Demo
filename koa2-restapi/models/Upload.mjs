@@ -10,6 +10,11 @@ const Upload = sequelize.define(
       primaryKey: true,
       unique: true,
     },
+    folderType: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 1,
+    },
     filename: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -30,8 +35,21 @@ const Upload = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    url: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     description: {
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    creatorId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    creatorName: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {

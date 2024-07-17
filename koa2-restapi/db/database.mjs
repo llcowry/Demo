@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize';
+import Redis from 'ioredis';
 import config from '../config/config.mjs';
 
 const env = process.env.NODE_ENV || 'default';
@@ -20,7 +21,7 @@ export const initDB = async () => {
     await sequelize.authenticate();
     console.log('数据库连接成功');
     if (env !== 'production') {
-      await sequelize.sync({ force: true });
+      await sequelize.sync({ after: true });
     } else {
       await sequelize.sync();
     }
@@ -28,3 +29,9 @@ export const initDB = async () => {
     console.error('无法连接到数据库:', error);
   }
 };
+
+export const redis = new Redis({
+  host: config.DB_REDIS_HOST,
+  port: 6379,
+  // password: config.DB_REDIS_PASSWORD,
+});
